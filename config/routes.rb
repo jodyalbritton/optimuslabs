@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
 #Users and Roles 
-  concern :the_role, TheRole::AdminRoutes.new
   devise_for :users
+  concern :the_role, TheRole::AdminRoutes.new
+ 
  
 #Site Features
   resources :services, only: [:index, :show]
