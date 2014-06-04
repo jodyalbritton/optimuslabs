@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
 
-
-
-
- 
-
-
+#Users and Roles 
+  concern :the_role, TheRole::AdminRoutes.new
   devise_for :users
-  resources :admin, only: [:index]
+ 
+#Site Features
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
+  
+
+#Admin interface 
+  resources :admin, only: [:index]
   namespace :admin do
       resources :posts
       resources :categories
@@ -24,35 +25,21 @@ Rails.application.routes.draw do
       resources :invoices
       resources :notes
       resources :tasks
+      concerns :the_role
 
   end
 
+  #Blog Feature 
    scope '/blog' do
       resources :posts, only: [:index, :show, :tagged, :catagorized]
-
-
   end
     
-
-    concern :the_role, TheRole::AdminRoutes.new
-    namespace :admin do
-        concerns :the_role
-    end
-
-
-
-
-
-  match "tasks/add" => "admin/tasks#add", :via => :post
-  match "tasks/update" => "admin/tasks#update", :via => :post
-  get 'blog', to: 'posts#index', :as => 'index'
   
-
- 
+  get 'blog', to: 'posts#index', :as => 'index'
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
 
-  
+  # Static Pages
   get 'welcome/index'
   get 'welcome/about'
   get 'welcome/contact'
