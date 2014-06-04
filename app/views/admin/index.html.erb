@@ -13,9 +13,9 @@
 <!-- 13. $RECENT_TASKS =============================================================================
 
       Recent tasks
--->    <style> .hidden { display: none; } </style>
+-->   
       <div class="col-md-5">
-      <div id="task_form" class="hidden">
+      <div id="task_form">
       <div class="form-group">
        <%= form_for ([:admin, @new_task]), :remote => true  do |f|  %>
         <%= f.text_field  :item, :class=>"form-control" %>
@@ -67,3 +67,6 @@
 
 
 
+<script>
+  $("#task_form").toggle(300);
+</script>
