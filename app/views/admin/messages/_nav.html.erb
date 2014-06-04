@@ -1,0 +1,31 @@
+  <div class="mail-nav">
+    <div class="compose-btn">
+      <a href="pages-new-email.html" class="btn btn-primary btn-labeled btn-block"><i class="btn-label fa fa-pencil-square-o"></i>New Email</a>
+    </div>
+    <div class="navigation">
+      <ul class="sections">
+        <li class="mail-select-folder active"><a href="#">Select folder...</a></li>
+        <li>
+        <%= link_to admin_messages_path do %>
+        <i class="m-nav-icon fa fa-inbox"></i>Inbox 
+        <span class="label pull-right"><%= current_user.inbox_and_unread.count %></span>
+        <% end %>
+        </li>
+       
+        <li>
+        <%= link_to admin_messages_path(:sent=>true) do %>
+        <i class="m-nav-icon fa fa-envelope"></i>Sent Messages
+        <span class="label pull-right"><%= current_user.sent.count %></span>
+        <% end %>
+        </li
+       
+       
+       
+      
+      </ul>
+
+      
+    </div>
+  </div>
+
+ 

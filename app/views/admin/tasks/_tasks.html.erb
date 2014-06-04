@@ -1,0 +1,35 @@
+<% for task in @tasks %>
+<div class="task">
+			<%= form_for ([:admin, task]),:remote => true do |f| %>
+              <span class="label label-default pull-right"><%= task.importance %></span>
+              <div class="fa fa-arrows-v task-sort-icon"></div>
+              <div class="action-checkbox">
+                <label class="px-single"><%= f.check_box :completed, :as => "boolean", :class=>"px", :type=> "checkbox" %><span class="lbl"></span></label>
+              </div>
+              <a href="#" class="task-title"><%= task.item %><span></span></a>
+              <%= f.submit %>
+            <% end %>
+ </div> <!-- / .task -->
+
+
+<% end %>
+
+
+
+
+
+<script>
+$(function () {
+  $('.edit_task').submitOnCheck();
+});
+
+
+jQuery.fn.submitOnCheck = function () {
+  this.find('input[type=submit]').remove();
+  this.find('input[type=checkbox]').click(function () {
+    $(this).closest('form').submit();
+  });  
+  return this;
+};
+</script>
+

@@ -1,0 +1,92 @@
+  <% content_for :page_header do %>
+   <%= @invoice.subject %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_invoices_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<script>
+  var init = [];
+  init.push(function () {
+    $('body').addClass('page-invoice');
+  });
+</script>
+<div class="panel invoice">
+      <div class="invoice-header">
+        <h3>
+        
+          <div>
+            <small><strong>Optimus</strong>Labs</small><br>
+            Invoice #<%= @invoice.id %>
+          </div>
+        </h3>
+        <address>
+          Jody Albritton<br>
+         
+        </address>
+        <div class="invoice-date">
+          <small><strong>Date</strong></small><br>
+          February 21, 2013
+        </div>
+      </div> <!-- / .invoice-header -->
+      <div class="invoice-info">
+        <div class="invoice-recipient">
+          <strong><%= @invoice.client.name %></strong><br>
+          New York, Bong Avenue, 109<br>
+          10012 NY, USA
+        </div> <!-- / .invoice-recipient -->
+        <div class="invoice-total">
+          <span><%= @invoice.total_price %> </span>
+          TOTAL:
+        </div> <!-- / .invoice-total -->
+      </div> <!-- / .invoice-info -->
+      <hr>
+      <div class="invoice-table">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Item Name
+              </th>
+              <th>
+                Billed
+              </th>
+              <th>
+                Item Type
+              </th>
+              <th>
+                Quantity
+              </th>
+              <th>
+                Line total
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @invoice.items.each do |item| %>
+            <tr>
+              <td>
+               <%= item.purchasable.name %>
+                <div class="invoice-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</div>
+              </td>
+              <td>
+                <%= item.purchasable.rate_type.name %>
+              </td>
+              <td>
+                <%= item.purchasable.class.to_s %>
+              </td>
+              <td>
+                <%= item.quantity %>
+              </td>
+              <td>
+                <%= item.line_total %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div> <!-- / .invoice-table -->
+    </div> <!-- / .invoice -->
+<!-- /5. $INVOICE_PAGE -->

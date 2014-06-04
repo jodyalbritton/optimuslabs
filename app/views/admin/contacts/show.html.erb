@@ -1,0 +1,23 @@
+  <% content_for :page_header do %>
+   <%= @client.name %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_clients_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @client.name %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @client.email %></dd>
+
+  <dt>Phone:</dt>
+  <dd><%= @client.phone %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @client.description %></dd>
+
+</dl>

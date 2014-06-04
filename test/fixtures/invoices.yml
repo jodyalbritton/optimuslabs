@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  client_id: 
+  started_on: 2014-05-30
+  completed_on: 2014-05-30
+  total: 9.99
+  notes: MyText
+  attentiom: MyString
+  inv_number: 1
+  balance: 9.99
+  paid: false
+
+two:
+  subject: MyString
+  client_id: 
+  started_on: 2014-05-30
+  completed_on: 2014-05-30
+  total: 9.99
+  notes: MyText
+  attentiom: MyString
+  inv_number: 1
+  balance: 9.99
+  paid: false

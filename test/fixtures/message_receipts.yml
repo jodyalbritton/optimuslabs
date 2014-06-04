@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reciever: 
+  message_id: 
+  read: false
+  trashed: false
+  deleted: false
+  mailbox_type: MyString
+
+two:
+  reciever: 
+  message_id: 
+  read: false
+  trashed: false
+  deleted: false
+  mailbox_type: MyString

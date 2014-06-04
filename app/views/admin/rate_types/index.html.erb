@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_admin_rate_type_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Rate type
+  <% end %>
+  <h1>Listing Rate Types</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Unit</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @rate_types) do |rate_type| %>
+            <td><%= rate_type.name %></td>
+            <td><%= rate_type.unit %></td>
+            <td><%= link_to 'Show', admin_rate_type_path(rate_type) %></td>
+        <td><%= link_to 'Edit', edit_admin_rate_type_path(rate_type) %></td>
+        <td><%= link_to 'Destroy', admin_rate_type_path(rate_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

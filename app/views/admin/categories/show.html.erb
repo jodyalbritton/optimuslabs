@@ -1,0 +1,20 @@
+
+  <% content_for :page_header do %>
+   <%= @category.name %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_categories_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<%= render 'admin/header' %>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @category.name %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @category.description %></dd>
+
+</dl>

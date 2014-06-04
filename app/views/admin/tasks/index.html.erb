@@ -1,0 +1,95 @@
+
+  <% content_for :page_header do %>
+    Listing Tasks
+  <% end %>
+  
+  <% content_for :page_search do %>
+  <form action="" class="pull-right col-xs-12 col-sm-6">
+              <div class="input-group no-margin">
+                <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);"><i class="fa fa-search"></i></span>
+                <input type="search" id="search" placeholder="Search..." class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
+              </div>
+            </form>
+  <% end %> 
+<%= render 'admin/header' %>
+
+ <%= form_for @new_task, :url => { :action => "add" }, :remote => true  do |f|  %>
+    <%= f.text_field  :item %>
+    <%= f.submit "Add todo", class: "btn btn-primary" %>
+ <%end%>
+
+<!-- 13. $RECENT_TASKS =============================================================================
+
+      Recent tasks
+-->
+      <div class="col-md-5">
+        <!-- Javascript -->
+        <script>
+          init.push(function () {
+            $('.widget-tasks .panel-body').pixelTasks().sortable({
+              axis: "y",
+              handle: ".task-sort-icon",
+              stop: function( event, ui ) {
+                // IE doesn't register the blur when sorting
+                // so trigger focusout handlers to remove .ui-state-focus
+                ui.item.children( ".task-sort-icon" ).triggerHandler( "focusout" );
+              }
+            });
+            $('#clear-completed-tasks').click(function () {
+              $('.widget-tasks .panel-body').pixelTasks('clearCompletedTasks');
+            });
+          });
+          </script>
+
+        <div class="panel widget-tasks panel-dark-gray">
+          <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>Recent tasks</span>
+            <div class="panel-heading-controls">
+              <button class="btn btn-xs btn-primary btn-outline dark" id="clear-completed-tasks"><i class="fa fa-eraser text-success"></i> Clear completed tasks</button>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <!-- Without vertical padding -->
+          <div class="panel-body no-padding-vr" id="tasklist">
+            
+             <%= render @tasks %>
+         
+            
+          </div> <!-- / .panel-body -->
+        </div> <!-- / .panel -->
+      </div>
+
+
+
+
+
+
+
+
+
+<script>
+$(function () {
+  $('.edit_task').submitOnCheck();
+});
+
+
+jQuery.fn.submitOnCheck = function () {
+  this.find('input[type=submit]').remove();
+  this.find('input[type=checkbox]').click(function () {
+    $(this).closest('form').submit();
+  });  
+  return this;
+};
+</script>
+
+
+<!--
+ <script>
+ $(function () {
+  $('.edit_task input[type=submit]').remove();
+  $('.edit_task input[type=checkbox]').click(function () {
+    $(this).closest('form').submit();
+  });  
+});
+</script>
+
+ script working -->

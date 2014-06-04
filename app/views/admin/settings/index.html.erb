@@ -1,0 +1,8 @@
+<% @settings.each do |item| %>
+  <tr>
+    <td><%= item.var %></td>
+    <td><%= item.thing_id %></td>
+    <td><%= item.thing_type %></td>
+    <td><%= link_to 'Edit', edit_admin_setting_path(item) %></td>
+  </tr>
+<% end %>

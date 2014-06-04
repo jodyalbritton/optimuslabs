@@ -1,0 +1,52 @@
+<div class="container">
+        <header class="section-title">
+            <h1>Blog</h1>
+
+            <ol class="breadcrumb">
+               <%= render_breadcrumbs :tag => :li, :separator => "", :class=>"breadcrumb-label text-light-gray" %>
+            </ol>
+        </header>
+
+        <div class="row">
+            <div class="col-md-8">
+                <section class="blog">
+                  <% @posts.each do |post| %>
+                    <article class="post">
+                        <h1><%= link_to post.title, post_path(post), :data =>{:disqus_identifier=>"" }%></h1>
+                        <p>
+                              <i class="icon-user"></i> by <%= post.author.first_name %> 
+                              | <i class="icon-calendar"></i><%= post.published_at %> 
+                              | <i class="icon-tags"></i> Tags : 
+                              <% post.tags.each do |tag| %>
+                                    <span class="label label-info"><%= tag.name %></span>
+                              <% end %>
+
+                           
+                            </p>
+                        <div class="article-summary">
+                         
+                           
+                                <p><%= strip_tags(post.body).first(300) %> <%= link_to "Read More.....", post_path(post)%></p>
+                           
+
+                        </div>
+                     
+             
+                 
+                  
+           
+          
+                    </article> <!-- post -->
+                    <% end %>
+                </section>
+                <section>
+                   <%= paginate @posts %>
+                </section>
+            </div> <!-- col-md-8 -->
+
+            <div class="col-md-4">
+                <%= render "posts/sidebar" %>
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+

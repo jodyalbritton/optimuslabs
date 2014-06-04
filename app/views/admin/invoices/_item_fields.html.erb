@@ -1,0 +1,25 @@
+	  <div class="nested-fields" id="nested-item">
+
+      <div class="form-group">
+			<%=  f.label "item", :class => "col-sm-2 control-label" %>
+		     <div class="col-sm-10">
+				<%= f.input :target_identifier, collection: (Service.all).map { |i| [ i.name, "#{i.class.to_s}-#{i.id}"] } %>
+			</div>
+	  </div>
+		<div class="form-group">
+			<%=  f.label "item", :class => "col-sm-2 control-label" %>
+			 <div class="col-sm-10">
+				<%= f.input :quantity%>
+			</div>
+	  </div>
+	  <div class="form-group">
+		<%=  f.label "item", :class => "col-sm-2 control-label" %>
+			<div class="col-sm-10">
+				<%= link_to_remove_association "remove task",   f %>
+			</div>
+	 </div>
+	</div>
+	
+
+
+

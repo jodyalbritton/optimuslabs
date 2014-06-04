@@ -1,0 +1,25 @@
+  <% content_for :page_header do %>
+   <%=@service.name %>
+  <% end %>
+  <% content_for :page_actions do %>
+   <%= link_to admin_services_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-chevron-left"></span>Back
+    <% end %>
+    <%= link_to edit_admin_service_path(@service), :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+    <% end %>
+  <% end %>
+<%= render 'admin/header' %>
+
+<h2> Header Image </h2>
+<%= image_tag @service.header.url %>
+
+
+<div class="row">
+	<div class="col-md-8">
+		<%= sanitize(@service.description) %>
+	</div>
+	<div class="col-md-4">
+		<%= image_tag @service.logo(:medium) %>
+	</div>
+</div>
