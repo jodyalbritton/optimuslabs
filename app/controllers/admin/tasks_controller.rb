@@ -2,7 +2,7 @@ class Admin::TasksController < ApplicationController
   layout "layouts/admin"
   before_action :login_required
   before_action :role_required
-  def new 
+  def new  
      respond_to do |format|
         format.js
       end
@@ -15,8 +15,15 @@ class Admin::TasksController < ApplicationController
   end
 
   def create
-    @tasks = Task.where(:completed => false).order('created_at DESC')
-	  @task = Task.create(:item =>params[:task][:item])
+    if params[:client_id]
+      @client = Client.find(params[:client_id])
+      @tasks = @client.tasks.where(:completed => false).order('created_at DESC')
+      @task = @client.tasks.create(:item =>params[:task][:item])
+    else 
+      @tasks = Task.where(:completed => false).order('created_at DESC')
+      @task = Task.create(:item =>params[:task][:item])
+     end
+	 
 	   respond_to do |format|
 	    format.html { redirect_to tasks_url }
 	    format.js
@@ -42,7 +49,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:completed, :item)
+      params.require(:task).permit(:completed, :item, :client)
     end
 
 end

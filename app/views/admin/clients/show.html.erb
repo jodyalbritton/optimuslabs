@@ -1,48 +1,78 @@
+  <style>
+    .holder {min-height: 400px;}
+  </style>
+
   <% content_for :page_header do %>
    <%= @client.name %>
+  <% end %>
+  <% content_for :page_search do %>
+    <div class="mail-controls clearfix">
+      <div class="btn-toolbar wide-btns pull-left" role="toolbar">
+
+        <div class="btn-group">
+          <button type="button" class="btn"><i class="fa fa-repeat"></i></button>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn"><i class="fa fa fa-file-text-o"></i></button>
+          <button type="button" class="btn"><i class="fa fa-exclamation-circle"></i></button>
+          <button type="button" class="btn"><i class="fa fa-trash-o"></i></button>
+        </div>
+
+      </div>
+    </div>
   <% end %>
   <% content_for :page_actions do %>
     <%= link_to admin_clients_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
                 <span class="btn-label icon fa fa-plus"></span>Back
     <% end %>
   <% end %>
-
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @client.name %></dd>
-
-  <dt>Email:</dt>
-  <dd><%= @client.email %></dd>
-
-  <dt>Phone:</dt>
-  <dd><%= @client.phone %></dd>
-
-  <dt>Description:</dt>
-  <dd><%= @client.description %></dd>
-
-</dl>
+  <%= render 'admin/header' %>
 
 
-<div class="panel">
-          <div class="panel-heading">
-            <span class="panel-title">Client Invoices</span>
-          </div>
-          <div class="panel-body">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Subject</th>
-                </tr>
-              </thead>
-              <tbody>
-              <% @client.invoices.each do |invoice|%>
-                <tr>
-                  <td><%= invoice.id %></td>
-                  <td><%= invoice.subject %></td>
-                </tr>
-              <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
+  <ul id="uidemo-tabs-default-demo" class="nav nav-tabs">
+              <li class="active">
+                <a href="#client-dash" data-toggle="tab">Dashboard</a>
+              </li>
+              <li class="">
+                <a href="#client-invoices" data-toggle="tab">Invoices <span class="badge badge-primary"><%= @client.invoices.size %></span></a>
+              </li>
+               <li class="">
+                <a href="#client-contacts" data-toggle="tab">Contacts <span class="badge badge-primary"><%= @client.contacts.size %></span></a>
+              </li>
+  </ul>
+
+  <div class="tab-content tab-content-bordered">
+              <div class="tab-pane fade active in" id="client-dash">
+                <div class="holder">
+                <%= render 'admin/clients/partials/tasks' %>
+                <%= render 'admin/clients/partials/tickets' %>
+                </div>
+                           
+              </div> <!-- / .tab-pane -->
+              <div class="tab-pane fade" id="client-invoices">
+               <div class="holder">
+                <%= render 'admin/clients/partials/invoices' %>
+               </div>
+              </div> <!-- / .tab-pane -->
+              <div class="tab-pane fade" id="client-contacts">
+               <div class="holder">
+                <%= render 'admin/clients/partials/contacts' %>
+               </div>
+              </div><!-- / .tab-pane -->
+    
+</div>
+
+ <!-- Javascript -->
+      <script>
+        init.push(function () {
+          $('#dashboard-support-tickets .panel-body > div').slimScroll({ height: 300, alwaysVisible: true, color: '#888',allowPageScroll: true });
+        })
+      </script>
+
+       <script>
+        init.push(function () {
+          $('#client-invoices .panel-body > div').slimScroll({ height: 300, alwaysVisible: true, color: '#888',allowPageScroll: true });
+        })
+  </script>
+      <!-- / Javascript -->

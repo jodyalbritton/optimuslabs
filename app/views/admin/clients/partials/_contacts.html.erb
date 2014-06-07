@@ -1,0 +1,26 @@
+
+<div class="panel" id="client-invoices">
+          <div class="panel-heading">
+            <span class="panel-title">Client Contacts</span>
+          </div>
+          <div class="panel-body">
+            <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% @client.contacts.each do |contact|%>
+                <tr>
+                  <td><%= contact.full_name %></td>
+                  <td><%= contact.email %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>

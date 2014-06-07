@@ -7,11 +7,13 @@ class Admin::ClientsController < ApplicationController
   # GET /clients.json
   def index
     @clients = Client.all
+
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
+     @new_task = Task.new
   end
 
   # GET /clients/new

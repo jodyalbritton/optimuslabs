@@ -7,7 +7,6 @@ class CreatePosts < ActiveRecord::Migration
       t.references :author, index: true
       t.boolean :draft
       t.text :excerpt
-      add_reference :posts, :category, index: true
       t.timestamps
     end
   end
