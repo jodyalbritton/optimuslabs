@@ -18,10 +18,10 @@
   <table class="table table-striped table-bordered table-hover" id="table">
     <thead>
       <tr>
-            <th>Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Description</th>
             <th></th>
         <th></th>
         <th></th>
@@ -30,10 +30,10 @@
 
     <tbody>
       <%= content_tag_for(:tr, @contacts) do |contact| %>
-            <td><%= contact.full_name %></td>
+            <td><%= contact.first_name %></td>
+            <td><%= contact.last_name %></td>
             <td><%= contact.email %></td>
             <td><%= contact.phone %></td>
-            <td><%= contact.notes %></td>
             <td><%= link_to 'Show', ([:admin,contact]) %></td>
         <td><%= link_to 'Edit', edit_admin_contact_path(contact) %></td>
         <td><%= link_to 'Destroy', ([:admin,contact]), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -3,4 +3,7 @@ class Client < ActiveRecord::Base
   	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   	has_many :notes, as: :notable
   	has_many :invoices
+  	has_many :tickets
+  	has_many :tasks
+  	has_many :contacts
 end

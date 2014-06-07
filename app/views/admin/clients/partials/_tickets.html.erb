@@ -1,0 +1,32 @@
+<!-- 10. $SUPPORT_TICKETS ==========================================================================
+
+      Support tickets
+-->
+     
+
+      <div class="col-md-6">
+        <div class="panel panel-success widget-support-tickets" id="dashboard-support-tickets">
+          <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-bullhorn"></i>Support Tickets</span>
+            <div class="panel-heading-controls">
+              <div class="panel-heading-text"><a href="#"><%= @client.tickets.size %> new tickets</a></div>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body tab-content-padding">
+            <!-- Panel padding, without vertical padding -->
+            <div class="panel-padding no-padding-vr">
+            <% @client.tickets.each do |ticket| %>
+              <div class="ticket">
+                <span class="label label-success ticket-label"><%= ticket.status %></span>
+                <a href="#" title="" class="ticket-title"><%= ticket.subject %><span>#<%= ticket.id %></span></a>
+                <span class="ticket-info">
+                  Opened by <a href="#" title=""><%= ticket.client %></a> today
+                </span>
+              </div> <!-- / .ticket -->
+
+            <% end %>
+            </div>
+          </div> <!-- / .panel-body -->
+        </div> <!-- / .panel -->
+      </div>
+<!-- /10. $SUPPORT_TICKETS -->

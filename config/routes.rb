@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
 #Users and Roles 
   devise_for :users
   concern :the_role, TheRole::AdminRoutes.new
@@ -18,12 +19,14 @@ Rails.application.routes.draw do
       resources :rate_types
       resources :clients do 
         resources :invoices
+        resources :tasks
       end
       resources :messages
       resources :contacts
       resources :settings
       resources :services
       resources :invoices
+      resources :tickets
       resources :notes
       resources :tasks
       concerns :the_role
