@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   #Sponsor Feature
   resources :sponsors, only: [:index, :show]
+  resources :services, only: [:index, :show]
   # Static Pages
   get 'welcome/index'
   get 'welcome/about'
