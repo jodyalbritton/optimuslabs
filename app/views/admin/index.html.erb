@@ -15,3 +15,10 @@
 
 
 <%= render 'admin/tickets' %>
+
+
+  <script>
+        init.push(function () {
+          $('#dashboard-tasks .panel-body').slimScroll({ height: 300, alwaysVisible: true, color: '#888',allowPageScroll: true });
+        })
+  </script>

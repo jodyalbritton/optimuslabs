@@ -309,11 +309,27 @@ Use search to find needed section.
 						
 					</ul>
 				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-bullhorn"></i><span class="mm-text">Tickets</span></a>
+					<ul>
 						<li>
+							<%= link_to admin_tickets_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Tickets</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to new_admin_ticket_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Ticket</span>
+							<% end %>
+						</li>
+						
+					</ul>
+				</li>
+				<li>
 							<%= link_to admin_messages_path, :tabindex=>"-1" do %>
 							<i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span>
 							<% end %>
-						</li>
+				</li>
 					
 				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-building-o"></i><span class="mm-text">Back Office</span></a>

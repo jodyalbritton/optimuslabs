@@ -31,14 +31,14 @@
           });
           </script>
 
-        <div class="panel widget-tasks panel-dark-gray">
+        <div class="panel widget-tasks panel-dark-gray" id="dashboard-tasks">
           <div class="panel-heading">
             <span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>Recent tasks</span>
             <div class="panel-heading-controls">
               <%= link_to new_admin_task_path, :remote => true do %>
               <button class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-pencil text-success"></i> New Task</button>
               <% end %>
-              <button class="btn btn-xs btn-primary btn-outline dark" id="clear-completed-tasks"><i class="fa fa-eraser text-success"></i> Clear completed tasks</button>
+              <button class="btn btn-xs btn-primary btn-outline dark" id="clear-completed-tasks"><i class="fa fa-eraser text-success"></i> Clear</button>
             </div>
           </div> <!-- / .panel-heading -->
           <!-- Without vertical padding -->

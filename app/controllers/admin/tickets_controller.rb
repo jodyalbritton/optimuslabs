@@ -11,6 +11,9 @@ class Admin::TicketsController < ApplicationController
     @tickets = Ticket.all
   end
 
+  def show 
+  end 
+
   def new
     @ticket = Ticket.new
   end
@@ -33,9 +36,23 @@ class Admin::TicketsController < ApplicationController
   end
 
   def update
+     respond_to do |format|
+      if @ticket.update(ticket_params)
+        format.html { redirect_to ([:admin, @ticket]), notice: 'Ticket was successfully updated.' }
+        format.json { render :show, status: :ok, location: @ticket }
+      else
+        format.html { render :edit }
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
+     @ticket.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_tickets_url, notice: 'Ticket was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
 
@@ -48,6 +65,6 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:subject, :client, :description, :severity, :status, :location)
+      params.require(:ticket).permit(:subject, :client_id, :description, :severity, :status, :location)
     end
 end

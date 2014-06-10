@@ -5,7 +5,7 @@
       <!-- Javascript -->
       <script>
         init.push(function () {
-          $('#dashboard-support-tickets .panel-body > div').slimScroll({ height: 300, alwaysVisible: true, color: '#888',allowPageScroll: true });
+          $('#dashboard-support-tickets .panel-body ').slimScroll({ height: 300, alwaysVisible: true, color: '#888',allowPageScroll: true });
         })
       </script>
       <!-- / Javascript -->
@@ -13,9 +13,12 @@
       <div class="col-md-6">
         <div class="panel panel-success widget-support-tickets" id="dashboard-support-tickets">
           <div class="panel-heading">
-            <span class="panel-title"><i class="panel-title-icon fa fa-bullhorn"></i>Support Tickets</span>
+            <span class="panel-title"><i class="panel-title-icon fa fa-bullhorn"></i>Tickets</span>
             <div class="panel-heading-controls">
-              <div class="panel-heading-text"><a href="#"><%= @tickets.size %> new tickets</a></div>
+              <%= link_to new_admin_ticket_path  do%>
+              <button class="btn btn-xs btn-primary btn-outline"><i class="fa fa-pencil text-success"></i> New Ticket</button>
+              <% end %>
+              <button class="btn btn-xs btn-primary btn-outline"><i class="fa fa-eraser text-success"></i> <%= @tickets.size %></button>
             </div>
           </div> <!-- / .panel-heading -->
           <div class="panel-body tab-content-padding">
@@ -24,9 +27,15 @@
             <% @tickets.each do |ticket| %>
               <div class="ticket">
                 <span class="label label-success ticket-label"><%= ticket.status %></span>
-                <a href="#" title="" class="ticket-title"><%= ticket.subject %><span>#<%= ticket.id %></span></a>
+                <%= link_to admin_ticket_path(ticket), :class=>"ticket-title" do %> 
+                <%= ticket.subject %><span>#<%= ticket.id %></span>
+                <% end %>
                 <span class="ticket-info">
-                  Opened by <a href="#" title=""><%= ticket.client %></a> today
+                  <p>Opened by 
+                    <%= link_to admin_client_path(ticket.client) do %>
+                    <%= ticket.client.name %> 
+                    <% end %>
+                   <%= time_ago_in_words(ticket.created_at)%> ago</p>
                 </span>
               </div> <!-- / .ticket -->
 

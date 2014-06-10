@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
 #Users and Roles 
   devise_for :users
   concern :the_role, TheRole::AdminRoutes.new
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
       resources :tickets
       resources :notes
       resources :tasks
+      resources :sponsors
       concerns :the_role
 
   end
