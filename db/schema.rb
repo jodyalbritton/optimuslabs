@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610201631) do
+ActiveRecord::Schema.define(version: 20140610221105) do
 
   create_table "admin_rate_types", force: true do |t|
     t.string   "name"
@@ -280,9 +280,19 @@ ActiveRecord::Schema.define(version: 20140610201631) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "url"
+    t.string   "video_url"
+    t.string   "phone"
+    t.string   "email"
+    t.integer  "client_id"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
   add_index "sponsors", ["category_id"], name: "index_sponsors_on_category_id", using: :btree
+  add_index "sponsors", ["client_id"], name: "index_sponsors_on_client_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
