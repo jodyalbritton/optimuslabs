@@ -8,6 +8,7 @@ Rails.application.routes.draw do
  
  
 #Site Features
+  resources :sponsors, only: [:index, :show]
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
   
@@ -46,10 +47,6 @@ Rails.application.routes.draw do
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
 
   
-
-  #Sponsor Feature
-  resources :sponsors, only: [:index, :show]
-  resources :services, only: [:index, :show]
   # Static Pages
   get 'welcome/index'
   get 'welcome/about'
