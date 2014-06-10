@@ -294,6 +294,22 @@ Use search to find needed section.
 					</ul>
 				</li>
 				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-money"></i><span class="mm-text">Sponsors</span></a>
+					<ul>
+						<li>
+							<%= link_to admin_sponsors_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Sponsors</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to new_admin_sponsor_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Sponsor</span>
+							<% end %>
+						</li>
+						
+					</ul>
+				</li>
+				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-book"></i><span class="mm-text">Contacts</span></a>
 					<ul>
 						<li>

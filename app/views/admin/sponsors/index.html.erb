@@ -22,7 +22,7 @@
     <thead>
       <tr>
             <th>Name</th>
-            <th>Summary</th>
+            <th>Enabled</th>
             <th>Category</th>
             <th></th>
         <th></th>
@@ -35,7 +35,7 @@
             <td><%= sponsor.name %></td>
          
             <td><%= sponsor.enabled%></td>
-            <td><%= sponsor.category %></td>
+            <td><%= sponsor.category.name %></td>
         
             <td><%= link_to 'Show', admin_sponsor_path(sponsor) %></td>
         <td><%= link_to 'Edit', edit_admin_sponsor_path(sponsor) %></td>

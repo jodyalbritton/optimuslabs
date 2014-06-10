@@ -8,6 +8,7 @@ class Admin::SponsorsController < ApplicationController
 
 
   def index
+    @sponsors = Sponsor.all
   end
 
   def show
@@ -71,6 +72,6 @@ class Admin::SponsorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sponsor_params
-      params.require(:sponsor).permit(:name, :description, :enabled, :category_id)
+      params.require(:sponsor).permit(:name, :description, :enabled, :category_id, :avatar)
     end
 end
