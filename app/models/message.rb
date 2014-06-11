@@ -51,6 +51,7 @@ class Message < ActiveRecord::Base
    def create_interaction
      Interaction.create(
       event: "Sent a message",
+      content: self.body, 
       interactive_id: get_sender.id, 
       interactive_type: get_sender.class  
     )
