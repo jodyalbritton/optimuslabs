@@ -16,9 +16,11 @@
 <%= render 'admin/header' %>
 
 <div class= "row">
-  <div class="col-md-3 left-col">
+  <div class="left-col">
+
     <div class="panel profile-photo">
             <%= image_tag @contact.avatar.url(:medium) %>
+   
     </div>
     <div class="panel panel-transparent">
           <div class="panel-heading">
@@ -31,7 +33,7 @@
           </div>
         </div>
   </div>
-  <div class="col-md-9">
+  <div class="right-col">
   <div class="panel colourable">
             <div class="panel-heading">
               <span class="panel-title">Contact Notes</span>
@@ -82,7 +84,7 @@
         </div>
        <%end%>
        </div>
-  <div class="timeline" id="timeline" >
+  <div class="col-md-offset-1 timeline" id="timeline" >
       <!-- Timeline header -->
      
        <%= render '/admin/interactions/event' %>
