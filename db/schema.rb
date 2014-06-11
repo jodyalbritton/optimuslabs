@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610221105) do
+ActiveRecord::Schema.define(version: 20140611022405) do
 
   create_table "admin_rate_types", force: true do |t|
     t.string   "name"
@@ -67,6 +67,10 @@ ActiveRecord::Schema.define(version: 20140610221105) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "contacts", ["client_id"], name: "index_contacts_on_client_id", using: :btree
@@ -90,6 +94,14 @@ ActiveRecord::Schema.define(version: 20140610221105) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "interactions", force: true do |t|
+    t.integer  "interactive_id"
+    t.string   "interactive_type"
+    t.string   "event"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "invoices", force: true do |t|
     t.string   "subject"
@@ -289,10 +301,12 @@ ActiveRecord::Schema.define(version: 20140610221105) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
+    t.string   "slug"
   end
 
   add_index "sponsors", ["category_id"], name: "index_sponsors_on_category_id", using: :btree
   add_index "sponsors", ["client_id"], name: "index_sponsors_on_client_id", using: :btree
+  add_index "sponsors", ["slug"], name: "index_sponsors_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

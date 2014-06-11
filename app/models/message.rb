@@ -8,7 +8,7 @@ class Message < ActiveRecord::Base
 
 
   before_create :get_sender
-  after_create :create_receipts 
+  after_create :create_receipts, :create_interaction
 
    
 
@@ -41,6 +41,13 @@ class Message < ActiveRecord::Base
    def create_receipts 
    		create_receipt_for_recipients 
    		create_receipt_for_sender
+   end 
+   def create_interaction
+     Interaction.create(
+      event: "Sent a message",
+      interactive_id: get_sender.id, 
+      interactive_type: get_sender.class  
+    )
    end 
  
    def create_receipt_for_recipients
