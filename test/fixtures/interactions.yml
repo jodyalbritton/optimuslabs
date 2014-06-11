@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  interactive_id: 1
+  interactive_type: MyString
+  event: MyString
+
+two:
+  interactive_id: 1
+  interactive_type: MyString
+  event: MyString

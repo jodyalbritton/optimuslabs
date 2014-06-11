@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
 
+
 #Users and Roles 
   devise_for :users
   concern :the_role, TheRole::AdminRoutes.new
  
  
 #Site Features
+  resources :sponsors, only: [:index, :show]
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
   
@@ -22,13 +24,17 @@ Rails.application.routes.draw do
         resources :tasks
       end
       resources :messages
-      resources :contacts
+      resources :interactions
+      resources :contacts do
+        resources :interactions
+      end
       resources :settings
       resources :services
       resources :invoices
       resources :tickets
       resources :notes
       resources :tasks
+      resources :sponsors
       concerns :the_role
 
   end
@@ -43,11 +49,12 @@ Rails.application.routes.draw do
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
 
+  
   # Static Pages
   get 'welcome/index'
   get 'welcome/about'
   get 'welcome/contact'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

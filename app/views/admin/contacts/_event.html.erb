@@ -1,0 +1,15 @@
+
+ <div class="tl-header now bg-primary">Interactions</div>
+<% @interactions.each do |interaction| %>
+
+      <div class="tl-entry">
+        <div class="tl-time">
+          <%= time_ago_in_words(interaction.created_at) %> ago
+        </div>
+        <div class="tl-icon"><i class="fa fa-envelope"></i></div>
+        <div class="panel tl-body">
+          <h4 class=""><%= interaction.event %></h4>
+          <%= interaction.content %>
+        </div> <!-- / .tl-body -->
+      </div> <!-- / .tl-entry -->
+      <% end %>

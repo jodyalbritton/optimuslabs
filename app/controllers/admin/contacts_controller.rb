@@ -12,6 +12,8 @@ class Admin::ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    @new_interaction = @contact.interactions.new
+    @interactions = @contact.interactions.order('created_at DESC')
   end
 
   # GET /contacts/new
@@ -30,7 +32,7 @@ class Admin::ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'contact was successfully created.' }
+        format.html { redirect_to ([:admin, @contact]), notice: 'contact was successfully created.' }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
@@ -71,7 +73,7 @@ class Admin::ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:full_name, :first_name, :last_name, :email, :phone, :description, :url, :avatar)
+      params.require(:contact).permit(:full_name, :first_name, :last_name, :email, :phone, :notes, :url, :avatar, :client_id, :avatar)
     end
 
 end

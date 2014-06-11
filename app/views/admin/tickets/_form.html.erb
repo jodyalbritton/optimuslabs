@@ -2,11 +2,18 @@
 
 				Form example
 -->
-				<%= form_for [:admin, @ticket], :html => { :class => "form-horizontal" } do |f| %>
+				<%= simple_form_for [:admin, @ticket], :html => { :class => "form-horizontal" } do |f| %>
+					<% @status = ["Open", "Closed", "Pending", "In Progess"]%>
 					<div class="panel-heading">
 						<span class="panel-title">New Ticket</span>
 					</div>
 					<div class="panel-body">
+						<div class="form-group">
+							<label for="asdasdas" class="col-sm-2 control-label">Client</label>
+							<div class="col-sm-10">
+								<%= f.association :client, :input_html=>{:class=> "form-control"}, :label=> false, :required => true %>
+							</div>
+						</div> <!-- / .form-group -->
 						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">Subject</label>
 							<div class="col-sm-10">
@@ -19,9 +26,15 @@
 								<%= f.text_area :description, :class=> "form-control" %>
 							</div>
 						</div> <!-- / .form-group -->
+						<div class="form-group">
+							<label for="asdasdas" class="col-sm-2 control-label">Status</label>
+							<div class="col-sm-10">
+								 <%= f.input :status, collection: @status.map, :selected => @ticket.status, :input_html=>{:class=> "form-control"}, :label=> false %>
+							</div>
+						</div> <!-- / .form-group -->
 						<div class="form-group" style="margin-bottom: 0;">
 							<div class="col-sm-offset-2 col-sm-10">
-								<%= f.submit "Create", :classs=> "btn btn-primary" %>
+								<%= f.submit "Update", :class=> "btn btn-primary" %>
 							</div>
 						</div> <!-- / .form-group -->
 					</div>

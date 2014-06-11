@@ -1,25 +1,99 @@
-  <% content_for :page_header do %>
-   <%= @contact.full_name %>
+<script>
+  var init = [];
+  init.push(function () {
+    $('body').addClass('page-profile');
+  });
+</script>
+<% content_for :page_header do %>
+   <%=@contact.full_name %>
   <% end %>
   <% content_for :page_actions do %>
-    <%= link_to admin_contact_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
-                <span class="btn-label icon fa fa-plus"></span>Back
+   <%= link_to admin_contacts_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-chevron-left"></span>Back
     <% end %>
+   
   <% end %>
+<%= render 'admin/header' %>
 
-<dl class="dl-horizontal">
-  <dt>First Name:</dt>
-  <dd><%= @contact.first_name %></dd>
-   <dt>Last Name:</dt>
-  <dd><%= @contact.last_name %></dd>
+<div class= "row">
+  <div class="col-md-2 left-col">
+    <div class="panel profile-photo">
+            <%= image_tag @contact.avatar.url(:medium) %>
+    </div>
+    <div class="panel panel-transparent">
+          <div class="panel-heading">
+            <span class="panel-title">Contact Information</span>
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-building-o" style="color: #888"></i> <%= @contact.client.name %></a>
+            <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-phone" style="color: #4ab6d5"></i> <%= @contact.phone %></a>
+            <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-envelope" style="color: #888"></i> <%= @contact.email %></a>
+          </div>
+        </div>
+  </div>
+  <div class="col-md-10">
+  <div class="panel colourable">
+            <div class="panel-heading">
+              <span class="panel-title">Contact Notes</span>
+              <div class="panel-heading-controls">
+                <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+                 <%= link_to edit_admin_contact_path(@contact), :class => 'btn btn-xs' do %>
+                  <span class="btn-label icon fa fa-plus"></span>Edit
+                 <% end %>
+              </div>
+            </div> <!-- / .panel-heading -->
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="contact-details">
+                   
+                    
+                      <p>
+                        <%= @contact.notes %>
+                      </p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+  </div>
+  <div id="interaction_form">
+   
+       <%= form_for ([:admin, @contact, @new_interaction]), :class=>"form-horizontal", :remote => true  do |f|  %>
+        <div class="form-group">
+          <%= f.label :event, :class => "col-sm-1 control-label" %>
+          <div class="col-sm-2">
+          <%= f.text_field  :event, :class=>"form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :content, :class => "col-sm-1 control-label" %>
+          <div class="col-sm-11">
+          <%= f.text_area  :content, :class=>"form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+        <%= f.submit "Create Interaction", class: "btn btn-primary pull-right" %>
+        </div>
+       <%end%>
+       </div>
+  <div class="timeline" id="timeline" >
+      <!-- Timeline header -->
+     
+       <%= render '/admin/interactions/event' %>
+      
+    </div> <!-- / .timeline -->
 
-  <dt>Email:</dt>
-  <dd><%= @contact.email %></dd>
 
-  <dt>Phone:</dt>
-  <dd><%= @contact.phone %></dd>
+  </div>
+</div>
 
-  <dt>Description:</dt>
-  <dd><%= @contact.notes %></dd>
 
-</dl>
+<script>
+  $("#interaction_form").toggle(300);
+</script>

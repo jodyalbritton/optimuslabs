@@ -1,0 +1,45 @@
+  <% content_for :page_header do %>
+   <%=@ticket.subject %>
+  <% end %>
+  <% content_for :page_actions do %>
+   <%= link_to admin_tickets_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-chevron-left"></span>Back
+    <% end %>
+   
+  <% end %>
+<%= render 'admin/header' %>
+
+
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Ticket Details</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_ticket_path(@ticket), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Status</th>
+                  <th>Client</th>
+                  <th>Severity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= @ticket.id %></td>
+                  <td><%= @ticket.status %></td>
+                  <td><%= @ticket.client %></td>
+                  <td><%= @ticket.severity %></td>
+              </tbody>
+            </table>
+            <div class="ticket-details">
+              <%= @ticket.description %>
+            </div>
+          </div>
+</div>
