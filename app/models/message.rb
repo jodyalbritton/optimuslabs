@@ -23,9 +23,13 @@ class Message < ActiveRecord::Base
        	Contact.find_or_create_by(:email => email) do |contact|
      		 contact.full_name = full_name
         end
-      else 
+      else
+        
         Contact.find_or_create_by(:email => email) do |contact|
-         contact.full_name = full_name
+         curr_user = User.find_by(:email)
+         contact.full_name = curr_user.full_name
+         contact.first_name = curr_user.first_name
+         contact.last_name = curr_user.last_name
        end
       end
   end
