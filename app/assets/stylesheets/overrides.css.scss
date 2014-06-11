@@ -18,3 +18,38 @@
 .blocks{
 	min-height: 400px;
 }
+
+
+.header-title {
+text-align: center;
+color: #fff;
+margin-bottom: 27px;
+min-height: 250px;
+}
+
+.header-title h2 {
+color: #fff;
+
+font-size: 85px;
+margin: 0px;
+font-weight: bold;
+line-height: 100px;
+-webkit-animation-duration: 6s;
+-webkit-animation-delay: 0s;
+-moz-animation-duration: 6s;
+-moz-animation-delay: 0s;
+-ms-animation-duration: 6s;
+-ms-animation-delay: 0s;
+-o-animation-duration: 6s;
+-o-animation-delay: 0s;
+animation-duration: 6s;
+animation-delay: 0.5s;
+}
+
+
+
+
+.header-title h4 {
+	color: #fff;
+	font-size: 32px;
+}
