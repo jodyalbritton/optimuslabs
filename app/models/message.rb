@@ -24,7 +24,9 @@ class Message < ActiveRecord::Base
      		 contact.full_name = full_name
         end
       else 
-        User.find_by(:email=> email)
+        Contact.find_or_create_by(:email => email) do |contact|
+         contact.full_name = full_name
+       end
       end
   end
    
