@@ -12,6 +12,8 @@ class Admin::ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    @new_interaction = @contact.interactions.new
+    @interactions = @contact.interactions.order('created_at DESC')
   end
 
   # GET /contacts/new

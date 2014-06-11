@@ -24,7 +24,10 @@ Rails.application.routes.draw do
         resources :tasks
       end
       resources :messages
-      resources :contacts
+      resources :interactions
+      resources :contacts do
+        resources :interactions
+      end
       resources :settings
       resources :services
       resources :invoices

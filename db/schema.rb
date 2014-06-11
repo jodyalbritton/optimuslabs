@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611022405) do
+ActiveRecord::Schema.define(version: 20140611033602) do
 
   create_table "admin_rate_types", force: true do |t|
     t.string   "name"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140611022405) do
     t.string   "event"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "content"
   end
 
   create_table "invoices", force: true do |t|
