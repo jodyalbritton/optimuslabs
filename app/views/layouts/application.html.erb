@@ -15,7 +15,7 @@
     <![endif]-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
- 
+  <%= canonical_tag -%>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
 <script src="https://platform.twitter.com/widgets.js"></script>
@@ -54,7 +54,7 @@
                          <i class="icon-angle-right"></i>Home
                         <% end %>
                         </li>
-                        <li><%= link_to  welcome_about_url do %>
+                        <li><%= link_to about_url do %>
                             <i class="icon-angle-right"></i>About
                         <% end %>
                         </li>
@@ -62,11 +62,11 @@
                             <i class="icon-angle-right"></i>Services
                         <% end %>
                         </li>
-                        <li><%= link_to  posts_url do %>
+                        <li><%= link_to  "/blog" do %>
                             <i class="icon-angle-right"></i>Blog
                         <% end %>
                         </li>
-                        <li><%= link_to welcome_contact_url do %>
+                        <li><%= link_to contact_url do %>
                             <i class="icon-angle-right"></i>Contact
                         <% end %>
                         </li>
@@ -77,14 +77,19 @@
             </div>
             <div class="col-md-4">
                 <section class="footer-widget">
+                    <% if current_page?("boop") %>
                     <h3>Newsletter</h3>
-                    <p>We never spam or solicit with our newsletter. Get infrequent emails about small biz technology.</p>
+                    <p>Get infrequent updates regarding small business technology issues.</p>
+                    <%= form_for (@contact) do |f| %>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Email Adress">
+                        <%= f.text_field :email, :class=> "form-control", :placeholder => "Email Address" %>
                         <span class="input-group-btn">
-                            <button class="btn btn-info" type="button">Subscribe</button>
+                            <%= f.submit "Suscribe", :class=> "btn btn-info" %>
+                           
                         </span>
                     </div><!-- /input-group -->
+                    <% end %>
+                    <% end %>
                 </section>
             </div>
             <div class="col-md-4">

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   add_breadcrumb "Home", :root_url
-  add_breadcrumb "Blog", :posts_path
+  add_breadcrumb "Blog", :blog_path
   def index
     
 
