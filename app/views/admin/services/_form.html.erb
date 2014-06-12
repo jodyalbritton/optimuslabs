@@ -39,9 +39,9 @@
       <div class="input-group">
       <%= f.text_field :logo_icon, :class=>"form-control" %>
       <span class="input-group-addon" >
-         <button class="btn btn-xs" data-toggle="modal" data-target="#myModal">
-           <i class="fa fa-calendar"></i>
-         </button>
+        
+           <i class="fa fa-calendar" data-toggle="modal" data-target="#myModal"></i>
+  
       </span>
        
       </div>
@@ -189,7 +189,7 @@
 
 $( ".addIcon" ).click(function() {
   var arrayOfClasses = (this).className.split(' ');
-  $('#service_logo_icon').val(arrayOfClasses[2]);
+  $('#service_logo_icon').val(arrayOfClasses[2].substring(3));
   $('#myModal').modal('hide');
 });
 </script>
