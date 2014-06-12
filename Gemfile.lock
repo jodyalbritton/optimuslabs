@@ -8,6 +8,13 @@ GIT
       hashie
     elasticsearch-rails (0.1.2)
 
+GIT
+  remote: git://github.com/jumph4x/canonical-rails.git
+  revision: 7c8e44e048faa23de107be7250336a3585e32247
+  specs:
+    canonical-rails (0.0.7)
+      rails (>= 3.1, < 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -197,6 +204,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 3.2.5)
   bootstrap-datepicker-rails
   breadcrumbs_on_rails
+  canonical-rails!
   cocoon
   coffee-rails (~> 4.0.0)
   devise
