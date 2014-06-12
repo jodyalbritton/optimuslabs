@@ -2,14 +2,14 @@
 
 
 
-<%= form_for [:admin, @service], :html => { :class => "form-horizontal" } do |f| %>
-  <% if @service.errors.any? %>
+<%= form_for [:admin, @product], :html => { :class => "form-horizontal" } do |f| %>
+  <% if @product.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h4><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h4>
+      <h4><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h4>
 
       <ul>
-      <% @service.errors.full_messages.each do |msg| %>
+      <% @product.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -23,24 +23,10 @@
       <%= f.text_field :name, :class => "form-control" %>
     </div>
   </div>
-   <div class="form-group">
-    <%= f.label :summary, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-    <%= f.text_area :summary, :class => "form-control " %>
-    </div>
-  </div>
   <div class="form-group">
-    <%= f.label :logo, :class => "col-sm-2 control-label" %>
+    <%= f.label :photo, :class => "col-sm-2 control-label" %>
     <div class="col-sm-2">
-      <%= f.file_field :logo, :class=>"form-control" %>
-    </div>
-     <%= f.label :logo_icon, :class => "col-sm-1 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :logo_icon, :class=>"form-control" %>
-    </div>
-     <%= f.label :header, :class => "col-sm-1 control-label" %>
-    <div class="col-sm-2">
-      <%= f.file_field :header, :class=>"form-control" %>
+      <%= f.file_field :photo, :class=>"form-control" %>
     </div>
   </div>
   <div class="form-group">
@@ -61,20 +47,6 @@
      <%= f.label :price, :class => "col-sm-1 control-label" %>
     <div class="col-sm-2">
       <%= f.number_field :price%>
-    </div>
-  </div>
-   <div class="form-group">
-    <%= f.label :rate, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.collection_select :rate_type_id, RateType.all, :id, :name %>
-    </div>
-    <%= f.label :featured, :class => "col-sm-1 control-label" %>
-    <div class="col-sm-2">
-      <%= f.check_box :featured, :class=> "form-control" %>
-    </div>
-      <%= f.label :sort_value, :class => "col-sm-1 control-label" %>
-    <div class="col-sm-1">
-      <%= f.number_field :sort_value, :class=> "form-control" %>
     </div>
   </div>
    <script>
@@ -125,7 +97,7 @@
     <script>
       init.push(function () {
         if (! $('html').hasClass('ie8')) {
-          $('#service_description').summernote({
+          $('#product_description').summernote({
             height: 500,
             tabsize: 2,
             codemirror: {

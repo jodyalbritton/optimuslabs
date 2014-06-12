@@ -11,12 +11,14 @@ Rails.application.routes.draw do
   resources :sponsors, only: [:index, :show]
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
+  resources :products, only: [:index, :show]
   
 
 #Admin interface 
   resources :admin, only: [:index]
   namespace :admin do
       resources :posts
+      resources :products
       resources :categories
       resources :rate_types
       resources :clients do 

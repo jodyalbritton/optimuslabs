@@ -347,7 +347,7 @@ Use search to find needed section.
 					</ul>
 				</li>
 				<li class="mm-dropdown">
-					<a href="#"><i class="menu-icon fa fa-bullhorn"></i><span class="mm-text">Services</span></a>
+					<a href="#"><i class="menu-icon fa fa-umbrella"></i><span class="mm-text">Services</span></a>
 					<ul>
 						<li>
 							<%= link_to admin_services_path, :tabindex=>"-1" do %>
@@ -357,6 +357,22 @@ Use search to find needed section.
 						<li>
 							<%= link_to new_admin_service_path, :tabindex=>"-1" do %>
 							<span class="mm-text">New Service</span>
+							<% end %>
+						</li>
+						
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-gift"></i><span class="mm-text">Products</span></a>
+					<ul>
+						<li>
+							<%= link_to admin_products_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Products</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to new_admin_product_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Product</span>
 							<% end %>
 						</li>
 						
@@ -385,7 +401,22 @@ Use search to find needed section.
 									<% end %>
 								</li>
 							</ul>
-						</li>		
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Rate Types</span></a>
+							<ul>
+								<li>
+									<%= link_to admin_rate_types_path, :tabindex=>"-1" do %>
+									<span class="mm-text">List Rate Types</span>
+									<% end %>
+								</li>
+								<li>
+								    <%= link_to new_admin_rate_type_path, :tabindex=>"-1" do %>
+								    <span class="mm-text">New Rate Type</span>
+									<% end %>
+								</li>
+							</ul>
+						</li>				
 					</ul>
 				</li>
 				
