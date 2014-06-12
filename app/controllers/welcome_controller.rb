@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
 
   	@recent_posts = Post.where(:draft => false ).order("published_at DESC").first(3)
   	@client_hightlight = Client.first(4)
+    @featured_services = Service.where(:featured => true).order(:sort_value).first(4)
   end
 
   def about

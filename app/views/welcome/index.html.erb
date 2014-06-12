@@ -29,38 +29,16 @@
         <div class="container">
             <section class="home-features">
                 <div class="row">
+                    <% @featured_services.each do |featured_service| %>
                     <div class="col-md-3 col-sm-6">
                         <article class="home-features-item">
                             <i class="icon-eye-open"></i>
-                            <h2>Monitoring</h2>
-                            <p>Proactive monitoring of your network equipment and websites. We are proactive even while you sleep.</p>
-                            <a class="btn btn-default">Read More</a>
+                            <h2><%= featured_service.name %></h2>
+                            <p><%= featured_service.summary %></p>
+                            <%= link_to "Read More", service_path(featured_service), :class=> "btn btn-default" %>
                         </article>
                     </div>
-                    <div class="col-md-3 col-sm-6">
-                        <article class="home-features-item">
-                            <i class="icon-html5"></i>
-                            <h2>Web Design</h2>
-                            <p>Get your brand out there with custom web design. We build consistent platforms across all devices.</p>
-                            <a class="btn btn-default">Read More</a>
-                        </article>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <article class="home-features-item">
-                            <i class="icon-tablet"></i>
-                            <h2>Purchasing Advisor</h2>
-                            <p>We work as a trusted advisor and help you make purchasing decisions. We are not in the business of high pressure sales.</p>
-                            <a class="btn btn-default">Read More</a>
-                        </article>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <article class="home-features-item">
-                            <i class="icon-pencil"></i>
-                            <h2>Software Dev</h2>
-                            <p>When it comes to software development we do it all. Need a Mobile App? We do that too. Fixing old code? No problem.</p>
-                            <a class="btn btn-default">Read More</a>
-                        </article>
-                    </div>
+                    <% end %>
                 </div> <!-- row -->
             </section> <!-- home-features -->
         </div> <!-- container -->
