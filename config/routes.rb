@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
   resources :products, only: [:index, :show]
+  resources :contacts, only: [:new, :create, :thanks]
   
 
 #Admin interface 
