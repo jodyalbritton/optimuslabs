@@ -39,6 +39,7 @@ gem "rails-settings-cached", "0.4.1"
 gem 'simple_form'
 gem "cocoon"
 gem 'faker'
+gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
