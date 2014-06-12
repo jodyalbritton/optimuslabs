@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611223536) do
+ActiveRecord::Schema.define(version: 20140612022436) do
 
   create_table "admin_rate_types", force: true do |t|
     t.string   "name"
@@ -224,6 +224,29 @@ ActiveRecord::Schema.define(version: 20140611223536) do
   add_index "posts", ["site_id"], name: "index_posts_on_site_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
 
+  create_table "products", force: true do |t|
+    t.string   "name",                                       default: "",    null: false
+    t.text     "description"
+    t.integer  "stock",                                      default: 0
+    t.boolean  "available",                                  default: false
+    t.datetime "available_on"
+    t.string   "slug"
+    t.string   "meta_description"
+    t.string   "meta_keywords"
+    t.string   "sku",                                        default: "",    null: false
+    t.decimal  "cost",               precision: 8, scale: 2, default: 0.0
+    t.decimal  "price",              precision: 8, scale: 2, default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "category_id"
+  end
+
+  add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
+
   create_table "rate_types", force: true do |t|
     t.string   "name"
     t.integer  "unit"
@@ -260,6 +283,8 @@ ActiveRecord::Schema.define(version: 20140611223536) do
     t.decimal  "cost",                precision: 30, scale: 10
     t.decimal  "duration",            precision: 30, scale: 10
     t.integer  "rate_type_id"
+    t.boolean  "featured",                                      default: false
+    t.integer  "sort_value",                                    default: 0
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree

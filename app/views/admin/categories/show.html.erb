@@ -10,11 +10,26 @@
 
 <%= render 'admin/header' %>
 
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @category.name %></dd>
 
-  <dt>Description:</dt>
-  <dd><%= @category.description %></dd>
 
-</dl>
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Category Details</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_category_path(@category), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt>Name:</dt>
+              <dd><%= @category.name %></dd>
+
+              <dt>Description:</dt>
+              <dd><%= @category.description %></dd>
+
+            </dl>
+          </div>
+</div>
