@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612022436) do
+ActiveRecord::Schema.define(version: 20140612183720) do
 
   create_table "admin_rate_types", force: true do |t|
     t.string   "name"
@@ -285,10 +285,12 @@ ActiveRecord::Schema.define(version: 20140612022436) do
     t.integer  "rate_type_id"
     t.boolean  "featured",                                      default: false
     t.integer  "sort_value",                                    default: 0
+    t.string   "slug"
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
   add_index "services", ["rate_type_id"], name: "index_services_on_rate_type_id", using: :btree
+  add_index "services", ["slug"], name: "index_services_on_slug", unique: true, using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "var",                   null: false

@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+     
+
+    categories = Category.create(:name => 'Default', :description => 'Default Category')
+    rate_types = RateType.create(:name => 'Default', :unit => 1)
