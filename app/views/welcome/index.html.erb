@@ -32,7 +32,7 @@
                     <% @featured_services.each do |featured_service| %>
                     <div class="col-md-3 col-sm-6">
                         <article class="home-features-item">
-                            <i class="icon-eye-open"></i>
+                           <%= raw("<i class='icon-#{featured_service.logo_icon}'></i>") %>
                             <h2><%= featured_service.name %></h2>
                             <p><%= featured_service.summary %></p>
                             <%= link_to "Read More", service_path(featured_service), :class=> "btn btn-default" %>
@@ -46,82 +46,42 @@
 
     <div class="container">
             <div class="row">                             
-                <div class="col-lg-8 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <section class="home-works">            
                         <h1 class="section-title">In The Lab</h1>
                         
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <figure class="caption cs-style-3">
                                     <img src="/assets/w1.jpg" alt="img04">
                                     <figcaption>
-                                        <h3>Settings</h3>
-                                        <span>Jacob Cummings</span>
-                                        <a class="btn btn-robotic-inverse" href="#">Take a look</a>
+                                        <h3>Platform</h3>
+                                        <%= link_to "Take a look", labs_platform_path, :class=> "btn btn-robotic-inverse" %>
                                     </figcaption>
                                 </figure>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <figure class="caption cs-style-3">
                                     <img src="/assets/w2.jpg" alt="img01">
                                     <figcaption>
-                                        <h3>Camera</h3>
-                                        <span>Jacob Cummings</span>
-                                        <a class="btn btn-robotic-inverse" href="#">Take a look</a>
+                                        <h3>Help Desk</h3>
+                                        <%= link_to "Take a look", labs_helpdesk_path, :class=> "btn btn-robotic-inverse" %>
                                     </figcaption>
                                 </figure>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <figure class="caption cs-style-3">
                                     <img src="/assets/w3.jpg" alt="img02">
                                     <figcaption>
-                                        <h3>Music</h3>
-                                        <span>Jacob Cummings</span>
-                                        <a class="btn btn-robotic-inverse" href="#">Take a look</a>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <figure class="caption cs-style-3">
-                                    <img src="/assets/w4.jpg" alt="img02">
-                                    <figcaption>
-                                        <h3>Music</h3>
-                                        <span>Jacob Cummings</span>
-                                        <a class="btn btn-robotic-inverse" href="#">Take a look</a>
+                                        <h3>Future Projects</h3>
+                                        <%= link_to "Take a look", labs_future_path, :class=> "btn btn-robotic-inverse" %>
                                     </figcaption>
                                 </figure>
                             </div>
                         </div>    
                     </section> <!-- home-works -->
                 </div> <!-- col-md-8 -->
-                <div class="col-lg-4 col-md-12">
-                    <section class="home-social-widget">
-                        <h1 class="section-title">Social Networking</h1>
-                        <ul class="nav nav-tabs nav-tabs-robotic nav-tabs-robotic-light nav-tabs-home" id="myTab">
-                           
-                            <li class="active"><a href="#twitter" data-toggle="tab"><i class="icon-twitter"></i> Twitter</a></li>
-                            <li><a href="#facebook" data-toggle="tab"><i class="icon-facebook"></i> Facebook</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-           
-                            <div class="tab-pane active" id="twitter">
-                                <a class="twitter-timeline" href="https://twitter.com/GetOptimus" data-widget-id="469627321305948160">Tweets by @GetOptimus</a>
-                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-
-
-                              
-
-
-                            </div>
-                            <div class="tab-pane" id="facebook">
-                            <div class="fb-like-box" data-href="https://www.facebook.com/getoptimus" data-width="100%" data-height="400" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
-                             
-                            </div>
-                        </div>
-                    </section> <!-- home-social-widget -->
-                </div> <!-- col-md-4 -->
+            <!-- col-md-4 -->
             </div> <!-- row -->
         
 

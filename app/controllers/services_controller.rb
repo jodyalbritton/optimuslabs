@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
   end
 
   def show
-  	 @service = Service.find(params[:id])
+  	 @service = Service.friendly.find(params[:id])
   	 add_breadcrumb @service.name, :post_path
   end
 end

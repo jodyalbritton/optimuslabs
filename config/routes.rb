@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
 
 
+  get 'labs/platform'
+
+  get 'labs/helpdesk'
+
+  get 'labs/future'
+
 #Users and Roles 
   devise_for :users
   concern :the_role, TheRole::AdminRoutes.new
