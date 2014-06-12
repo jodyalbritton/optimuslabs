@@ -5,21 +5,35 @@
    <%= link_to admin_services_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
                 <span class="btn-label icon fa fa-chevron-left"></span>Back
     <% end %>
-    <%= link_to edit_admin_service_path(@service), :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
-                <span class="btn-label icon fa fa-plus"></span>Edit
-    <% end %>
   <% end %>
 <%= render 'admin/header' %>
 
-<h2> Header Image </h2>
-<%= image_tag @service.header.url %>
 
-
-<div class="row">
-	<div class="col-md-8">
-		<%= sanitize(@service.description) %>
-	</div>
-	<div class="col-md-4">
-		<%= image_tag @service.logo(:medium) %>
-	</div>
-</div>
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Service Details</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em><%= link_to "Public View", service_path %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_service_path(@service), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div>
+                  <h3> Service Header </h3>
+                  <%= image_tag @service.header.url %>
+                </div>
+              <div>
+                  <h3> Service Content </h3>
+                  <%= sanitize(@service.description) %>
+              </div>
+              </div>
+              <div class="col-md-4">
+               <h3> Service Logo </h3>
+                <%= image_tag @service.logo(:medium) %>
+              </div>
+            </div>
+          </div>

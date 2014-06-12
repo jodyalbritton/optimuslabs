@@ -1,5 +1,5 @@
   <% content_for :page_header do %>
-   <%=@ticket.subject %>
+   #<%= @ticket.id %>&nbsp<%=@ticket.subject %>
   <% end %>
   <% content_for :page_actions do %>
    <%= link_to admin_tickets_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
@@ -9,37 +9,99 @@
   <% end %>
 <%= render 'admin/header' %>
 
-
+<div class="row">
+<div class="col-md-8">
+    <div class="panel">
+      <div class="panel-heading">
+        Ticket Details
+      </div>
+        <div class="panel-body">
+              <%= @ticket.description %>
+        </div>
+    </div>
+    <div class="panel">
+      <div class="panel-heading">
+        Resolution
+      </div>
+        <div class="panel-body">
+              <%= @ticket.resolution %>
+        </div>
+    </div>
+ <div id="interaction_form">
+   
+       <%= form_for ([:admin, @ticket, @new_interaction]), :class=>"form-horizontal", :remote => true  do |f|  %>
+        <div class="form-group">
+          <%= f.label :event, :class => "col-sm-1 control-label" %>
+          <div class="col-sm-2">
+          <%= f.text_field  :event, :class=>"form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :content, :class => "col-sm-1 control-label" %>
+          <div class="col-sm-11">
+          <%= f.text_area  :content, :class=>"form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+        <%= f.submit "Create Interaction", class: "btn btn-primary pull-right" %>
+        </div>
+       <%end%>
+  </div>
+  <div class="col-md-offset-1 timeline" id="timeline" >
+      <!-- Timeline header -->
+     
+       <%= render '/admin/interactions/event' %>
+      
+  </div> <!-- / .timeline -->
+</div>
+<div class="col-md-4">
 <div class="panel colourable">
           <div class="panel-heading">
-            <span class="panel-title">Ticket Details</span>
+            <span class="panel-title">Current Status:&nbsp <%= @ticket.status %></span>
             <div class="panel-heading-controls">
-              <span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+              <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
                <%= link_to edit_admin_ticket_path(@ticket), :class => 'btn btn-xs' do %>
                 <span class="btn-label icon fa fa-plus"></span>Edit
                <% end %>
             </div>
           </div> <!-- / .panel-heading -->
           <div class="panel-body">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Status</th>
-                  <th>Client</th>
-                  <th>Severity</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><%= @ticket.id %></td>
-                  <td><%= @ticket.status %></td>
-                  <td><%= @ticket.client %></td>
-                  <td><%= @ticket.severity %></td>
-              </tbody>
-            </table>
-            <div class="ticket-details">
-              <%= @ticket.description %>
-            </div>
+            <ul class="list-group">
+                    <li class="list-group-item">
+                      <span class="pull-right"><%= @ticket.client.name %></span>
+                      Client:
+                    </li>
+                     <li class="list-group-item">
+                      <span class="pull-right"><%= @ticket.location %></span>
+                      Location
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-info">14</span>
+                      Time Spent:
+                    </li>
+                    <li class="list-group-item">
+                      <span class="pull-right"><%= @ticket.created_at.strftime("%d/%m/%y") %></span>
+                      Date Opened
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-success"><%= @ticket.interactions.size %></span>
+                      Interactions
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-warning"><%= time_ago_in_words(@ticket.created_at) %></span>
+                      Time Open
+                    </li>
+                    
+                  </ul>
+          </div>
+</div>
+</div>
+</div>
+
+
+
+<script>
+  $("#interaction_form").toggle(300);
+</script>
           </div>
 </div>

@@ -31,7 +31,18 @@
             <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-phone" style="color: #4ab6d5"></i> <%= @contact.phone %></a>
             <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-envelope" style="color: #888"></i> <%= @contact.email %></a>
           </div>
-        </div>
+    </div>
+    <div class="panel panel-transparent">
+          <div class="panel-heading">
+            <span class="panel-title">Stats</span>
+          </div>
+          <div class="list-group">
+                    <li class="list-group-item">
+                      <span class="pull-right"><%= Time.at(@contact.total_time).utc.strftime("%H:%M:%S") %></span>
+                      Total Time
+                
+          </div>
+    </div>
   </div>
   <div class="right-col">
   <div class="panel colourable">
@@ -72,6 +83,16 @@
           <div class="col-sm-2">
           <%= f.text_field  :event, :class=>"form-control" %>
           </div>
+          <%= f.label :time, :class => "col-sm-1 control-label" %>
+           <button type="button"  onclick='Example1.Timer.toggle();' class="btn btn-default"/>
+            <span class="fa fa-play"></span>/<span class="fa fa-pause"></span>
+            </button>
+          <button type='button'  onclick='Example1.resetStopwatch();' class="btn btn-default" />
+            <span class="fa fa-stop"></span>
+          </button>
+          <div class="col-sm-1">
+          <%= f.number_field :time, :class=> "form-control " %>
+          </div>
         </div>
         <div class="form-group">
           <%= f.label :content, :class => "col-sm-1 control-label" %>
@@ -98,4 +119,26 @@
 
 <script>
   $("#interaction_form").toggle(300);
+</script>
+
+<script>
+ var Example1 = new (function() {
+    var $interaction_time, // Stopwatch element on the page
+        incrementTime = 1000, // Timer speed in milliseconds
+        currentTime = 0, // Current time in hundredths of a second
+        updateTimer = function() {
+            $interaction_time.val(currentTime);
+            currentTime += incrementTime / 1000;
+        },
+        init = function() {
+            $interaction_time = $('#interaction_time');
+            Example1.Timer = $.timer(updateTimer, incrementTime, true);
+        };
+    this.resetStopwatch = function() {
+        currentTime = 0;
+        this.Timer.stop().once();
+    };
+    $(init);
+});
+
 </script>

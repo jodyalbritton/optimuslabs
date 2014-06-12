@@ -338,6 +338,27 @@ Use search to find needed section.
 							<span class="mm-text">New Ticket</span>
 							<% end %>
 						</li>
+						<li>
+							<%= link_to admin_tickets_path(:closed=> true), :tabindex=>"-1" do %>
+							<span class="mm-text">Archived Tickets</span>
+							<% end %>
+						</li>
+						
+					</ul>
+				</li>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-bullhorn"></i><span class="mm-text">Services</span></a>
+					<ul>
+						<li>
+							<%= link_to admin_services_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Services</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to new_admin_service_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Service</span>
+							<% end %>
+						</li>
 						
 					</ul>
 				</li>
@@ -350,21 +371,6 @@ Use search to find needed section.
 				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-building-o"></i><span class="mm-text">Back Office</span></a>
 					<ul>
-						<li class="mm-dropdown">
-							<a tabindex="-1" href="#"><span class="mm-text">Services</span></a>
-							<ul>
-								<li>
-									<%= link_to admin_services_path, :tabindex=>"-1" do %>
-									<span class="mm-text">List Services</span>
-									<% end %>
-								</li>
-								<li>
-								    <%= link_to new_admin_service_path, :tabindex=>"-1" do %>
-								    <span class="mm-text">New Service</span>
-									<% end %>
-								</li>
-							</ul>
-						</li>
 						<li class="mm-dropdown">
 							<a tabindex="-1" href="#"><span class="mm-text">Invoices</span></a>
 							<ul>

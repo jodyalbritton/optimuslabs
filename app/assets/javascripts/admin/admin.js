@@ -14,6 +14,7 @@
 //= require admin/bootstrap
 //= require admin/pixel-admin
 //= require admin/jquery.searchable
+//= require admin/jquery.timer
 //= require cocoon
 //= require_self
 

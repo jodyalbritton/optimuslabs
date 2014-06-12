@@ -15,5 +15,8 @@ class Contact < ActiveRecord::Base
 
   end
 
+  def total_time
+    self.interactions.sum :time
+  end 
 
 end
