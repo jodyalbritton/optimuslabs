@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   #Blog Feature 
    scope '/blog' do
-      resources :posts, only: [:show, :tagged, :catagorized]
+      resources :posts, only: [:index, :show, :tagged, :catagorized]
   end
     
   
