@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :clients do 
         resources :invoices
         resources :tasks
+        resources :tickets
       end
       resources :messages
       resources :interactions
@@ -31,7 +32,9 @@ Rails.application.routes.draw do
       resources :settings
       resources :services
       resources :invoices
-      resources :tickets
+      resources :tickets do
+        resources :interactions
+      end
       resources :notes
       resources :tasks
       resources :sponsors

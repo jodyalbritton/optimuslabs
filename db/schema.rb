@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611033602) do
+ActiveRecord::Schema.define(version: 20140611223536) do
 
   create_table "admin_rate_types", force: true do |t|
     t.string   "name"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20140611033602) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "content"
+    t.integer  "time",             default: 0
   end
 
   create_table "invoices", force: true do |t|
@@ -351,6 +352,9 @@ ActiveRecord::Schema.define(version: 20140611033602) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "resolution"
+    t.integer  "assignable_id"
+    t.string   "assignable_type"
   end
 
   add_index "tickets", ["client_id"], name: "index_tickets_on_client_id", using: :btree

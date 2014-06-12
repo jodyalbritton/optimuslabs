@@ -15,14 +15,19 @@ class Admin::InteractionsController < ApplicationController
   end
 
   def create
-    if params[:contact_id]
-      @contact = Contact.find(params[:contact_id])
-      @interactions = @contact.interactions.order('created_at DESC')
-      @interaction = @contact.interactions.create(:event =>params[:interaction][:event],:content=> params[:interaction][:content])
-    else 
-      @interactions = Interaction.order('created_at DESC')
-      @interaction = Interaction.create(:event =>params[:interaction][:event],:content=> params[:interaction][:content])
-     end
+      if params[:contact_id]
+        @contact = Contact.find(params[:contact_id])
+        @interactions = @contact.interactions.order('created_at DESC')
+        @interaction = @contact.interactions.create(:event =>params[:interaction][:event],:content=> params[:interaction][:content],:time=> params[:interaction][:time])
+      elsif params[:ticket_id]
+        @ticket = Ticket.find(params[:ticket_id])
+        @interactions = @ticket.interactions.order('created_at DESC')
+        @interaction = @ticket.interactions.create(:event =>params[:interaction][:event],:content=> params[:interaction][:content],:time=> params[:interaction][:time])
+
+      else 
+        @interactions = Interaction.order('created_at DESC')
+        @interaction = Interaction.create(:event =>params[:interaction][:event],:content=> params[:interaction][:content])
+      end
 	 
 	   respond_to do |format|
 	    format.html { redirect_to admin_interactions_url }
@@ -49,7 +54,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interaction_params
-      params.require(:interaction).permit(:event, :content)
+      params.require(:interaction).permit(:event, :content, :time)
     end
 
 

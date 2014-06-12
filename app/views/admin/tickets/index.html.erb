@@ -19,28 +19,41 @@
 
 
 <div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover" id="table">
+  <table class="table table-striped table-bordered table-hover table-responsive" id="table">
     <thead>
       <tr>
             <th>Subject</th>
-            <th>Status</th>
-            <th>Client</th>
-            <th></th>
-        <th></th>
+          
+              <th class="hidden-sm hidden-xs">Priority</th>
+          
+            <th class="hidden-sm hidden-xs">Status</th>
+            <th class="hidden-sm hidden-xs">Opened</th>
+            
+    
         <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @tickets) do |ticket| %>
-            <td><%= ticket.subject %></td>
-         
-            <td><%= ticket.status%></td>
-            <td><%= ticket.client.name %></td>
-        
-            <td><%= link_to 'Show', admin_ticket_path(ticket) %></td>
-        <td><%= link_to 'Edit', edit_admin_ticket_path(ticket) %></td>
-        <td><%= link_to 'Destroy', admin_ticket_path(ticket), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= link_to admin_ticket_path(ticket) do %>
+                  <%= ticket.subject %> [#<%=ticket.id%>]
+              <% end %>
+              <p>Opened for <%=link_to ticket.client.name, admin_client_path(ticket.client) %></p>
+            </td>
+            <td class="hidden-sm hidden-xs"><%= ticket.severity%></td>
+            <td class="hidden-sm hidden-xs"><%= ticket.status%></td>
+            <td class="hidden-sm hidden-xs"><%= ticket.created_at.strftime("%d/%m/%y")%></td>
+          
+            <td> 
+            <%= link_to edit_admin_ticket_path(ticket) do %>
+              <span class="btn btn-default icon fa fa-pencil"></span>
+            <% end %>
+            <%= link_to  admin_ticket_path(ticket), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+              <span class="btn btn-danger icon fa fa-trash-o"></span>
+            <% end %>
+            </td>
       <% end %>
     </tbody>
   </table>

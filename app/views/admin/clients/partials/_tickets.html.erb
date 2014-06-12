@@ -8,8 +8,11 @@
         <div class="panel panel-success widget-support-tickets" id="dashboard-support-tickets">
           <div class="panel-heading">
             <span class="panel-title"><i class="panel-title-icon fa fa-bullhorn"></i>Support Tickets</span>
-            <div class="panel-heading-controls">
-              <div class="panel-heading-text"><a href="#"><%= @client.tickets.size %> new tickets</a></div>
+             <div class="panel-heading-controls">
+              <%= link_to new_admin_client_ticket_path(@client, @ticket)  do%>
+              <button class="btn btn-xs btn-primary btn-outline"><i class="fa fa-pencil text-success"></i> New Ticket</button>
+              <% end %>
+              <button class="btn btn-xs btn-primary btn-outline"><i class="fa fa-eraser text-success"></i> <%= @client.tickets.size %></button>
             </div>
           </div> <!-- / .panel-heading -->
           <div class="panel-body tab-content-padding">
@@ -18,9 +21,9 @@
             <% @client.tickets.each do |ticket| %>
               <div class="ticket">
                 <span class="label label-success ticket-label"><%= ticket.status %></span>
-                <a href="#" title="" class="ticket-title"><%= ticket.subject %><span>#<%= ticket.id %></span></a>
+                <%= link_to ([:admin, ticket]), :class=> "ticket-title" do %> <%= ticket.subject %><span>#<%= ticket.id %></span><% end %>
                 <span class="ticket-info">
-                  Opened by <a href="#" title=""><%= ticket.client %></a> today
+                  Opened by <a href="#" title=""><%= ticket.client.name %></a> today
                 </span>
               </div> <!-- / .ticket -->
 

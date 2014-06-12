@@ -36,7 +36,7 @@
             <td><%= service.name %></td>
          
             <td><%= service.summary%></td>
-            <td><%= service.category %></td>
+            <td><%= service.category.name %></td>
         
             <td><%= link_to 'Show', admin_service_path(service) %></td>
         <td><%= link_to 'Edit', edit_admin_service_path(service) %></td>
