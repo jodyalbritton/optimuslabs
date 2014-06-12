@@ -57,9 +57,9 @@ Rails.application.routes.draw do
   
   # Static Pages
   get 'welcome/index'
-  get 'welcome/about'
-  get 'welcome/contact'
-  
+  get '/about', to:'welcome#about'
+  get '/contact', to: 'welcome#contact'
+ 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
