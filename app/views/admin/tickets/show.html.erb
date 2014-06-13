@@ -35,6 +35,16 @@
           <div class="col-sm-2">
           <%= f.text_field  :event, :class=>"form-control" %>
           </div>
+          <%= f.label :time, :class => "col-sm-1 control-label" %>
+           <button type="button"  onclick='Example1.Timer.toggle();' class="btn btn-default"/>
+            <span class="fa fa-play"></span>/<span class="fa fa-pause"></span>
+            </button>
+          <button type='button'  onclick='Example1.resetStopwatch();' class="btn btn-default" />
+            <span class="fa fa-stop"></span>
+          </button>
+          <div class="col-sm-1">
+          <%= f.number_field :time, :class=> "form-control " %>
+          </div>
         </div>
         <div class="form-group">
           <%= f.label :content, :class => "col-sm-1 control-label" %>
@@ -46,7 +56,7 @@
         <%= f.submit "Create Interaction", class: "btn btn-primary pull-right" %>
         </div>
        <%end%>
-  </div>
+       </div>
   <div class="col-md-offset-1 timeline" id="timeline" >
       <!-- Timeline header -->
      
@@ -99,7 +109,27 @@
 </div>
 
 
+<script>
+ var Example1 = new (function() {
+    var $interaction_time, // Stopwatch element on the page
+        incrementTime = 1000, // Timer speed in milliseconds
+        currentTime = 0, // Current time in hundredths of a second
+        updateTimer = function() {
+            $interaction_time.val(currentTime);
+            currentTime += incrementTime / 1000;
+        },
+        init = function() {
+            $interaction_time = $('#interaction_time');
+            Example1.Timer = $.timer(updateTimer, incrementTime, true);
+        };
+    this.resetStopwatch = function() {
+        currentTime = 0;
+        this.Timer.stop().once();
+    };
+    $(init);
+});
 
+</script>
 <script>
   $("#interaction_form").toggle(300);
 </script>
