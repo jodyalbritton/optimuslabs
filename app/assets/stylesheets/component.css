@@ -1,4 +1,14 @@
+.grid {
+	padding: 0px 0px 0px 0px;
+	max-width: 1300px;
+	margin: 0 auto;
+	list-style: none;
 
+}
+
+.grid li {
+
+}
 
 figure.caption {
 	margin: 0 0 30px 0;

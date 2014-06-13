@@ -16,6 +16,5 @@
 //= require bootstrap
 //= require holder
 //= require respond.min
-//= require modernizr.custom
 //= require toucheffects
 //= require turbolinks
