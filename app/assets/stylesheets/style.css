@@ -474,7 +474,7 @@ background-color: transparent;
 /* navbar-brand / navbar-header */
 
 .navbar-robotic .navbar-brand {
-    background-image: url(/assets/logo.png);
+    background-image: image-url("logo.png");
     background-repeat: no-repeat;
     background-position: left;
     line-height: 100%;
@@ -602,7 +602,7 @@ ul.navbar-nav-robotic > li.dropdown-menu {
 .wrap-home-header {
     padding: 20px 0;
     background-color: #082a47;
-    background-image: url(/assets/f3.jpg);
+    background-image: image-url("f3.jpg");
     background-position: top center; 
     background-repeat: repeat-y;
 
@@ -1386,7 +1386,7 @@ ul.navbar-nav-robotic > li.dropdown-menu {
 .coming h1 {
     color: #fff;
     padding: 20px 0 20px 100px;
-    background-image: url(logo_75.png);
+    background-image: image-url("logo_75.png");
     background-repeat: no-repeat;
     background-position: left;
     font-size: 4em;
@@ -1528,7 +1528,7 @@ ul.navbar-nav-robotic > li.dropdown-menu {
 #login-form h1 {
     color: #fff;
     padding: 10px 0 00px 60px;
-    background-image: url(logo.png);
+    background-image: image-url("logo.png");
     background-repeat: no-repeat;
     background-position: left;
     font-size: 2em;
@@ -1541,7 +1541,7 @@ ul.navbar-nav-robotic > li.dropdown-menu {
 
 #login-form h1 {
     padding: 15px 0 20px 100px;
-    background-image: url(logo_75_o.png);
+    background-image: image-url("logo_75_o.png");
     font-size: 4em;
     margin: 0 auto;
 }
@@ -1876,7 +1876,7 @@ a.tag:hover {
 
 .footer-widget > h3.logo {
     text-transform: uppercase;
-    background-image: url(logo.png);
+    background-image: image-url("logo.png");
     background-repeat: no-repeat;
     background-position: left;
     font-size: 2.2em;
