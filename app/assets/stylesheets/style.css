@@ -474,7 +474,7 @@ background-color: transparent;
 /* navbar-brand / navbar-header */
 
 .navbar-robotic .navbar-brand {
-    background-image: url(logo.png);
+    background-image: url(/assets/logo.png);
     background-repeat: no-repeat;
     background-position: left;
     line-height: 100%;
@@ -602,7 +602,7 @@ ul.navbar-nav-robotic > li.dropdown-menu {
 .wrap-home-header {
     padding: 20px 0;
     background-color: #082a47;
-    background-image: url(f3.jpg);
+    background-image: url(/assets/f3.jpg);
     background-position: top center; 
     background-repeat: repeat-y;
 

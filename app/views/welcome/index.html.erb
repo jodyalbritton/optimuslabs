@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <figure class="caption cs-style-3">
-                                    <img src="/assets/w2.jpg" alt="img01">
+                                    <%=image_tag "w2.jpg" %>
                                     <figcaption>
                                         <h3>Help Desk</h3>
                                         <%= link_to "Take a look", labs_helpdesk_path, :class=> "btn btn-robotic-inverse" %>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <figure class="caption cs-style-3">
-                                    <img src="/assets/w3.jpg" alt="img02">
+                                    <%= image_tag "w3.jpg">
                                     <figcaption>
                                         <h3>Future Projects</h3>
                                         <%= link_to "Take a look", labs_future_path, :class=> "btn btn-robotic-inverse" %>
@@ -98,7 +98,7 @@
                         <div class="col-md-4">
                             <div class="team-home-item">
                                 <div class="team-home-img">
-                                    <img src="/assets/th2.jpg" alt="">
+                                    <%= image_tag "th2.jpg" %>
                                 </div>
                                 <div class="team-home-content">
                                     <h3>Jody Albritton - CEO</h3>
@@ -140,7 +140,7 @@
                         <% end %>
                         <% else %>
 
-                        <a href="#"><img src="/assets/rb.jpg" class="img-responsive" alt="Image"></a>
+                        <a href="#"><%= image_tag" rb.jpg",  :class=>"img-responsive" :alt=>"Image" %>
                         <% end %>
                     <% end %>
                     
