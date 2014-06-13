@@ -50,9 +50,8 @@ test:
 production:
   <<: *default
   database: optimus_production
-<<<<<<< HEAD
+
   username: root
   password: <%= ENV['OPTIMUS_DATABASE_PASSWORD'] %>
-=======
-  password: <%= ENV["OPTIMUS_DATABASE_PASSWORD"] %>
->>>>>>> upstream/master
+
+
