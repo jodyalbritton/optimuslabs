@@ -19,4 +19,10 @@
 
 /config/database.yml
 
+# Ignore environment variables
+
+/config/environment_variables.yml
+
 /public/system/
+
+
