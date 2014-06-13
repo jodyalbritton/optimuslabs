@@ -1,8 +1,9 @@
 class Admin::ContactsController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
-  before_action :login_required
-  before_action :role_required
+
   # GET /contacts
   # GET /contacts.json
   def index

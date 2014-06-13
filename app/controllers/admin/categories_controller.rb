@@ -1,10 +1,11 @@
 class Admin::CategoriesController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Categories", :admin_categories_path
   layout "layouts/admin"
-  before_action :login_required
-  before_action :role_required
+
   # GET /categories
   # GET /categories.json
   def index

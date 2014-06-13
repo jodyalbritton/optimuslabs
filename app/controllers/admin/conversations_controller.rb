@@ -1,5 +1,6 @@
 class Admin::ConversationsController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer	
   layout "layouts/admin"
-  before_action :login_required
-  before_action :role_required
+
 end
