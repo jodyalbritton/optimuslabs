@@ -224,7 +224,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   simple_form
   spring
-  the_role (~> 2.5.2)
+  the_role (~> 2.5.3)
   the_role_bootstrap3_ui
   therubyracer
   turbolinks

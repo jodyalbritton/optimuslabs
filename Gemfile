@@ -28,7 +28,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 #gems for user accounts and objects
 gem 'devise'
-gem 'the_role', '~> 2.5.2'
+gem 'the_role', '~> 2.5.3'
 gem 'acts-as-taggable-on',  '~> 3.2.5'
 gem 'the_role_bootstrap3_ui'
 gem "paperclip", "~> 4.1"
