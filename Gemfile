@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -28,9 +28,10 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 #gems for user accounts and objects
 gem 'devise'
-gem 'the_role', '~> 2.5.2'
+gem "rolify"
+gem 'authority'
+gem "figaro"
 gem 'acts-as-taggable-on',  '~> 3.2.5'
-gem 'the_role_bootstrap3_ui'
 gem "paperclip", "~> 4.1"
 gem 'friendly_id', '~> 5.0.0'
 gem "breadcrumbs_on_rails"

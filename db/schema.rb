@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612233946) do
-
-  create_table "admin_rate_types", force: true do |t|
-    t.string   "name"
-    t.integer  "unit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140613032346) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -44,15 +37,6 @@ ActiveRecord::Schema.define(version: 20140612233946) do
     t.datetime "avatar_updated_at"
     t.boolean  "featured",            default: false
   end
-
-  create_table "configurables", force: true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "configurables", ["name"], name: "index_configurables_on_name", using: :btree
 
   create_table "contacts", force: true do |t|
     t.string   "full_name"
@@ -152,26 +136,12 @@ ActiveRecord::Schema.define(version: 20140612233946) do
 
   add_index "message_receipts", ["message_id"], name: "index_message_receipts_on_message_id", using: :btree
 
-  create_table "message_reciepts", force: true do |t|
-    t.integer  "receivable_id"
-    t.string   "receivable_type"
-    t.integer  "message_id"
-    t.boolean  "read"
-    t.boolean  "trashed"
-    t.boolean  "deleted"
-    t.string   "mailbox_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "message_reciepts", ["message_id"], name: "index_message_reciepts_on_message_id", using: :btree
-
   create_table "messages", force: true do |t|
     t.string   "type"
-    t.integer  "sender_id"
     t.integer  "conversation_id"
     t.integer  "client_id"
     t.integer  "project_id"
+    t.integer  "sender_id"
     t.string   "sender_type"
     t.string   "notification_code"
     t.integer  "notified_object_id"
@@ -192,7 +162,6 @@ ActiveRecord::Schema.define(version: 20140612233946) do
   add_index "messages", ["contact_id"], name: "index_messages_on_contact_id", using: :btree
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
   add_index "messages", ["project_id"], name: "index_messages_on_project_id", using: :btree
-  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "notes", force: true do |t|
     t.string   "subject"
@@ -217,12 +186,10 @@ ActiveRecord::Schema.define(version: 20140612233946) do
     t.datetime "updated_at"
     t.integer  "category_id"
     t.string   "slug"
-    t.integer  "site_id"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
-  add_index "posts", ["site_id"], name: "index_posts_on_site_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
 
   create_table "products", force: true do |t|
@@ -256,13 +223,15 @@ ActiveRecord::Schema.define(version: 20140612233946) do
   end
 
   create_table "roles", force: true do |t|
-    t.string   "name",        null: false
-    t.string   "title",       null: false
-    t.text     "description", null: false
-    t.text     "the_role",    null: false
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "services", force: true do |t|
     t.string   "name"
@@ -303,13 +272,6 @@ ActiveRecord::Schema.define(version: 20140612233946) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
-
-  create_table "sites", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "subdomain"
-  end
 
   create_table "sponsors", force: true do |t|
     t.string   "name"
@@ -411,10 +373,16 @@ ActiveRecord::Schema.define(version: 20140612233946) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end

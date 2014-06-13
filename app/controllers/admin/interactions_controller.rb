@@ -1,7 +1,8 @@
 class Admin::InteractionsController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer
 	layout "layouts/admin"
-  before_action :login_required
-  before_action :role_required
+
   def new  
      respond_to do |format|
         format.js

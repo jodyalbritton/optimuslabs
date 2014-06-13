@@ -49,6 +49,5 @@ test:
 #
 production:
   <<: *default
-  database: #changeme_production
-  username: root
-  password: <%= ENV['OPTIMUS_DATABASE_PASSWORD'] %>
+  database: optimus_production
+  password: <%= ENV["OPTIMUS_DATABASE_PASSWORD"] %>

@@ -1,10 +1,11 @@
 class Admin::SponsorsController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer
   before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Sponsors", :admin_settings_path
   layout "layouts/admin"
-  before_action :login_required
-  before_action :role_required
+
 
 
   def index

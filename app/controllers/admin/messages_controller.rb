@@ -1,6 +1,6 @@
 class Admin::MessagesController < ApplicationController
-  before_action :login_required
-  before_action :role_required
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Messages", :admin_categories_path

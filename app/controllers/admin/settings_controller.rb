@@ -1,10 +1,11 @@
 class Admin::SettingsController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_actions_for ApplicationAuthorizer
 before_action :set_setting, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Settings", :admin_settings_path
   layout "layouts/admin"
-  before_action :login_required
-  before_action :role_required
+
 
 def index
     # to get all items for render list
