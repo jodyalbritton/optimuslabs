@@ -15,31 +15,47 @@
             </form>
   <% end %> 
 <%= render 'admin/header' %>
+<div class="table-responsive">
   <table class="table table-striped table-bordered table-hover" id="table">
     <thead>
       <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Description</th>
-            <th></th>
-        <th></th>
+       
+        
+       
         <th></th>
       </tr>
     </thead>
 
     <tbody>
-      <%= content_tag_for(:tr, @clients) do |client| %>
-            <td><%= client.name %></td>
-            <td><%= client.email %></td>
+      <% @clients.each  do |client| %>
+            <tr>
+            <td>
+            <%= link_to  ([:admin,client]) do  %>
+            <%= client.name %>
+            <% end %>
+            </td>
+            <td><%= mail_to client.email %></td>
             <td><%= client.phone %></td>
-            <td><%= client.description %></td>
-            <td><%= link_to 'Show', ([:admin,client]) %></td>
-        <td><%= link_to 'Edit', edit_admin_client_path(client) %></td>
-        <td><%= link_to 'Destroy', ([:admin,client]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
+            
+        
+        <td>
+            <%= link_to edit_admin_client_path(client) do %>
+              <span class="btn btn-default icon fa fa-pencil"></span>
+            <% end %>
+            <%= link_to  admin_client_path(client), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+              <span class="btn btn-danger icon fa fa-trash-o"></span>
+            <% end %>
+       
+        </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
+  </div>
 </div>
 <script>
   $(function () {
