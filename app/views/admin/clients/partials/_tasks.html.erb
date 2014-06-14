@@ -2,7 +2,7 @@
 
       Recent tasks
 -->   
-      <div class="col-md-5">
+      <div class="col-md-6 col-sm-12">
       <div id="task_form">
       <div class="form-group">
        <%= form_for ([:admin,@client, @new_task]), :remote => true  do |f|  %>
@@ -10,6 +10,7 @@
         </div>
         <div class="form-group">
         <%= f.submit "Create Task", class: "btn btn-primary pull-right" %>
+        <%= link_to "Cancel", "#", :class=> "btn btn-danger", :id => "cancel_button"%>
         </div>
        <%end%>
        </div>
@@ -40,7 +41,7 @@
               <%= link_to new_admin_task_path, :remote => true do %>
               <button class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-pencil text-success"></i> New Task</button>
               <% end %>
-              <button class="btn btn-xs btn-primary btn-outline dark" id="clear-completed-tasks"><i class="fa fa-eraser text-success"></i> Clear completed tasks</button>
+              <button class="btn btn-xs btn-primary btn-outline dark" id="clear-completed-tasks"><i class="fa fa-eraser text-success"></i> Clear</button>
             </div>
           </div> <!-- / .panel-heading -->
           <!-- Without vertical padding -->
@@ -52,8 +53,10 @@
           </div> <!-- / .panel-body -->
         </div> <!-- / .panel -->
       </div>
-
 <script>
-  $("#task_form").toggle(300);
+  $("#task_form").slideUp(1);
+  $( "#cancel_button" ).click(function() {
+   $("#task_form").slideUp(550);
+   
+});
 </script>
-
