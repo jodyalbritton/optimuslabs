@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  layout :layout_by_resource
+
   before_action :configure_permitted_parameters, if: :devise_controller?
  
   def access_denied
@@ -12,21 +12,7 @@ class ApplicationController < ActionController::Base
     redirect_to(:back)
   end
   
-  def layout_by_resource 
-  	if devise_controller?
-  		"appView"
 
-    else 
-
-       
-    "application"
-
-    end
-
-
-
-  end
-  
 
 
 protected

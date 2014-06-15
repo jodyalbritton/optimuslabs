@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
  has_many :message_receipts, :as => :receivable
  
  validates :username,
-  :uniqueness => {
-    :case_sensitive => false}
+  :uniqueness => { :case_sensitive => false}
  
  def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
