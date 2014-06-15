@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
 
 
-
-
+ 
 #Users and Roles 
   devise_for :users
   
@@ -66,17 +65,13 @@ Rails.application.routes.draw do
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
 
  
-  # Static Pages
-  get 'welcome/index'
-  get 'contacts/thanks'
-  get '/about', to:'welcome#about'
-  get '/contact', to: 'welcome#contact'
-  get '/blog', to: 'posts#index'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  
 
 
   # Example of regular route:
