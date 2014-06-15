@@ -1,17 +1,6 @@
 Rails.application.routes.draw do
 
 
-
-<<<<<<< HEAD
-  get 'labs/platform'
-
-  get 'labs/helpdesk'
-
-  get 'labs/future'
-
-=======
- 
->>>>>>> upstream/master
 #Users and Roles 
   devise_for :users
   
