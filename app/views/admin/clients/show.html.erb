@@ -24,18 +24,22 @@
                 <a href="#client-invoices" data-toggle="tab">Invoices <span class="badge badge-primary"><%= @client.invoices.size %></span></a>
               </li>
                <li class="">
+                <a href="#client-tickets" data-toggle="tab">Tickets<span class="badge badge-primary"><%= @client.tickets.size %></span></a>
+              </li>
+               <li class="">
                 <a href="#client-contacts" data-toggle="tab">Contacts <span class="badge badge-primary"><%= @client.contacts.size %></span></a>
               </li>
               <li class="">
-                <a href="#client-stats" data-toggle="tab">Stats Panel</a>
+                <a href="#client-users" data-toggle="tab">Users <span class="badge badge-primary"><%= @client.users.size %></span></a>
               </li>
+             
   </ul>
 
   <div class="tab-content tab-content-bordered">
               <div class="tab-pane fade active in" id="client-dash">
                 <div class="holder row">
                 <%= render 'admin/clients/partials/tasks' %>
-                <%= render 'admin/clients/partials/tickets' %>
+                <%= render 'admin/clients/partials/summary' %>
                 </div>
                            
               </div> <!-- / .tab-pane -->
@@ -49,9 +53,14 @@
                 <%= render 'admin/clients/partials/contacts' %>
                </div>
               </div><!-- / .tab-pane -->
-              <div class="tab-pane fade" id="client-stats">
+              <div class="tab-pane fade" id="client-users">
                <div class="holder">
-                <%= render 'admin/clients/partials/summary' %>
+                <%= render 'admin/clients/partials/users' %>
+               </div>
+              </div><!-- / .tab-pane -->
+              <div class="tab-pane fade" id="client-tickets">
+               <div class="holder">
+                <%= render 'admin/clients/partials/tickets' %>
                </div>
               </div><!-- / .tab-pane -->
     

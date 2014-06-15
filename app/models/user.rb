@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   attr_accessor :login
-
+ belongs_to :client
  has_many :posts, :foreign_key => 'author_id'
  has_many :notes, :foreign_key => 'created_by_id'
  has_many :messages

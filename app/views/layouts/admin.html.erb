@@ -101,11 +101,13 @@ Use search to find needed section.
 				<div>
 					<ul class="nav navbar-nav">
 						<li>
-							<%= link_to "Home", admin_index_path %>
-							
+					       <%= link_to "Home", admin_index_path %>	
 						</li>
 						<li>
-						<%= link_to "Settings", admin_settings_path %>
+							<%= link_to "My Company", admin_company_index_path %>
+						</li>
+						<li>
+							<%= link_to "Settings", admin_settings_path %>
 						</li>
 						<li>
 							<%= link_to "Public Site", root_path %>
@@ -178,10 +180,11 @@ Use search to find needed section.
 
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-									<span><%= current_user.first_name %></span>
+									<span><%= current_user.full_name %></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><%= link_to "Edit Account", edit_user_registration_path %></li>
+									<li><%= link_to "Edit Account", edit_admin_user_path(current_user) %></li>
+									<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 								</ul>
 							</li>
 						</ul> <!-- / .navbar-nav -->
@@ -405,7 +408,22 @@ Use search to find needed section.
 									<% end %>
 								</li>
 							</ul>
-						</li>				
+						</li>
+						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Users</span></a>
+							<ul>
+							<li>
+									<%= link_to  admin_users_path, :tabindex=>"-1" do %>
+									<span class="mm-text">List Users</span>
+									<% end %>
+								</li>
+								<li>
+									<%= link_to new_admin_user_path, :tabindex=>"-1" do %>
+									<span class="mm-text">New User</span>
+									<% end %>
+								</li>
+							</ul>
+						</li>					
 					</ul>
 				</li>
 				

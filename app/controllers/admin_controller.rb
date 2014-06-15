@@ -9,6 +9,7 @@ class AdminController < ApplicationController
   	@tasks = Task.where(:completed => false).order('created_at DESC')
     @tickets = Ticket.all
   	@new_task = Task.new
+    @unpaid_invoices = Invoice.where(:paid => false || nil)
 
   end
 

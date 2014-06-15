@@ -4,7 +4,7 @@
 <!-- 11. $EXAMPLE_ACCOUNT_OVERVIEW =================================================================
 
 				Account overview example
--->
+-->				 <div class="col-md-6 col-sm-12">
 				<div class="stat-panel" style="height: 211px;">
 					<div class="stat-row">
 						<!-- Success darker background -->
@@ -14,45 +14,49 @@
 							<!-- Big text -->
 							<span class="text-bg">Overview</span><br>
 							<!-- Small text -->
-							<span class="text-sm">Your account statistics</span>
+							<span class="text-sm">Client Stats</span>
 						</div>
 					</div> <!-- /.stat-row -->
 					<div class="stat-row">
 						<!-- Success background, without bottom border, without padding, horizontally centered text -->
 						<div class="stat-counters bg-success no-border-b no-padding text-center">
 							<!-- Small padding, without horizontal padding -->
-							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+							
+							
+							<%= link_to admin_client_tickets_path(@client), :class=> "stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle" do%>
 								<!-- Big text -->
-								<span class="text-bg"><strong>12</strong></span><br>
+								<span class="text-bg"><strong><%= @client.tickets.size %></strong></span><br>
 								<!-- Extra small text -->
-								<span class="text-xs">PURCHASES</span>
-							</div>
+								<span class="text-xs">Tickets</span>
+							<% end %>
+							
+						
 							<!-- Small padding, without horizontal padding -->
-							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+							<%= link_to admin_client_contacts_path(@client), :class=> "stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle" do%>
 								<!-- Big text -->
-								<span class="text-bg"><strong>17</strong></span><br>
+								<span class="text-bg"><strong><%= @client.contacts.size %></strong></span><br>
 								<!-- Extra small text -->
-								<span class="text-xs">REVIEWS</span>
-							</div>
+								<span class="text-xs">Contacts</span>
+							<% end %>
 							<!-- Small padding, without horizontal padding -->
-							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+							<%= link_to admin_client_users_path(@client), :class=> "stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle" do%>
 								<!-- Big text -->
-								<span class="text-bg"><strong>49</strong></span><br>
+								<span class="text-bg"><strong><%= @client.users.size %></strong></span><br>
 								<!-- Extra small text -->
-								<span class="text-xs">LIKES</span>
-							</div>
+								<span class="text-xs">Users</span>
+							<% end %>
 						</div> <!-- /.stat-counters -->
 					</div> <!-- /.stat-row -->
 					<div class="stat-row">
 						<!-- Success background, without bottom border, without padding, horizontally centered text -->
 						<div class="stat-counters bg-success no-border-b no-padding text-center">
 							<!-- Small padding, without horizontal padding -->
-							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
+							<%= link_to admin_client_invoices_path(@client), :class=> "stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle" do%>
 								<!-- Big text -->
-								<span class="text-bg"><strong>203</strong></span><br>
+								<span class="text-bg"><strong><%= @client.invoices.size %></strong></span><br>
 								<!-- Extra small text -->
-								<span class="text-xs">FRIENDS</span>
-							</div>
+								<span class="text-xs">Invoices</span>
+							<% end %>
 							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
 								<!-- Big text -->
 								<span class="text-bg"><strong>1056</strong></span><br>
@@ -67,6 +71,7 @@
 						</div> <!-- /.stat-counters -->
 					</div> <!-- /.stat-row -->
 				</div> <!-- /.stat-panel -->
+				</div>
 <!-- /11. $EXAMPLE_ACCOUNT_OVERVIEW -->
 
 	
