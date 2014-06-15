@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+
+
+
 #Users and Roles 
   devise_for :users
   
