@@ -1,8 +1,41 @@
-<% @settings.each do |item| %>
-  <tr>
-    <td><%= item.var %></td>
-    <td><%= item.thing_id %></td>
-    <td><%= item.thing_type %></td>
-    <td><%= link_to 'Edit', edit_admin_setting_path(item) %></td>
-  </tr>
+<%= form_for :setting, :url => admin_settings_update_all_path, :html => { :method => :put } do %>
+  <% @settings.each do |setting| %>
+      <% setting[:value] = YAML.load(setting[:value]) %>
+      <%= simple_fields_for "setting[]", setting do |setting_fields| %>
+      <div class="form-group">
+           <%= setting_fields.label setting.var, :class=>"control-label col-sm-2" %>   
+       <div class="col-sm-10">
+          <% if setting.find_class == "boolean" %>
+             <%= setting_fields.input :var, as: :hidden %>
+             <div class="switcher">
+             <%= setting_fields.input :value, as: :boolean, checked_value: "true", unchecked_value: "false", :label=> false, :input_html=> {:class=> "setting_value"} %>
+             </div>
+            
+          <% else %>
+             <%= setting_fields.input :var, as: :hidden %>
+             <div class="">
+             <%= setting_fields.input :value, as: :string, :input_html =>{:class=> "form-control"}, :label => false %>
+             </div>
+    
+         <% end %>
+        </div>
+      </div>
+     <% end %>
+  <% end %>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
 <% end %>
+
+
+
+
+
+
+<script>
+          init.push(function () {
+            $('.setting_value').switcher();
+
+            
+          });
+</script>

@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
 
 
+ 
 #Users and Roles 
   devise_for :users
-
- 
+  
  
 #Site Features
   resources :sponsors, only: [:index, :show]
@@ -16,8 +16,14 @@ Rails.application.routes.draw do
   
 
 #Admin interface 
+
   resources :admin, only: [:index]
+
   namespace :admin do
+      namespace :settings do
+       match  'edit_all' => :edit_all, :via => :get
+       match  'update_all' => :update_all, :via => :put
+      end
       resources :posts
       resources :products
       resources :categories
@@ -32,8 +38,11 @@ Rails.application.routes.draw do
       resources :contacts do
         resources :interactions
       end
-      resources :settings
+     
       resources :services
+      resources :settings do 
+        
+      end
       resources :invoices
       resources :tickets do
         resources :interactions
@@ -55,7 +64,7 @@ Rails.application.routes.draw do
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
 
-  
+ 
   # Static Pages
   get 'welcome/index'
   get 'contacts/thanks'

@@ -36,7 +36,9 @@ gem "paperclip", "~> 4.1"
 gem 'friendly_id', '~> 5.0.0'
 gem "breadcrumbs_on_rails"
 gem 'kaminari'
+
 gem "rails-settings-cached", "0.4.1"
+gem 'rails-settings-ui'
 gem 'simple_form'
 gem "cocoon"
 gem 'faker'
