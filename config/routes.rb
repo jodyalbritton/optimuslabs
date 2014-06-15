@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
  
 #Users and Roles 
-  devise_for :users
+    devise_for :users, :controllers => { :registrations => "registrations" }
   
  
 #Site Features
