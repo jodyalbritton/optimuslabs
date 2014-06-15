@@ -1,0 +1,29 @@
+<div class="panel" id="client-invoices">
+          <div class="panel-heading">
+            <span class="panel-title">Unpaid Invoices</span>
+          </div>
+          <div class="panel-body">
+            <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Original Balance</th>
+                  <th>Current Balance </th>
+                  <th>Payments</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% @unpaid_invoices.each do |invoice|%>
+                <tr>
+                  <td><%= link_to invoice.subject, admin_invoice_path(invoice) %></td>
+                  <td><%= sprintf("%.02f", invoice.balance) %></td>
+                  <td><%= invoice.current_balance %></td>
+                  <td><%= sprintf("%.02f",invoice.total_payments) %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>

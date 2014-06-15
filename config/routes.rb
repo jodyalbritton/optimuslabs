@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         resources :tasks
         resources :tickets
         resources :users
+        resources :contacts
       end
       resources :messages
       resources :interactions

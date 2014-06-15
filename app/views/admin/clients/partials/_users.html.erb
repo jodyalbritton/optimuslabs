@@ -1,0 +1,26 @@
+
+<div class="panel" id="client-invoices">
+          <div class="panel-heading">
+            <span class="panel-title">Client Users</span>
+          </div>
+          <div class="panel-body">
+            <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% @client.users.each do |user|%>
+                <tr>
+                  <td><%= user.username %></td>
+                  <td><%= user.email %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>

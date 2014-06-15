@@ -7,7 +7,12 @@ class Admin::ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    if params[:client_id]
+      @client = Client.find(params[:client_id])
+      @contacts = @client.contacts.all
+    else
+      @contacts = Contact.all
+    end
   end
 
   # GET /contacts/1

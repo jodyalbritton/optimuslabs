@@ -39,7 +39,7 @@ protected
       u.permit(:email, :username, :first_name, :last_name, :tel, :password, :password_confirmation)
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:email, :username, :first_name, :last_name, :tel, :password, :password_confirmation, :current_password)
+      u.permit(:email, :username, :first_name, :last_name, :tel, :password, :password_confirmation, :current_password, :client_id)
     end
   end
 

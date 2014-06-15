@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615154923) do
+ActiveRecord::Schema.define(version: 20140615182309) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -174,6 +174,21 @@ ActiveRecord::Schema.define(version: 20140615154923) do
   end
 
   add_index "notes", ["created_by_id"], name: "index_notes_on_created_by_id", using: :btree
+
+  create_table "payments", force: true do |t|
+    t.decimal  "amount",            precision: 8, scale: 2, default: 0.0, null: false
+    t.integer  "invoice_id"
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.integer  "payment_method_id"
+    t.string   "state"
+    t.string   "response_code"
+    t.string   "avs_response"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title"

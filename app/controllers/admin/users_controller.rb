@@ -5,7 +5,12 @@ class Admin::UsersController < ApplicationController
   layout "layouts/admin"
   add_breadcrumb "Admin", :admin_index_path
   def index
-    @users = User.all
+      if params[:client_id]
+        @client = Client.find(params[:client_id])
+        @users = @client.users.order('created_at ASC')
+      else 
+        @users = User.all
+      end
   end
 
   def show
@@ -33,14 +38,20 @@ class Admin::UsersController < ApplicationController
       account_update_params.delete("password_confirmation")
     end
 
-   
-    if @user.update_attributes(account_update_params)
-      set_flash_message :notice, :updated
-      # Sign in the user bypassing validation in case their password changed
-      sign_in @user, :bypass => true
-      redirect_to edit_admin_user_path(@user)
-    else
-      render "edit"
+      successfully_updated = if needs_password?(@user, account_update_params)
+                             @user.update(user_params)
+                           else
+                             @user.update_without_password(account_update_params)
+                           end
+
+     respond_to do |format|
+      if successfully_updated
+        format.html { redirect_to edit_admin_user_path(@user), notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -50,6 +61,7 @@ class Admin::UsersController < ApplicationController
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+
       @user = User.find(params[:id])
     end
 
@@ -57,4 +69,8 @@ class Admin::UsersController < ApplicationController
     def account_update_params
       params.require(:user).permit(:email, :username, :first_name, :last_name, :title, :telephone, :mobile_phone,:address, :city, :state, :zip, :password, :password_confirmation, :client_id)
     end
+
+    def needs_password?(user, params)
+    params[:password].present?
+  end
 end
