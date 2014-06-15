@@ -13,10 +13,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-nav-robotic navbar-right">
                     <li><%= link_to "Home", root_url,  data: { no_turbolink: true }%></li>
-                    <li><%= link_to "About", about_url %></li>
+                    <li><%= link_to "About", page_path('about') %></li>
                     <li><%= link_to "Services", services_url %></li>
                     <li><%= link_to "Blog",  "/blog" %></li>
-                    <li><%= link_to "Contact", contact_url %></li>
+                    <li><%= link_to "Contact", page_path('contact') %></li>
                 <% if user_signed_in? %>
                     <% if current_user.has_role? :admin %>
                     <li><%= link_to "Admin", admin_index_path %></li>
