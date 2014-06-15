@@ -15,6 +15,7 @@
 //= require admin/pixel-admin
 //= require admin/jquery.searchable
 //= require admin/jquery.timer
+//= require admin/froala-editor.min.js
 //= require cocoon
 //= require_self
 
