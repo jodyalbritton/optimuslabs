@@ -20,15 +20,16 @@ Authority.configure do |config|
   #
   # Defaults are as follows:
   #
-  # config.controller_action_map = {
-  #   :index   => 'read',
-  #   :show    => 'read',
-  #   :new     => 'create',
-  #   :create  => 'create',
-  #   :edit    => 'update',
-  #   :update  => 'update',
-  #   :destroy => 'delete'
-  # }
+  config.controller_action_map = {
+ :index   => 'read',    # `index` controller action will check `readable_by?`
+ :show    => 'read',
+ :new     => 'create',  # `new` controller action will check `creatable_by?`
+ :create  => 'create',  # ...etc
+ :edit    => 'update',
+ :update  => 'update',
+ :update_all => 'update',
+ :destroy => 'delete'
+}
 
   # ABILITIES
   # =========

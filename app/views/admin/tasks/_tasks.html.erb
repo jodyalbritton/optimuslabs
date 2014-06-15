@@ -6,7 +6,11 @@
               <div class="action-checkbox">
                 <label class="px-single"><%= f.check_box :completed, :as => "boolean", :class=>"px", :type=> "checkbox" %><span class="lbl"></span></label>
               </div>
-              <a href="#" class="task-title"><%= task.item %><span></span></a>
+              <a href="#" class="task-title"><%= task.item %><span> 
+              <% unless task.client == nil %>
+               for <%= task.client.name %>
+              <% end %>
+              </span></a>
               <%= f.submit %>
             <% end %>
  </div> <!-- / .task -->

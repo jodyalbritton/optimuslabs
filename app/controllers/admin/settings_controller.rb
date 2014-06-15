@@ -1,7 +1,7 @@
 class Admin::SettingsController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
-before_action :set_setting, only: [:show, :edit, :update, :destroy]
+  before_action :set_setting, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Settings", :admin_settings_path
   layout "layouts/admin"
@@ -15,6 +15,7 @@ def index
   def edit
     @setting = Setting.unscoped.find(params[:id])
     @setting[:value] = YAML.load(@setting[:value])
+    
   end
     def new
     add_breadcrumb "New"
@@ -22,7 +23,7 @@ def index
   end
    def create
     @setting = Setting.new(setting_params)
-    @setting.var = params[:setting][:var]
+    @setting.var= params[:setting][:var]
     @setting.value = params[:setting][:value]
 
     respond_to do |format|
@@ -52,6 +53,19 @@ def index
         format.json { render json: @setting.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+
+   def update_all
+      params["setting"].keys.each do |id|
+        @setting = Setting.unscoped.find(id.to_i)
+        @setting.var = params["setting"][id]["var"]
+        @setting.value = params["setting"][id]["value"]
+        @setting.update_attributes(setting_params)
+
+      end 
+        redirect_to(admin_settings_url)
+
   end
 
     private

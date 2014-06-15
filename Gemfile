@@ -36,7 +36,9 @@ gem "paperclip", "~> 4.1"
 gem 'friendly_id', '~> 5.0.0'
 gem "breadcrumbs_on_rails"
 gem 'kaminari'
+
 gem "rails-settings-cached", "0.4.1"
+gem 'rails-settings-ui'
 gem 'simple_form'
 gem "cocoon"
 gem 'faker'
@@ -50,6 +52,11 @@ gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-ra
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+
+#mailing 
+
+
 
 # Use unicorn as the app server
 # gem 'unicorn'

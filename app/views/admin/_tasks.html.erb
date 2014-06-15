@@ -9,7 +9,9 @@
         <%= f.text_field  :item, :class=>"form-control" %>
         </div>
         <div class="form-group">
+
         <%= f.submit "Create Task", class: "btn btn-primary pull-right" %>
+        <%= link_to "Cancel", "#", :class=> "btn btn-danger", :id => "cancel_button"%>
         </div>
        <%end%>
        </div>
@@ -36,7 +38,7 @@
             <span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>Recent tasks</span>
             <div class="panel-heading-controls">
               <%= link_to new_admin_task_path, :remote => true do %>
-              <button class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-pencil text-success"></i> New Task</button>
+              <button class="btn btn-xs btn-primary btn-outline dark" id="new_task_button"><i class="fa fa-pencil text-success"></i> New Task</button>
               <% end %>
               <button class="btn btn-xs btn-primary btn-outline dark" id="clear-completed-tasks"><i class="fa fa-eraser text-success"></i> Clear</button>
             </div>
@@ -52,5 +54,9 @@
       </div>
 
 <script>
-  $("#task_form").toggle(300);
+  $("#task_form").slideUp(1);
+  $( "#cancel_button" ).click(function() {
+   $("#task_form").slideUp(550);
+   
+});
 </script>

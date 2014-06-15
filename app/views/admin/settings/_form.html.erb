@@ -1,12 +1,32 @@
 <%= simple_form_for([:admin, @setting]) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :var %>
-    <%= f.input :value %>
+  <div class="control-group">
+    <%= f.label @setting.var, :class=> "control-label col-sm-2" %>
+    <div class="col-sm-10">
+     <% if @setting.find_class == "boolean" %>
+   	 <%= f.input :var, as: :hidden %>
+   	 <div class="switcher">
+   	 <%= f.input :value, as: :boolean, checked_value: "true", unchecked_value: "false", :label=> false %>
+   	 </div>
+   	
+   	 <% else %>
+   	 <%= f.input :var, as: :hidden %>
+   	 <%= f.input :value, :input_html =>{:class=> "form-control"}, :label => false %>
+   	 <%= @setting.find_class %>
+   	<% end %>
+    </div>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Save" %>
+    <%= f.button :submit, "Save"%>
   </div>
 <% end %>
+
+<script>
+					init.push(function () {
+						$('.setting_value').switcher();
+
+						
+					});
+				</script>
