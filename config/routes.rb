@@ -57,13 +57,13 @@ Rails.application.routes.draw do
   #Blog Feature 
    scope '/blog' do
       resources :posts, only: [:show, :tagged, :catagorized]
-  end
+   end
     
   
   get 'blog', to: 'posts#index', :as => 'index'
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
-
+  get '/blog', to: 'posts#index'
  
 
 
