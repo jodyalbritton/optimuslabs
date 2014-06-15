@@ -30,6 +30,6 @@
 # Ignore application configuration
 /config/application.yml
 
-/pages/
+/pages
 
 /app/views/layouts/application.html.erb
