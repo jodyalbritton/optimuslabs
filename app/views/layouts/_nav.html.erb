@@ -15,6 +15,16 @@
                     <li><%= link_to "Home", root_url,  data: { no_turbolink: true }%></li>
                     <li><%= link_to "About", page_path('about') %></li>
                     <li><%= link_to "Services", services_url %></li>
+
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Labs<b class="caret"></b></a>
+
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "The Platform", page_path('labs/platform')%> </li>
+                        <li><%= link_to "The Helpdesk", page_path('labs/helpdesk')%></li>
+                        <li><%= link_to "The Future", page_path('labs/future')%></li>
+                    </ul>
+                    </li>
                     <li><%= link_to "Blog",  "/blog" %></li>
                     <li><%= link_to "Contact", page_path('contact') %></li>
                 <% if user_signed_in? %>

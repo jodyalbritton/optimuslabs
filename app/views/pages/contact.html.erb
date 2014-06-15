@@ -18,7 +18,7 @@
                   <div class="container">              
 
 
-                <%= form_for (@message) do |f| %>
+                <%= form_for (new_contact_message) do |f| %>
                     <% unless user_signed_in? %>
                         <div class="form-group">
                             <label for="InputName" class="col-sm-2">Name</label>

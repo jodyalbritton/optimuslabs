@@ -6,5 +6,29 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", f: builder)
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
-  end
+  	end
+   
+  	
+
+  	def recent_posts
+  	Post.where(:draft => false ).order("published_at DESC").first(3)
+  	
+    end
+
+    def featured_services
+    	 Service.where(:featured => true).order(:sort_value).first(4)
+    	
+    end
+
+    def client_highlight
+    	Client.where(:featured => true).first(4)
+    end 
+
+    def create_a_contact
+    	Contact.new
+    end 
+
+    def new_contact_message
+    	Message.new
+    end
 end

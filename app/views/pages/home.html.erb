@@ -29,7 +29,7 @@
         <div class="container">
             <section class="home-features">
                 <div class="row">
-                    <% @featured_services.each do |featured_service| %>
+                    <% featured_services.each do |featured_service| %>
                     <div class="col-md-3 col-sm-6">
                         <article class="home-features-item">
                            <%= raw("<i class='icon-#{featured_service.logo_icon}'></i>") %>
@@ -113,12 +113,12 @@
                                     <%= image_tag "th2.jpg" %>
                                 </div>
                                 <div class="team-home-content">
-                                    <h3>Jody Albritton - CEO</h3>
+                                    <h3>Jody Albritton - Owner</h3>
                                     <p>Programmer. Web Guy. Engineer</p>
                                     <p>Jody has been working in technology related fields for over 15 years.</p>
                                 </div>
                                 <div class="team-home-footer">
-                                    <a href="#">Read more</a>
+                                    <%= link_to "Read More", page_path('about') %>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                     <div class="section-title">
                         <h1>Our clients</h1>
                     </div>
-                    <% @client_hightlight.each do |ch| %>
+                    <% client_highlight.each do |ch| %>
                         <% unless ch == nil %>
                         <%= link_to ch.url do %>
                             <%= image_tag ch.avatar.url(:thumb)%>
@@ -165,7 +165,7 @@
         <section class="latest-post">
             <h1 class="section-title">Latest Blog Entries</h1>
             <div class="row">
-            <% @recent_posts.each do |post| %>
+            <% recent_posts.each do |post| %>
                 <div class="col-md-4">
                     <div class="home-post-item"> 
                         <h3><%= link_to post.title, post_path(post) %></h3>
