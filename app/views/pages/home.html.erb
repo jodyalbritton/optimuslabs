@@ -51,8 +51,9 @@
                         <h1 class="section-title">In The Lab</h1>
                         
                         <div class="row">
+
                             <div class="col-lg-4 col-md-4 col-sm-4">
-                            <ul class="grid">
+                             <ul class="grid">
                                 <li>
                                 <figure class="caption cs-style-3">
                                    <%= image_tag "w1.jpg" %>
@@ -61,11 +62,10 @@
                                         <%= link_to "Take a look", page_path('labs/platform'), :class=> "btn btn-robotic-inverse" %>
                                     </figcaption>
                                 </figure>
-                                </li>
-                            </ul>
+                            </li>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
-                             <ul class="grid">
+                            <ul class="grid">
                                 <li>
                                 <figure class="caption cs-style-3">
                                     <%=image_tag "w2.jpg" %>
@@ -176,3 +176,6 @@
             </div> <!-- row -->
         </section> <!-- latest-post -->
     </div> <!--container -->
+
+
+    <%= javascript_include_tag "toucheffects", 'data-turbolinks-track' => true  %>

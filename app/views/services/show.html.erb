@@ -1,18 +1,4 @@
-<style>
-	.wrap-service-header {
-	    padding: 20px;
-	    background-color: #082a47;
-	    <%= raw("background-image: url('#{@service.header.url(:original)}');") %>
-	    background-position: top center; 
-	    background-repeat: repeat-y;
 
-	    background-size: cover !important;
-	   
-	    
-	}
-
-
-</style>
 <div class="wrap-service-header">
 	<div class="header-title">
 
@@ -22,18 +8,37 @@
 </div>
 <div class="wrap-home-features">
 	<div class="container">
+		<section>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<section class="home-features">
 					<%= sanitize(@service.description)%>
 				</section>
 			</div>
 
-			<div class="col-md-6">
-				<%= image_tag @service.logo.url, :class=> "img img-responsive" %>
+			<div class="col-md-4">
+			  <section class="home-features">
+			  	<div class="image-holder">
+					<%= image_tag @service.logo.url(:medium), :class=> "img img-responsive" %>
+				</div>
+			 </section>
 			</div>
 		</div>
+		</section>
 
 	</div>
 </div>
 	
+<style>
+.wrap-service-header {
+        padding: 20px;
+        background-color: #082a47;
+        background-image: url('<%= @service.header.url(:original) %>');
+        background-position: top center; 
+        background-repeat: repeat-y;
+
+        background-size: cover !important;
+       
+        
+    }
+</style>

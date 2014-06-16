@@ -44,7 +44,7 @@ strong {
 .video iframe,
 .video object,
 .video embed {
-    position: absolute;
+    
     top: 0;
     left: 0;
     width: 100%;
@@ -610,6 +610,9 @@ ul.navbar-nav-robotic > li.dropdown-menu {
 
     
 }
+
+    
+
 
 .lcd {
     background-color: rgba(95, 195, 255, 0.2);

@@ -16,5 +16,4 @@
 //= require bootstrap
 //= require holder
 //= require respond.min
-//= require toucheffects
 //= require turbolinks

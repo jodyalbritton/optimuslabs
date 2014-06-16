@@ -8,7 +8,7 @@
         </header>
         
         <section class="home-features">
-        	<% @services.each do |service| %>
+        	<% @services.each do |service_display| %>
        
   
                
@@ -16,16 +16,16 @@
                 <div class="col-md-4 col-sm-7 blocks">
                         <article class="home-features-item">
                             <div class="service-summary">
-                            <% unless service.logo_icon == nil %>
-                                <%= raw ("<i class='icon-#{service.logo_icon}'></i>") %>
+                            <% unless service_display.logo_icon == nil %>
+                                <%= raw ("<i class='icon-#{service_display.logo_icon}'></i>") %>
                             <% else %>
                                 <i class="icon-chevron-down"></i>
                             <% end %>
-                            <h2><%= service.name %></h2>
-                            <p><%= service.summary %></p>
+                            <h2><%= service_display.name %></h2>
+                            <p><%= service_display.summary %></p>
                             </div>
                             
-                            <%= link_to "Read More", service_path(service), :class=>"btn btn-default" %>
+                            <%= link_to "Read More", service_path(service_display), :class=>"btn btn-default" %>
                         
                             
                         </article>
