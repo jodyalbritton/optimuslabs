@@ -1,6 +1,8 @@
 class Admin::ProductsController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Products", :admin_categories_path
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
 
@@ -67,7 +69,7 @@ class Admin::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

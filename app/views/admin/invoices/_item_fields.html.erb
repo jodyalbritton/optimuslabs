@@ -3,19 +3,33 @@
       <div class="form-group">
 			<%=  f.label "item", :class => "col-sm-2 control-label" %>
 		     <div class="col-sm-10">
-				<%= f.input :target_identifier, collection: (Service.all).map { |i| [ i.name, "#{i.class.to_s}-#{i.id}"] } %>
+				<%= f.input :target_identifier, collection: (Service.all).map { |i| [ i.name, "#{i.class.to_s}-#{i.id}"] }, :label=> false, :input_html => {:class=> "form-control"} %>
 			</div>
 	  </div>
-		<div class="form-group">
-			<%=  f.label "item", :class => "col-sm-2 control-label" %>
+	   <div class="form-group">
+		<%=  f.label "Description", :class => "col-sm-2 control-label" %>
 			 <div class="col-sm-10">
-				<%= f.input :quantity%>
+				<%= f.input :description, :label=> false, :input_html => {:class=> "form-control"}%>
 			</div>
-	  </div>
+	  	</div>
+	   <div class="form-group">
+		<%=  f.label "Cost", :class => "col-sm-2 control-label" %>
+			 <div class="col-sm-10">
+				<%= f.input :cost, :label=> false, :input_html => {:class=> "form-control"}%>
+			</div>
+	  	</div>
+		<div class="form-group">
+		<%=  f.label "Quanitity", :class => "col-sm-2 control-label" %>
+			 <div class="col-sm-10">
+				<%= f.input :quantity, :label=> false, :input_html => {:class=> "form-control"}%>
+			</div>
+	  	</div>
+
 	  <div class="form-group">
-		<%=  f.label "item", :class => "col-sm-2 control-label" %>
-			<div class="col-sm-10">
-				<%= link_to_remove_association "remove task",   f %>
+			
+			<div class="col-sm-offset-2 col-sm-10">
+
+				<%= link_to_remove_association "Remove Item",   f %>
 			</div>
 	 </div>
 	</div>

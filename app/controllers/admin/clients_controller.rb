@@ -1,6 +1,8 @@
 class Admin::ClientsController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Clients", :admin_clients_path
   before_action :set_client, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
 

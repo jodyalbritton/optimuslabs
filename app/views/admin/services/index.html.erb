@@ -25,22 +25,28 @@
             <th>Name</th>
             <th>Summary</th>
             <th>Category</th>
-            <th></th>
-        <th></th>
+           
+       
         <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @services) do |service| %>
-            <td><%= service.name %></td>
+            <td><%= link_to service.name, admin_service_path(service) %></td>
          
             <td><%= service.summary%></td>
             <td><%= service.category.name %></td>
         
-            <td><%= link_to 'Show', admin_service_path(service) %></td>
-        <td><%= link_to 'Edit', edit_admin_service_path(service) %></td>
-        <td><%= link_to 'Destroy', admin_service_path(service), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      
+        <td>
+          <%= link_to edit_admin_service_path(service) do %>
+              <span class="btn btn-default icon fa fa-pencil"></span>
+            <% end %>
+            <%= link_to  admin_service_path(service), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+              <span class="btn btn-danger icon fa fa-trash-o"></span>
+            <% end %>
+        </td>
       <% end %>
     </tbody>
   </table>

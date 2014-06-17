@@ -15,6 +15,12 @@
 							</div>
 						</div> <!-- / .form-group -->
 						<div class="form-group">
+							<label for="asdasdas" class="col-sm-2 control-label">Severity</label>
+							<div class="col-sm-10">
+								<%= f.association :severity_type, :input_html=>{:class=> "form-control"}, :label=> false, :required => true, :include_blank => false%>
+							</div>
+						</div> <!-- / .form-group -->
+						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">Subject</label>
 							<div class="col-sm-10">
 								<%= f.text_field :subject, :class=> "form-control", :required=> true %>

@@ -1,6 +1,8 @@
 class Admin::InteractionsController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Interactions", :admin_interactions_path
 	layout "layouts/admin"
 
   def new  

@@ -1,6 +1,8 @@
 class Admin::ContactsController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Contacts", :admin_contacts_path
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
 

@@ -3,7 +3,7 @@ class Admin::RateTypesController < ApplicationController
   authorize_actions_for ApplicationAuthorizer
   layout "layouts/admin"
   add_breadcrumb "Admin", :admin_index_path
-  add_breadcrumb "Posts", :admin_rate_types_path
+  add_breadcrumb "Rate Types", :admin_rate_types_path
 
   before_action :set_rate_type, only: [:show, :edit, :update, :destroy]
 

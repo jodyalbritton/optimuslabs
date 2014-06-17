@@ -9,7 +9,7 @@ class Admin::SettingsController < ApplicationController
 
 def index
     # to get all items for render list
-    @settings = Setting.unscoped
+    @settings = Setting.unscoped.order(:position)
   end
 
   def edit

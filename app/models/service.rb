@@ -1,4 +1,7 @@
 class Service < ActiveRecord::Base
+ extend FriendlyId
+  friendly_id :name, use: :slugged
+  acts_as_list
 	has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => ":style/missing.png"
   	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
   	has_attached_file :header, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => ":style/missing-header.jpg"
@@ -12,6 +15,5 @@ class Service < ActiveRecord::Base
 	validates_presence_of :name 
 
 
-  extend FriendlyId
-  friendly_id :name, use: :slugged
+
 end

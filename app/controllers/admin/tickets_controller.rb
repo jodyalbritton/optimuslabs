@@ -3,7 +3,7 @@ class Admin::TicketsController < ApplicationController
   authorize_actions_for ApplicationAuthorizer
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
-  add_breadcrumb "Tickets", :admin_categories_path
+  add_breadcrumb "Tickets", :admin_tickets_path
   layout "layouts/admin"
 
  

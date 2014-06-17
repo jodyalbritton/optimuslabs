@@ -1,6 +1,8 @@
 class Admin::InvoicesController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Invoices", :admin_invoices_path
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
 

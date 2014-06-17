@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :products
       resources :categories
       resources :rate_types
+      resources :severity_types
       resources :clients do 
         resources :invoices
         resources :tasks
@@ -52,7 +53,9 @@ Rails.application.routes.draw do
         resources :interactions
       end
       resources :notes
-      resources :tasks
+      resources :tasks do 
+        collection { post :sort }
+      end
       resources :sponsors
 
 

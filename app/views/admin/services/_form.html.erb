@@ -68,11 +68,11 @@
     </div>
      <%= f.label :cost, :class => "col-sm-1 control-label" %>
     <div class="col-sm-2">
-      <%= f.number_field :cost%>
+      <%= f.number_field :cost, :step => 'any' %>
     </div>
      <%= f.label :price, :class => "col-sm-1 control-label" %>
     <div class="col-sm-2">
-      <%= f.number_field :price%>
+      <%= f.number_field :price, :step => 'any'%>
     </div>
   </div>
    <div class="form-group">
@@ -84,9 +84,9 @@
     <div class="col-sm-2">
       <%= f.check_box :featured, :class=> "form-control" %>
     </div>
-      <%= f.label :sort_value, :class => "col-sm-1 control-label" %>
+      <%= f.label :position, :class => "col-sm-1 control-label" %>
     <div class="col-sm-1">
-      <%= f.number_field :sort_value, :class=> "form-control" %>
+      <%= f.number_field :position, :class=> "form-control" %>
     </div>
   </div>
    <script>
