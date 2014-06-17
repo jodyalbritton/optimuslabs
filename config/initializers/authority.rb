@@ -28,6 +28,7 @@ Authority.configure do |config|
  :edit    => 'update',
  :update  => 'update',
  :update_all => 'update',
+ :sort => 'sort',
  :destroy => 'delete'
 }
 
@@ -39,12 +40,13 @@ Authority.configure do |config|
   #
   # Defaults are as follows:
   #
-  # config.abilities =  {
-  #   :create => 'creatable',
-  #   :read   => 'readable',
-  #   :update => 'updatable',
-  #   :delete => 'deletable'
-  # }
+  config.abilities =  {
+     :sort => 'sortable',
+     :create => 'creatable',
+     :read   => 'readable',
+     :update => 'updatable',
+     :delete => 'deletable'
+   }
 
   # LOGGER
   # ======

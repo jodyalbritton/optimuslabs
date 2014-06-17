@@ -1,6 +1,8 @@
 class Admin::ServicesController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Services", :admin_services_path
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
 
@@ -72,6 +74,6 @@ class Admin::ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :description, :summary, :category_id, :logo, :header, :logo_icon, :cost, :price, :rate_type_id, :sort_value, :featured)
+      params.require(:service).permit(:name, :description, :summary, :category_id, :logo, :header, :logo_icon, :cost, :price, :rate_type_id, :position, :featured)
     end
 end

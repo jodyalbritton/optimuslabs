@@ -50,7 +50,7 @@ gem 'spring',        group: :development
 gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 gem 'high_voltage', '~> 2.1.0'
-
+gem 'acts_as_list'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

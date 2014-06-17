@@ -6,7 +6,7 @@ class AdminController < ApplicationController
 
   	
  def index
-  	@tasks = Task.where(:completed => false).order('created_at DESC')
+    @tasks = Task.where(:completed => false).order(:position)
     @tickets = Ticket.all
   	@new_task = Task.new
     @unpaid_invoices = Invoice.where(:paid => false || nil)

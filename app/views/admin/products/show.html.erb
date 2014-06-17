@@ -22,18 +22,14 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-8">
-                <div>
-                  <h3> Product Header </h3>
-                  <%= image_tag @product.header.url %>
-                </div>
-              <div>
-                  <h3> Product Content </h3>
+        
+            
                   <%= sanitize(@product.description) %>
               </div>
-              </div>
+              
               <div class="col-md-4">
-               <h3> Product Logo </h3>
-                <%= image_tag @product.logo(:medium) %>
+            
+                <%= image_tag @product.photo(:medium) %>
               </div>
             </div>
           </div>

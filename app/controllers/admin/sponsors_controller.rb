@@ -3,7 +3,7 @@ class Admin::SponsorsController < ApplicationController
   authorize_actions_for ApplicationAuthorizer
   before_action :set_sponsor, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
-  add_breadcrumb "Sponsors", :admin_settings_path
+  add_breadcrumb "Sponsors", :admin_sponsors_path
   layout "layouts/admin"
 
 

@@ -1,9 +1,11 @@
 class Admin::UsersController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+  add_breadcrumb "Admin", :admin_index_path
+  add_breadcrumb "Users", :admin_users_path
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   layout "layouts/admin"
-  add_breadcrumb "Admin", :admin_index_path
+  
   def index
       if params[:client_id]
         @client = Client.find(params[:client_id])

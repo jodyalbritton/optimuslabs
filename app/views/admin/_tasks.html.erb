@@ -15,23 +15,7 @@
         </div>
        <%end%>
        </div>
-        <!-- Javascript -->
-        <script>
-          init.push(function () {
-            $('.widget-tasks .panel-body').pixelTasks().sortable({
-              axis: "y",
-              handle: ".task-sort-icon",
-              stop: function( event, ui ) {
-                // IE doesn't register the blur when sorting
-                // so trigger focusout handlers to remove .ui-state-focus
-                ui.item.children( ".task-sort-icon" ).triggerHandler( "focusout" );
-              }
-            });
-            $('#clear-completed-tasks').click(function () {
-              $('.widget-tasks .panel-body').pixelTasks('clearCompletedTasks');
-            });
-          });
-          </script>
+        
 
         <div class="panel widget-tasks panel-dark-gray" id="dashboard-tasks">
           <div class="panel-heading">
@@ -44,7 +28,7 @@
             </div>
           </div> <!-- / .panel-heading -->
           <!-- Without vertical padding -->
-          <div class="panel-body no-padding-vr" id="tasklist">
+          <div class="panel-body no-padding-vr" id="tasklist"  data-update-url="<%= sort_admin_tasks_url %>">
             
              <%= render :partial => "admin/tasks/tasks" %>
          
@@ -52,6 +36,27 @@
           </div> <!-- / .panel-body -->
         </div> <!-- / .panel -->
       </div>
+
+<!-- Javascript -->
+        <script>
+          init.push(function () {
+            $('.widget-tasks .panel-body').pixelTasks().sortable({
+              axis: "y",
+              handle: ".task-sort-icon",
+              stop: function( event, ui ) {
+                // IE doesn't register the blur when sorting
+                // so trigger focusout handlers to remove .ui-state-focus
+                ui.item.children( ".task-sort-icon" ).triggerHandler( "focusout" );
+              }, 
+               update: function(){
+          $.post($(this).data('update-url'), $(this).sortable('serialize'));
+        }
+            });
+            $('#clear-completed-tasks').click(function () {
+              $('.widget-tasks .panel-body').pixelTasks('clearCompletedTasks');
+            });
+          });
+          </script>
 
 <script>
   $("#task_form").slideUp(1);

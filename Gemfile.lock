@@ -46,6 +46,8 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.2.6)
       activerecord (>= 3, < 5)
+    acts_as_list (0.4.0)
+      activerecord (>= 3.0)
     arel (5.0.1.20140414130214)
     authority (3.0.0)
       activesupport (>= 3.0.0)
@@ -212,6 +214,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 3.2.5)
+  acts_as_list
   authority
   bootstrap-datepicker-rails
   breadcrumbs_on_rails
