@@ -7,4 +7,17 @@ class Ticket < ActiveRecord::Base
   validates_presence_of :client
   validates_presence_of :subject
   validates_presence_of :description
+
+
+  def get_label
+  	if self.status == "Open"
+  		"success"
+    elsif self.status == "In Progress"
+    	"warning"
+    elsif self.status == "Pending"
+    	"info"
+    else	
+        "default"
+    end
+  end
 end
