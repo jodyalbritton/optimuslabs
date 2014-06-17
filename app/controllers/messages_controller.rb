@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to contact_path, notice: 'Message was successfully created.' }
+        format.html { redirect_to page_path('home'), notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -29,7 +29,7 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:full_name, :email, :body, :subject, :phone, :source)
+      params.require(:message).permit(:full_name, :email, :body, :subject, :phone, :source, :recipient)
     end
 
 end
