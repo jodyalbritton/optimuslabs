@@ -36,7 +36,7 @@ class Message < ActiveRecord::Base
    
    
    def get_receiver
-      User.find(1)
+      User.find_by_email(recipient)
    end 
 
    
