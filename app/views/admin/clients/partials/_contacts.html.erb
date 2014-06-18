@@ -1,8 +1,14 @@
 
 <div class="panel" id="client-invoices">
           <div class="panel-heading">
-            <span class="panel-title">Client Contacts</span>
-          </div>
+            <span class="panel-title">Contact Details</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to new_admin_client_contact_path(@client), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>New Contact 
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
           <div class="panel-body">
             <div>
             <table class="table table-striped">
@@ -15,7 +21,7 @@
               <tbody>
               <% @client.contacts.each do |contact|%>
                 <tr>
-                  <td><%= contact.full_name %></td>
+                  <td><%= link_to contact.full_name, admin_contact_path(contact) %></td>
                   <td><%= contact.email %></td>
                 </tr>
               <% end %>

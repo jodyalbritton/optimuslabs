@@ -1,8 +1,12 @@
- 
-
 <div class="panel" id="client-invoices">
           <div class="panel-heading">
-            <span class="panel-title">Client Invoices</span>
+            <span class="panel-title">Unpaid Invoices</span>
+             <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em><%= link_to "Print", "#" %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to new_admin_client_invoice_path(@client), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>New
+               <% end %>
+            </div>
           </div>
           <div class="panel-body">
             <div>
@@ -10,14 +14,18 @@
               <thead>
                 <tr>
                   <th>Subject</th>
-                  <th>Balance</th>
+                  <th>Original Balance</th>
+                  <th>Current Balance </th>
+                  <th>Payments</th>
                 </tr>
               </thead>
               <tbody>
               <% @client.invoices.each do |invoice|%>
                 <tr>
                   <td><%= link_to invoice.subject, admin_invoice_path(invoice) %></td>
-                  <td><%= invoice.balance %></td>
+                  <td><%= sprintf("%.02f", invoice.balance) %></td>
+                  <td><%= invoice.current_balance %></td>
+                  <td><%= sprintf("%.02f",invoice.total_payments) %></td>
                 </tr>
               <% end %>
               </tbody>

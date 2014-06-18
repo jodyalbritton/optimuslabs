@@ -9,7 +9,7 @@ class Service < ActiveRecord::Base
 	belongs_to :category
 	has_many :items, :as => :purchasable
 	belongs_to :rate_type
-
+	has_many :attachments, as: :attachable 
 
 	validates_presence_of :category_id
 	validates_presence_of :name 

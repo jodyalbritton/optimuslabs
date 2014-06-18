@@ -1,0 +1,35 @@
+
+  <% content_for :page_header do %>
+   <%= @ticket_status.name %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_ticket_status_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<%= render 'admin/header' %>
+
+
+
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Ticket Status Details</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_ticket_status_path(@ticket_status), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt>State:</dt>
+              <dd><%= @ticket_status.state %></dd>
+
+              <dt>Description:</dt>
+              <dd><%= @ticket_status.description %></dd>
+
+            </dl>
+          </div>
+</div>

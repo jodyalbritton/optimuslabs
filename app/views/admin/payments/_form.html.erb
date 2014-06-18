@@ -1,0 +1,37 @@
+<%= simple_form_for([:admin, @payment], :html => { :class => "form-horizontal", :multipart => true }) do |f| %>
+  <% if @payment.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><%= pluralize(@payment.errors.count, "error") %> prohibited this contact from being saved:</h4>
+
+      <ul>
+      <% @payment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+          <div class="form-group">
+            <%= f.label :amount, :class => "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.number_field :amount, :class => "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :invoice, :class => "col-sm-2 control-label" %>
+            <div class="col-sm-10">
+              <%= f.association :invoice, label_method: :id, :class => "form-control", :label=> false, :include_blank => false %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <%= f.submit :class => "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+          
+          
+      </div>
+
+<% end %>
