@@ -1,4 +1,17 @@
+<% content_for :page_title,  @post.title %>
+<% content_for :page_description, @post.excerpt  %>
 
+<% content_for :meta_tags do %>
+<!-- Twitter Card data --> 
+<meta name="twitter:card" value="<%= @post.excerpt %>">
+
+<!-- Open Graph data --> 
+<meta property="og:title" content="<%= @post.title %>" /> 
+<meta property="og:type" content="article" /> 
+<meta property="og:url" content="<%= post_url(@post) %>" />
+<meta property="og:description" content="<%= @post.excerpt %>" />
+  
+<% end %>
 <div class="container">
   <article>
    <section class="section-title">
@@ -31,8 +44,8 @@
             <h2 class="section-title">Comments</h2>
             
                <div id="disqus_thread"></div>
-              <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-              Hello World!
+             
+          
         </section> <!-- comments -->
       </div>
       <div class="col-md-4">

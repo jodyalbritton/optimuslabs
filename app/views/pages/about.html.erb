@@ -1,3 +1,6 @@
+<%  add_breadcrumb "Home", :root_path, :options => { :title => "Home" } %>
+<%  add_breadcrumb "About", page_path('about'), :options => { :title => "About" } %>
+<% content_for :page_title, 'About Optimus Labs' %>
 <div class="container">
         <header class="section-title">
             <h1>About Us</h1>
@@ -58,10 +61,7 @@
         <section id="about-team">
         <h2 class="section-title">Our Team</h2>
         <div class="row">
-        <div class="col-md-4 col-sm-6">
-                         
-         </div>
-      
+ 
         <div class="col-md-4 col-sm-6">
                             <div class="about-team-item">
                                 <div class="about-team-item-header">
@@ -72,15 +72,15 @@
                                         <a href="#"><i class="icon-google-plus"></i></a>
                                         <a href="#"><i class="icon-dribbble"></i></a>
                                     </div>
-                                    <img src="img/at2.jpg" class="img-responsive" alt="Image">
-                                    <h3>Jody Albritton</h3>
+                                    <%= image_tag "th2.jpg", :class=> "img-responsive" %>
+                                    <h3>Josh Shepherd</h3>
                                 </div>
                                 <div class="about-team-item-content">
                                     
                                     <p>Lorem ipsum Dolore tempor aliquip ad qui anim aliqua tempor Duis aute sit cillum aliquip voluptate et eu Duis dolore minim ea mollit aute qui Ut ea et ut in eu magna eiusmod.</p>
                                 </div>
                                 <div class="about-team-item-footer">
-                                    <a href="#">Read more</a>
+                                    <a href="#">Media and Marketing</a>
                                 </div>
                             </div>
                         </div>
@@ -94,15 +94,37 @@
                                         <a href="#"><i class="icon-google-plus"></i></a>
                                         <a href="#"><i class="icon-dribbble"></i></a>
                                     </div>
-                                    <img src="img/at2.jpg" class="img-responsive" alt="Image">
-                                    <h3>Albert Clegane</h3>
+                                     <%= image_tag "th2.jpg", :class=> "img-responsive" %>
+                                    <h3>Jody Albritton</h3>
                                 </div>
                                 <div class="about-team-item-content">
                                     
                                     <p>Lorem ipsum Dolore tempor aliquip ad qui anim aliqua tempor Duis aute sit cillum aliquip voluptate et eu Duis dolore minim ea mollit aute qui Ut ea et ut in eu magna eiusmod.</p>
                                 </div>
                                 <div class="about-team-item-footer">
-                                    <a href="#">Read more</a>
+                                    <a href="#">Lead Developer</a>
+                                </div>
+                            </div>
+                        </div>
+        <div class="col-md-4 col-sm-6">
+                            <div class="about-team-item">
+                                <div class="about-team-item-header">
+                                    <div class="about-team-item-social">
+                                        <a href="#"><i class="icon-twitter"></i></a>
+                                        <a href="#"><i class="icon-facebook"></i></a>
+                                        <a href="#"><i class="icon-github"></i></a>
+                                        <a href="#"><i class="icon-google-plus"></i></a>
+                                        <a href="#"><i class="icon-dribbble"></i></a>
+                                    </div>
+                                  <%= image_tag "th2.jpg", :class=> "img-responsive" %>
+                                    <h3>Rebecca Goodman</h3>
+                                </div>
+                                <div class="about-team-item-content">
+                                    
+                                    <p>Lorem ipsum Dolore tempor aliquip ad qui anim aliqua tempor Duis aute sit cillum aliquip voluptate et eu Duis dolore minim ea mollit aute qui Ut ea et ut in eu magna eiusmod.</p>
+                                </div>
+                                <div class="about-team-item-footer">
+                                    <a href="#">Art Director</a>
                                 </div>
                             </div>
                         </div>

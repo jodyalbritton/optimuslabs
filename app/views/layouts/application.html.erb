@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Optimus</title>
+  <title><%= yield(:page_title) %></title>
+    <meta name="description" content="<%= yield(:page_description) %>" />
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= yield(:meta_tags) %>
 
     
     <!-- Bootstrap -->
@@ -13,14 +15,14 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
    <%= javascript_include_tag :modernizr, 'data-turbolinks-track' => true  %>
    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   
   <%= canonical_tag -%>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
-<script src="https://platform.twitter.com/widgets.js"></script>
+
 </head>
 <body>
 

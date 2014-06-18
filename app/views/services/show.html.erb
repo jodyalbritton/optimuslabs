@@ -1,4 +1,17 @@
+<% content_for :page_title, "Optimus Labs" + " " + @service.name %>
+<% content_for :page_description, @service.summary  %>
 
+<% content_for :meta_tags do %>
+<!-- Twitter Card data --> 
+<meta name="twitter:card" value="<%= @service.summary %>">
+
+<!-- Open Graph data --> 
+<meta property="og:title" content="<%= @service.name %>" /> 
+<meta property="og:type" content="article" /> 
+<meta property="og:url" content="<%= service_url(@service) %>" />
+<meta property="og:description" content="<%= @service_summary %>" />
+  
+<% end %>
 <div class="wrap-service-header">
 	<div class="header-title">
 
