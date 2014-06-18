@@ -7,7 +7,7 @@ class Contact < ActiveRecord::Base
   
   before_update :create_full_name
 
-
+  attr_accessor :total_time
   def create_full_name 
   	if self.full_name == nil 
   		self.full_name = self.first_name + " " + self.last_name

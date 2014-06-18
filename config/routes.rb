@@ -27,16 +27,21 @@ Rails.application.routes.draw do
       resources :company
       resources :users
       resources :posts
-      resources :products
+      resources :products do 
+        resources :attachments
+      end
       resources :categories
       resources :rate_types
       resources :severity_types
+      resources :ticket_statuses
+      resources :invoice_statuses
       resources :clients do 
         resources :invoices
         resources :tasks
-        resources :tickets
+        resources :tickets 
         resources :users
         resources :contacts
+
       end
       resources :messages
       resources :interactions
@@ -44,19 +49,25 @@ Rails.application.routes.draw do
         resources :interactions
       end
      
-      resources :services
+      resources :services do 
+          resources :attachments
+         end
       resources :settings do 
         
       end
       resources :invoices
+      resources :payments
       resources :tickets do
+        resources :attachments
         resources :interactions
       end
       resources :notes
       resources :tasks do 
         collection { post :sort }
       end
-      resources :sponsors
+      resources :sponsors do 
+        resources :attachments
+      end
 
 
   end

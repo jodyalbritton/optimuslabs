@@ -10,7 +10,7 @@ class Admin::SeverityTypesController < ApplicationController
   # GET /severity_types
   # GET /severity_types.json
   def index
-    @severity_types = SeverityType.all
+    @severity_types = SeverityType.order('position ASC')
   end
 
   # GET /severity_types/1

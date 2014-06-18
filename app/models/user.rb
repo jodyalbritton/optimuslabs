@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
  has_many :notes, :foreign_key => 'created_by_id'
  has_many :messages
  has_many :message_receipts, :as => :receivable
+ has_one :contact
  
  validates :username,
   :uniqueness => {

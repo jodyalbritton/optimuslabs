@@ -10,7 +10,7 @@ class Admin::RateTypesController < ApplicationController
   # GET /rate_types
   # GET /rate_types.json
   def index
-    @rate_types = RateType.all
+    @rate_types = RateType.order('position ASC')
   end
 
   # GET /rate_types/1

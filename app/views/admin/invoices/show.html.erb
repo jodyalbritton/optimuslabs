@@ -14,28 +14,38 @@
   });
 </script>
 <div class="panel invoice">
+<div class="panel-heading">
+            <span class="panel-title">Customer Invoice</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em><%= link_to "Print", "#" %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_invoice_path(@invoice), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
       <div class="invoice-header">
         <h3>
         
           <div>
-            <small><strong>Optimus</strong>Labs</small><br>
+                <small><%= Setting.company_name %></small><br>
             Invoice #<%= @invoice.id %>
           </div>
         </h3>
         <address>
-          Jody Albritton<br>
+          <%= Setting.company_address %><br>
+           <%= Setting.company_city %>, <%= Setting.company_state %>, <%= Setting.company_zip %><br>
          
         </address>
         <div class="invoice-date">
           <small><strong>Date</strong></small><br>
-          February 21, 2013
+         <%= @invoice.created_at.strftime('%B %d, %Y') %>
         </div>
       </div> <!-- / .invoice-header -->
       <div class="invoice-info">
         <div class="invoice-recipient">
           <strong><%= @invoice.client.name %></strong><br>
-          New York, Bong Avenue, 109<br>
-          10012 NY, USA
+           <%= @invoice.client.address %><br>
+           <%= @invoice.client.city %>, <%=@invoice.client.state %>, <%= @invoice.client.zip %>
         </div> <!-- / .invoice-recipient -->
         <div class="invoice-total">
           <span><%= @invoice.total_price %> </span>

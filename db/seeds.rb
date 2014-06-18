@@ -15,6 +15,12 @@
     if SeverityType.all.size == 0
     severity_types = SeverityType.create(:name => 'Normal', :description => "Normal Severity")
     end
+    if TicketStatus.all.size == 0
+    ticket_statuses = TicketStatus.create(:state => 'Open', :position => 1, :description => 'Default State')
+    end
+    if InvoiceStatus.all.size == 0
+    ticket_statuses = InvoiceStatus.create(:state => 'Open', :position => 1, :description => 'Default State')
+    end
 
     site_name = Setting.site_name = 'Admin Site' 
     company_name = Setting.company_name = "My Company"

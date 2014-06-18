@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617013351) do
+ActiveRecord::Schema.define(version: 20140618132903) do
+
+  create_table "attachments", force: true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "title"
+    t.string   "alt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -37,6 +50,10 @@ ActiveRecord::Schema.define(version: 20140617013351) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "featured",            default: false
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
   create_table "contacts", force: true do |t|
@@ -91,22 +108,40 @@ ActiveRecord::Schema.define(version: 20140617013351) do
     t.integer  "time",             default: 0
   end
 
+  create_table "invoice__statuses", force: true do |t|
+    t.string   "state"
+    t.text     "description"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invoice_statuses", force: true do |t|
+    t.string   "state"
+    t.text     "description"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invoices", force: true do |t|
     t.string   "subject"
     t.integer  "client_id"
     t.date     "started_on"
     t.date     "completed_on"
-    t.decimal  "total",        precision: 10, scale: 0
+    t.decimal  "total",             precision: 10, scale: 0
     t.text     "notes"
     t.string   "attention"
     t.integer  "inv_number"
-    t.decimal  "balance",      precision: 10, scale: 0
+    t.decimal  "balance",           precision: 10, scale: 0
     t.boolean  "paid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "invoice_status_id"
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+  add_index "invoices", ["invoice_status_id"], name: "index_invoices_on_invoice_status_id", using: :btree
 
   create_table "items", force: true do |t|
     t.decimal  "cost",             precision: 10, scale: 0
@@ -362,6 +397,14 @@ ActiveRecord::Schema.define(version: 20140617013351) do
   add_index "tasks", ["client_id"], name: "index_tasks_on_client_id", using: :btree
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
+  create_table "ticket_statuses", force: true do |t|
+    t.string   "state"
+    t.text     "description"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tickets", force: true do |t|
     t.string   "subject"
     t.integer  "client_id"
@@ -375,10 +418,12 @@ ActiveRecord::Schema.define(version: 20140617013351) do
     t.integer  "assignable_id"
     t.string   "assignable_type"
     t.integer  "severity_type_id"
+    t.integer  "ticket_status_id"
   end
 
   add_index "tickets", ["client_id"], name: "index_tickets_on_client_id", using: :btree
   add_index "tickets", ["severity_type_id"], name: "index_tickets_on_severity_type_id", using: :btree
+  add_index "tickets", ["ticket_status_id"], name: "index_tickets_on_ticket_status_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

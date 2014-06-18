@@ -59,15 +59,16 @@
 							<% end %>
 							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
 								<!-- Big text -->
-								<span class="text-bg"><strong>1056</strong></span><br>
+								<span class="text-bg"><strong><%= Time.at(@client.total_interactions).utc.strftime("%H:%M:%S") %></strong></span><br>
 								<!-- Extra small text -->
-								<span class="text-xs">POINTS</span>
+								<span class="text-xs">Interaction Time</span>
 							</div>
 							<!-- Success background, small padding, without left and right padding, vertically centered text -->
-							<a href="#" class="stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle">
+							<%= link_to edit_admin_client_path(@client), :class=> "stat-cell col-xs-4 bg-success padding-sm no-padding-hr valign-middle" do %>
+							
 								<!-- Extra small text -->
-								<span class="text-xs">MORE&nbsp;&nbsp;<i class="fa fa-caret-right"></i></span>
-							</a>
+								<span class="text-xs">EDIT&nbsp;&nbsp;<i class="fa fa-caret-right"></i></span>
+							<% end %>
 						</div> <!-- /.stat-counters -->
 					</div> <!-- /.stat-row -->
 				</div> <!-- /.stat-panel -->

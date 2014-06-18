@@ -2,7 +2,8 @@ class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :items
   has_many :notes, as: :notable
-  has_many :payments 
+  has_many :payments
+  belongs_to :invoice_status
 
   before_save :update_balance
 

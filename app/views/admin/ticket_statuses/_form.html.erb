@@ -1,0 +1,40 @@
+
+
+<%= form_for([:admin, @ticket_status], :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @ticket_status.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><%= pluralize(@ticket_status.errors.count, "error") %> prohibited this ticket status from being saved:</h4>
+
+      <ul>
+      <% @ticket_status.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :state, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_field :state, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.text_area :description, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :menu_position, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.number_field :position, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit :class => "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
