@@ -1,0 +1,29 @@
+<div class="panel widget-followers">
+					<div class="panel-heading">
+						<span class="panel-title"><i class="panel-title-icon fa fa-check"></i>Employees</span>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body">
+						<% @employees.each do |employee| %>
+
+							
+						<div class="follower">
+							
+							<div class="body">
+								<div class="follower-controls">
+									<% if employee.clocked_in == true %>
+									<a href="#" class="btn btn-sm btn-success"><i class="fa fa-check"></i><span>&nbsp;&nbsp;Clocked In</span></a>
+									<% else %>
+									<a href="#" class="btn btn-sm btn-outline">Clocked Out</a>
+									<% end %>
+								</div>
+								<a href="#" class="follower-name"><%= employee.full_name %> </a><br>
+								<%= link_to employee.username, admin_user_path(employee), :class=> "follower-username" %>
+								
+							</div>
+						</div>
+
+						<% end %>
+					</div> <!-- / .panel-body -->
+				</div>
+
+

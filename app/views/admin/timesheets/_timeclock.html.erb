@@ -1,0 +1,15 @@
+<% if @user.clocked_in == true %>
+	<%= simple_form_for ([:admin, @user, @timesheet]), :remote => true do |f| %>
+		<%= f.hidden_field :clocked_out, :value => DateTime.now %>
+		<%= f.hidden_field :source, :value => "TIMECLOCK" %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.submit "Clock Out" %>
+	<% end %>
+<% else %>
+	<%= simple_form_for ([:admin, @user, @timesheet]), :remote => true do |f| %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+		<%= f.hidden_field :source, :value => "TIMECLOCK" %>
+		<%= f.hidden_field :clocked_in, :value => DateTime.now %>
+		<%= f.submit "Clock In" %>
+	<% end %>
+<% end %>

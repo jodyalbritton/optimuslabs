@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clocked_in: 2014-06-18 13:17:29
+  clocked_out: 2014-06-18 13:17:29
+  user_id: 
+
+two:
+  clocked_in: 2014-06-18 13:17:29
+  clocked_out: 2014-06-18 13:17:29
+  user_id: 

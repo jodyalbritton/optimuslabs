@@ -17,9 +17,13 @@ class Admin::UsersController < ApplicationController
 
   def show
 
+    @new_interaction = @user.interactions.new
+    @interactions = @user.interactions.order('created_at DESC')
+
   end
 
   def new
+    
   end
 
   def edit
@@ -27,6 +31,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
+
   end
 
   def update
@@ -64,7 +69,7 @@ class Admin::UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
 
-      @user = User.find(params[:id])
+      @user = User.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
