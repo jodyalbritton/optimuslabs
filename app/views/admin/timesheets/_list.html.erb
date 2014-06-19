@@ -1,0 +1,34 @@
+<table class="table table-striped table-bordered table-hover" id="table">
+    <thead>
+      <tr>
+            <th>User</th>
+            <th>Clocked In</th>
+            <th>Clocked Out</th>
+            <th>Time Worked </th>
+            
+           
+       
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @timesheets) do |timesheet| %>
+            <td><%= link_to timesheet.user.full_name, admin_timesheet_path(timesheet) %></td>
+         
+            <td><%= timesheet.clocked_in %></td>
+            <td><%= timesheet.clocked_out %></td>
+            <td><%= Time.at(timesheet.time_worked).utc.strftime("%H:%M:%S") %>
+        
+      
+        <td>
+          <%= link_to edit_admin_timesheet_path(timesheet) do %>
+              <span class="btn btn-default icon fa fa-pencil"></span>
+            <% end %>
+            <%= link_to  admin_timesheet_path(timesheet), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+              <span class="btn btn-danger icon fa fa-trash-o"></span>
+            <% end %>
+        </td>
+      <% end %>
+    </tbody>
+  </table>

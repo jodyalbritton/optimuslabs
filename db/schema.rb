@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618132903) do
+ActiveRecord::Schema.define(version: 20140618225855) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -425,20 +425,31 @@ ActiveRecord::Schema.define(version: 20140618132903) do
   add_index "tickets", ["severity_type_id"], name: "index_tickets_on_severity_type_id", using: :btree
   add_index "tickets", ["ticket_status_id"], name: "index_tickets_on_ticket_status_id", using: :btree
 
+  create_table "timesheets", force: true do |t|
+    t.datetime "clocked_in"
+    t.datetime "clocked_out"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "source"
+  end
+
+  add_index "timesheets", ["user_id"], name: "index_timesheets_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "first_name",             default: "", null: false
-    t.string   "last_name",              default: "", null: false
-    t.string   "telephone",              default: "", null: false
-    t.string   "address",                default: "", null: false
-    t.string   "city",                   default: "", null: false
-    t.string   "state",                  default: "", null: false
-    t.string   "zip",                    default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "first_name",             default: "",    null: false
+    t.string   "last_name",              default: "",    null: false
+    t.string   "telephone",              default: "",    null: false
+    t.string   "address",                default: "",    null: false
+    t.string   "city",                   default: "",    null: false
+    t.string   "state",                  default: "",    null: false
+    t.string   "zip",                    default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -459,11 +470,19 @@ ActiveRecord::Schema.define(version: 20140618132903) do
     t.string   "manager"
     t.string   "mobile_phone"
     t.boolean  "self_created"
+    t.boolean  "clocked_in",             default: false
+    t.boolean  "employee",               default: false
+    t.string   "slug"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["client_id"], name: "index_users_on_client_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: true do |t|

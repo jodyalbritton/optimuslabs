@@ -25,7 +25,11 @@ Rails.application.routes.draw do
        match  'update_all' => :update_all, :via => :put
       end
       resources :company
-      resources :users
+      resources :timesheets
+      resources :users do
+        resources :timesheets
+        resources :interactions
+      end
       resources :posts
       resources :products do 
         resources :attachments
@@ -39,7 +43,8 @@ Rails.application.routes.draw do
         resources :invoices
         resources :tasks
         resources :tickets 
-        resources :users
+        resources :users 
+
         resources :contacts
 
       end
