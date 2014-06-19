@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   attr_accessor :search 
+  has_attached_file :photo, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
+  validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
   
   belongs_to :author, :class_name => 'User'
   belongs_to :category
