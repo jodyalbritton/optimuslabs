@@ -37,8 +37,8 @@ class Invoice < ActiveRecord::Base
     
     total_items.each do |item|
 
-	  	unless item.purchasable.price == nil 
-	  	total_price =  total_price+(item.purchasable.price*item.quantity)
+	  	unless item.price == nil 
+	  	total_price =  total_price+(item.price*item.quantity)
 	  	end
 
     end
