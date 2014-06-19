@@ -143,15 +143,10 @@
                         <h1>Our clients</h1>
                     </div>
                     <% client_highlight.each do |ch| %>
-                        <% unless ch == nil %>
                         <%= link_to ch.url do %>
-                            <%= image_tag ch.avatar.url(:thumb)%>
+                            <%= image_tag ch.avatar.url(:thumb), :class=> "img-responsive"%>
+                        <% end %>
                            
-                        <% end %>
-                        <% else %>
-
-                        <%= image_tag" rb.jpg",  :class=>"img-responsive" %>
-                        <% end %>
                     <% end %>
                     
                     
