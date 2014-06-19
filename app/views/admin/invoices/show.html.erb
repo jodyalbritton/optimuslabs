@@ -1,3 +1,5 @@
+ <style>
+
   <% content_for :page_header do %>
    <%= @invoice.subject %>
   <% end %>
@@ -13,7 +15,7 @@
     $('body').addClass('page-invoice');
   });
 </script>
-<div class="panel invoice">
+<div class="panel invoice" id="printDiv">
 <div class="panel-heading">
             <span class="panel-title">Customer Invoice</span>
             <div class="panel-heading-controls">
@@ -22,7 +24,7 @@
                 <span class="btn-label icon fa fa-plus"></span>Edit
                <% end %>
             </div>
-          </div> <!-- / .panel-heading -->
+</div> <!-- / .panel-heading -->
       <div class="invoice-header">
         <h3>
         
@@ -100,3 +102,5 @@
       </div> <!-- / .invoice-table -->
     </div> <!-- / .invoice -->
 <!-- /5. $INVOICE_PAGE -->
+
+
