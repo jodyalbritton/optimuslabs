@@ -22,7 +22,7 @@
                   <div class="container">              
 
 
-                <%= simple_form_for (new_contact_message) do |f| %>
+                <%= form_for (new_contact_message) do |f| %>
                   <%= render 'shared/error_messages', object: f.object %>
                     <% unless user_signed_in? %>
                         <div class="form-group">

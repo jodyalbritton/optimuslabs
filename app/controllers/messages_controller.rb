@@ -13,14 +13,11 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-<<<<<<< HEAD
+
         format.html { redirect_to page_path('home'), notice: 'Message was successfully created.' }
-=======
-        format.html { redirect_to page_path('contact', notice: 'Message was successfully created.' }
->>>>>>> upstream/master
         format.json { render :show, status: :created, location: @message }
       else
-        format.html { redirect_to page_path('contact', error: 'Message was not successfully created.' }
+        format.html { redirect_to page_path('contact'), error: 'Message was not successfully created.' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
    
