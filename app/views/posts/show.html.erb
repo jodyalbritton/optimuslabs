@@ -32,6 +32,8 @@
                             <span class="author"><i class="icon-user"></i> <%= @post.author.full_name %></span>
                             <span class="num-comments pull-right"><i class="icon-comments"></i>&nbsp<%= raw("<a href='#{post_url(@post)}#disqus_thread'>Comments</a>") %></span>
                         </div>
+                        <%= image_tag @post.photo.url(:large), :class=> "img-responsive img-feature" %>
+                        
                         <div class="article-content">
                          <%= sanitize @post.body %>
                         </div>

@@ -161,6 +161,9 @@
             <% recent_posts.each do |post| %>
                 <div class="col-md-4">
                     <div class="home-post-item"> 
+                        <%= link_to post do %>
+                        <%= image_tag post.photo(:medium), :class=>"img-responsive"%>
+                        <% end %>
                         <h3><%= link_to post.title, post_path(post) %></h3>
                         <p><%= strip_tags(post.body).first(200) %></p>
                     </div>
