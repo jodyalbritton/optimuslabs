@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
  has_many :messages
  has_many :message_receipts, :as => :receivable
  has_one :contact
+ has_many :payments, as: :source
  has_many :timesheets
  has_many :interactions, as: :interactive
  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619044332) do
+ActiveRecord::Schema.define(version: 20140619150141) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20140619044332) do
   add_index "invoices", ["invoice_status_id"], name: "index_invoices_on_invoice_status_id", using: :btree
 
   create_table "items", force: true do |t|
-    t.decimal  "cost",             precision: 10, scale: 0
+    t.decimal  "cost",             precision: 8, scale: 2
     t.string   "name"
     t.text     "description"
     t.integer  "item_num"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20140619044332) do
     t.string   "purchasable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price",            precision: 8, scale: 2
   end
 
   create_table "message_receipts", force: true do |t|
