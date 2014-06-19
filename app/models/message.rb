@@ -10,6 +10,8 @@ class Message < ActiveRecord::Base
   before_create :get_sender
   after_create :create_receipts, :create_interaction
 
+  validates_presence_of :email, :subject, :full_name
+
    
 
    def find_sender
