@@ -29,9 +29,3 @@
 
 # Ignore application configuration
 /config/application.yml
-
-/pages
-
-/app/views/layouts/application.html.erb
-
-/app/views/devise/
