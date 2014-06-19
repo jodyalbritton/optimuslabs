@@ -4,7 +4,7 @@
        
            
                
-                    <%= form_for([:admin, @user]) do |f| %>
+                    <%= simple_form_for([:admin, @user]) do |f| %>
                        
                         <div class="form-group">
                             <label for="InputUserName">Username<sup>*</sup></label>
@@ -22,7 +22,11 @@
                         </div>
                         <div class="form-group">
                             <label for="InputFirstName">Client</label>
-                             <%= f.number_field :client_id, :class=>"form-control" %>
+                             <%= f.association :client, :class=>"form-control" %>
+                        </div>
+                         <div class="form-group">
+                            <label for="InputFirstName">Employee</label>
+                             <%= f.input :employee, :class=>"form-control" %>
                         </div>
                         <div class="row">
                           <div class="col-md-6">
