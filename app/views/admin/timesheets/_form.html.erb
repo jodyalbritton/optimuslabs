@@ -1,0 +1,54 @@
+
+
+	
+	
+	
+	
+
+	
+
+	
+	
+
+
+
+<div class="col-sm-6">
+
+<!-- 8. $BORDERED_FORM =============================================================================
+
+				Bordered form
+-->
+				
+			
+				<%= form_for [:admin, @timesheet], :class=>"panel form-horizontal form-bordered" do |f| %>
+					<div class="panel-heading">
+						<span class="panel-title">Time Sheet:</span>
+						<%= f.select :user_id, User.where(:employee => true).map { |r| [r.full_name, r.id] }, {include_blank: false, :selected => f.object.user_id} %>
+					</div>
+					<div class="panel-body no-padding-hr">
+						<div class="form-group no-margin-hr panel-padding-h no-padding-t no-border-t">
+							<div class="row">
+								<label class="col-sm-4 control-label">Clocked In</label>
+								<div class="col-sm-8">
+									<%= f. datetime_local_field :clocked_in, :class=> "form-control" %>
+								</div>
+							</div>
+						</div>
+						<div class="form-group no-margin-hr no-margin-b panel-padding-h">
+							<div class="row">
+								<label class="col-sm-4 control-label">Clocked Out</label>
+								<div class="col-sm-8">
+									<%= f.datetime_local_field :clocked_out, :class=>"form-control" %>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer text-right">
+						<%= f.hidden_field :source, :value => "MANUAL" %>
+						<%= f.submit :action, :class=> "btn btn-primary"%>
+					
+					</div>
+		
+<% end %>
+</div>
+

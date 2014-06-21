@@ -27,9 +27,14 @@ class Admin::TimesheetsController < ApplicationController
 				@timesheet = @user.timesheets.new 
 		end		end 
 	end
+	def edit
+
+	end
 
 	def new  
+		@timesheet = Timesheet.new
     	respond_to do |format|
+    		format.html
         	format.js
       	end
   	end
@@ -41,7 +46,7 @@ class Admin::TimesheetsController < ApplicationController
 	      	@user = User.find(params[:timesheet][:user_id])
 	      	@user.clocked_in = true
 	      	@user.save
-	      	@timesheets = @user.timesheets.order('created_at DESC')
+	      	@timesheets = Timesheet.order('created_at DESC')
 	      	@timesheet =  @user.timesheets.create(:user_id =>params[:timesheet][:userid], :clocked_in => Time.now)
 
 	     
@@ -62,24 +67,20 @@ class Admin::TimesheetsController < ApplicationController
 
 	       @timesheets = Timesheet.order('created_at DESC')
 	       if params[:timesheet][:source] == "TIMECLOCK"
-	      	@user = User.find(params[:timesheet][:user_id])
-	      	@user.clocked_in = false
-	      	@user.save
+	      		@user = User.find(params[:timesheet][:user_id])
+	      		@user.clocked_in = false
+	      		@user.save
+	      		@timesheet.update(:clocked_out => Time.now)
+	      	else 
+	       		@timesheet.update(timesheet_params)
 
-	      end 
-	      
-  
-	 	if @timesheet.update(:clocked_out => Time.now)
-	 		@timesheet = Timesheet.new
+	     	end 
+	      	
+	      	@timesheet = Timesheet.new
 			respond_to do |format|
 		    	format.html { redirect_to admin_timesheets_url }
 		    	format.js
-		    end
-		else 
-			respond_to do |format|
-		    	format.html { redirect_to admin_timesheets_url }
-		    	format.js
-	    	end
+	    
 	   	end
   	end
 
