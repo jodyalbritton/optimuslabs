@@ -8,6 +8,9 @@ class Client < ActiveRecord::Base
   	has_many :contacts
   	has_many :users
 
+    belongs_to :assigned_to, :class_name => "User"
+    belongs_to :client_owner, :class_name => "User"
+
 
 
     has_many :contact_interactions, :through => :contacts, :source => :interactions
