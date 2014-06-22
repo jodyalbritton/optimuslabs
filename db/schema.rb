@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622042030) do
+ActiveRecord::Schema.define(version: 20140622211521) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -54,7 +54,13 @@ ActiveRecord::Schema.define(version: 20140622042030) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
+    t.boolean  "active",              default: true
+    t.integer  "assigned_to_id"
+    t.integer  "client_owner_id"
   end
+
+  add_index "clients", ["assigned_to_id"], name: "index_clients_on_assigned_to_id", using: :btree
+  add_index "clients", ["client_owner_id"], name: "index_clients_on_client_owner_id", using: :btree
 
   create_table "contacts", force: true do |t|
     t.string   "full_name"
@@ -242,6 +248,8 @@ ActiveRecord::Schema.define(version: 20140622042030) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "meta_description"
+    t.string   "meta_keywords"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree

@@ -1,4 +1,4 @@
-<%= simple_form_for([:admin, @invoice], :html => { :class => "form-horizontal", :multipart => true }) do |f| %>
+<%= form_for([:admin, @invoice], :html => { :class => "form-horizontal", :multipart => true }) do |f| %>
   <% if @invoice.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -15,19 +15,19 @@
   <div class="form-group">
     <%= f.label :subject, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.input :subject, :class => "form-control", :label => false %>
+      <%= f.text_field :subject, :class => "form-control", :label => false %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :client, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.association :client, :class => "form-control", :label => false %>
-    </div>
+      <%= f.label :client, :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+          <%= f.collection_select :client_id, Client.where(:active => true), :id, :name, :class=>"form-control" %>   
+     </div>
   </div>
   <div class="form-group">
     <%= f.label :State, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.association :invoice_status, :class => "form-control", :label => false, label_method: :state, :include_blank => false %>
+     <%= f.collection_select :invoice_status_id, InvoiceStatus.all, :id, :state, :class=>"form-control" %>   
     </div>
   </div>
   <div>
@@ -38,10 +38,7 @@
             <li>
               <a href="#invoice-tabs-notes" data-toggle="tab">Notes</a>
             </li>
-            <li>
-              <a href="#invoice-tabs-details" data-toggle="tab">Details</a>
-            </li>
-
+        
     </ul>
     <div class="tab-content tab-content-bordered panel-padding">
             <div class="tab-pane no-padding no-border fade in active" id="invoice-tabs-items">
@@ -53,7 +50,7 @@
                     <% end %>
             
               
-                  <div class="links">
+                  <div class="form-group links">
                   <%= link_to_add_association 'add item', f, :items, :class=>"btn btn-primary pull-right" %>
                   </div>
         
@@ -67,14 +64,13 @@
                              <%= render 'note_fields', :f => item %>
                   <% end %>
                     
-                  <div class="links">
+                  <div class="form-group links">
                   <%= link_to_add_association 'add note', f, :notes, :class=>"btn btn-primary pull-right" %>
                   </div>
              
            
             </div>
-             <div class="tab-pane no-padding no-border fade in" id="invoice-tabs-details">
-             </div>
+            
     </div>
 
 
