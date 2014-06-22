@@ -89,25 +89,6 @@
       <%= f.number_field :position, :class=> "form-control" %>
     </div>
   </div>
-   <script>
-          init.push(function () {
-            var options = {
-              todayBtn: "linked",
-              format: "yyyy-mm-dd",
-              orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
-            }
-            $('#bs-datepicker-example').datepicker(options);
-
-            $('#bs-datepicker-component').datepicker(options);
-
-            var options2 = {
-              orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
-            }
-            $('#bs-datepicker-range').datepicker(options2);
-
-            $('#bs-datepicker-inline').datepicker();
-          });
-        </script>
 
 
  
@@ -142,6 +123,25 @@
         <!-- / Modal -->
 <!-- /5. $DEFAULT_MODAL -->
 
+<script>
+          init.push(function () {
+            var options = {
+              todayBtn: "linked",
+              format: "yyyy-mm-dd",
+              orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
+            }
+            $('#bs-datepicker-example').datepicker(options);
+
+            $('#bs-datepicker-component').datepicker(options);
+
+            var options2 = {
+              orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
+            }
+            $('#bs-datepicker-range').datepicker(options2);
+
+            $('#bs-datepicker-inline').datepicker();
+          });
+</script>
 
 
 <script>

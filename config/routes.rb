@@ -30,7 +30,11 @@ Rails.application.routes.draw do
         resources :timesheets
         resources :interactions
       end
-      resources :posts
+      resources :posts do
+        collection do
+          get :tags
+        end
+      end
       resources :products do 
         resources :attachments
       end
