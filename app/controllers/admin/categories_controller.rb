@@ -9,7 +9,13 @@ class Admin::CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    if params[:term]
+      @categories = Category.order(:name).where("name like ?", "%#{params[:term]}%")
+      render json: @categories.map(&:name)
+    else 
+      @categories = Category.all
+    end
+   
   end
 
   # GET /categories/1

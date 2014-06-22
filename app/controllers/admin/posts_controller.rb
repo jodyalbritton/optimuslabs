@@ -75,6 +75,12 @@ class Admin::PostsController < ApplicationController
     end
   end
 
+  def tags 
+  @tags = ActsAsTaggableOn::Tag.where("tags.name LIKE ?", "%#{params[:q]}%") 
+  respond_to do |format|
+   format.json { render :json => @tags.collect{|t| {:id => t.name, :name => t.name }}}
+  end 
+  end
 
 
 
@@ -93,6 +99,6 @@ class Admin::PostsController < ApplicationController
     
 
     def post_params
-      params.require(:post).permit(:title, :body, :published_at, :author_id, :draft, :excerpt, :author, :tag_list, :category_id, :photo)
+      params.require(:post).permit(:title, :body, :published_at, :author_id, :draft, :excerpt, :author, :tag_list, :category, :photo, :category_name)
     end
 end

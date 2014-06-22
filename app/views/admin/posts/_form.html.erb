@@ -40,13 +40,13 @@
    <div class="form-group">
     <%= f.label :tag_list, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :tag_list, :class => "form-control" %>
+      <%= f.text_field :tag_list, :class => "form-control", "data-pre" => @post.tags.map(&:attributes).to_json %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :category, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :category_id, Category.all, :id, :name, :include_blank => false%>
+      <%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control" %>
     </div>
   </div>
    
@@ -108,4 +108,27 @@
 
             $('#bs-datepicker-inline').datepicker();
           });
-        </script>
+
+          
+</script>
+
+
+
+  <script>
+      $(function() {
+        $( "#post_category_name" ).autocomplete({
+          source: $('#post_category_name').data('autocomplete-source')
+    });
+  });
+
+  $(function() {
+  $("#post_tag_list").tokenInput("/admin/posts/tags.json", {
+    prePopulate:       $("#post_tag_list").data("pre"),
+    preventDuplicates: true,
+    noResultsText:     "No results, needs to be created.",
+    theme: "facebook",
+    tokenValue:"name",
+    allowFreeTagging: true
+  });
+});
+  </script>

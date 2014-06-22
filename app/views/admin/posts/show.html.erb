@@ -9,7 +9,27 @@
 <%= render 'admin/header' %>
 
                         
-
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Post Details</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em><%= link_to "Public View", post_path %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_post_path(@post), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-8">
+                <%= sanitize @post.body%>
+              </div>
+              <div class="col-md-4">
+               <h3> Post Photo </h3>
+                <%= image_tag @post.photo.url(:medium) %>
+              </div>
+            </div>
+          </div>
                			<article class="col-md-8">
-                        	<%= sanitize @post.body%>
-                        </article>
+                        
+                     </article>

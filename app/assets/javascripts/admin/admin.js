@@ -11,11 +11,13 @@
 // about supported directives.
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.autocomplete
 //= require admin/bootstrap
 //= require admin/pixel-admin
 //= require admin/jquery.searchable
 //= require admin/jquery.timer
 //= require admin/jquery.ui.touch-punch
+//= require admin/jquery.tokeninput
 //= require admin/froala-editor.min.js
 //= require cocoon
 //= require_self
