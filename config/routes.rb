@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       end
       resources :products do 
         resources :attachments
+        collection { post :sort }
       end
       resources :categories
       resources :rate_types

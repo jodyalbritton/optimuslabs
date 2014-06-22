@@ -9,7 +9,7 @@ class Admin::ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.order(:position)
   end
 
   # GET /products/1
@@ -66,6 +66,16 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  #SORT /products 
+  def sort
+    params[:product].each_with_index do |id, index|
+        product = Product.find(id)
+        product.position = index
+        product.save
+    end
+    render nothing: true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -74,6 +84,6 @@ class Admin::ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :description, :category_id, :photo, :cost, :price )
+      params.require(:product).permit(:name, :description, :category_id, :photo, :cost, :price, :position, :header_photo )
     end
 end
