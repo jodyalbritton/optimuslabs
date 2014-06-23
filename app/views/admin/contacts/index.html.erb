@@ -30,10 +30,10 @@
 
     <tbody>
           <%= content_tag_for(:tr, @contacts) do |contact| %>
-            <td><%= link_to contact.full_name,  ([:admin,contact])  %></td>
-            <td class="hidden-sm hidden-xs"><%= contact.email %></td>
+            <td class="col-md-2"><%= link_to contact.full_name,  ([:admin,contact])  %></td>
+            <td class="col-md-2 hidden-sm hidden-xs"><%= mail_to contact.email %></td>
             <td class="hidden-sm hidden-xs"><%= contact.phone %></td>      
-        <td>
+        <td class="col-md-1">
         <%= link_to edit_admin_contact_path(contact) do %>
               <span class="btn btn-default icon fa fa-pencil"></span>
             <% end %>
