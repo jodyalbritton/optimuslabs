@@ -1,2 +1,17 @@
+<%  add_breadcrumb "Home", :root_path, :options => { :title => "Home" } %>
+<%  add_breadcrumb "Labs", "#", :options => { :title => "Labs" } %>
+<%  add_breadcrumb "The Future", page_path('labs/future'), :options => { :title => "future" } %>
+
+<% content_for :page_title, 'Optimus Labs Helpdesk' %>
+<% content_for :page_description, 'Remote helpdesk services for small business.' %>
 <div class="container">
+	<header class="section-title">
+                <h1>The Future</h1>
+
+                <ol class="breadcrumb">
+                    <%= render_breadcrumbs :tag => :li, :separator => "", :class=>"breadcrumb-label text-light-gray" %>
+                </ol>
+            </header>
+	<div class="full-spacer">
+	</div>
 </div>

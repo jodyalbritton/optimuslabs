@@ -1,14 +1,26 @@
+<%  add_breadcrumb "Home", :root_path, :options => { :title => "Home" } %>
+<%  add_breadcrumb "Labs", "#", :options => { :title => "Labs" } %>
+<%  add_breadcrumb "Helpdesk", page_path('labs/helpdesk'), :options => { :title => "Helpdesk" } %>
+
 <% content_for :page_title, 'Optimus Labs Helpdesk' %>
 <% content_for :page_description, 'Remote helpdesk services for small business.' %>
+<% content_for :meta_tags do %>
+<!-- Twitter Card data --> 
+<meta name="twitter:card" value="On demand remote helpdesk service from Optimus Labs">
+
+<!-- Open Graph data --> 
+<meta property="og:title" content="Optimus Labs Helpdesk" /> 
+<meta property="og:type" content="website" /> 
+<meta property="og:description" content="On demand remote helpdesk from Optimus Labs" />
+  
+<% end %>
 <div class="container">
 
             <header class="section-title">
                 <h1>The Help Desk</h1>
 
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Labs</a></li>
-                    <li class="active">Helpdesk</li>
+                    <%= render_breadcrumbs :tag => :li, :separator => "", :class=>"breadcrumb-label text-light-gray" %>
                 </ol>
             </header>
             <div class="row">
@@ -18,30 +30,28 @@
 
                     <p class="lead">You shouldn't need to have your own IT department to get the most out of Today's Technologies.</p>
 
-                    <p>By retaining our services on a monthly basis you can call anytime you have a question.<strong>Day or night</strong> ea nisi <em>occaecat mollit</em> voluptate Excepteur labore amet sunt exercitation tempor enim nisi cillum ea repr.</p>
-                    <p>Lorem ipsum Nisi commodo proident exercitation eiusmod et ea aliqua nostrud Excepteur nostrud cillum veniam enim sit veniam deserunt magna est voluptate laboris id sed occaecat officia enim.</p>
+                    <p>By retaining our services on a monthly basis you can call anytime you have a question.<strong>Day or night</strong> we are here to help <em>You</em> with any of your technology needs.</p>
+                    <p>Our on demand helpdesk service gives you peace of mind, knowing that when you do need help it will be there.</p>
                 </div>
                 <div class="col-md-6">
-                   <%= image_tag "platform_logo.jpg", :class=> "img-responsive" %>
+                   <%= image_tag "helpdesk_logo.png", :class=> "img-responsive" %>
                 </div>
             </div>
             <div class="row">
+            <h2 class="section-title">A Few Features</h2>
             <div class="col-md-6">
-                <h2 class="section-title">Unordered Lists</h2>
                 <ul>
-                    <li>Lorem ipsum Id tempor in veniam nisi laboris.</li>
-                    <li>proident exercitation eiusmod et ea aliqua.</li>
-                    <li>nostrud cillum veniam enim sit veniam.</li>
-                    <li>cupidatat consequat elit officia est.
+                    <li>Ticket Tracking</li>
+                    <li>Phone Support</li>
+                    <li>Asset Management</li>
+                    <li>Knowledge Base
                         <ul>
-                            <li>reprehenderit dolore elit Duis irure</li>
-                            <li>Lorem ipsum Id tempor in</li>
-                            <li>reprehenderit dolore elit Duis irure</li>
-                            <li>Lorem ipsum Id tempor in</li>
+                            <li>Remote Troubleshooting</li>
+                            <li>Remote Monitoring</li>
+                            <li>Change and Configuration Management</li>
+                            <li>Software Updates</li>
                         </ul>
                    </li>
-                    <li>Excepteur labore amet sunt exercitation tempor.</li>
-                    <li>Lorem ipsum Id tempor in veniam nisi laboris.</li>
                 </ul>
             </div>
             <div class="col-md-6">
@@ -70,76 +80,6 @@
        
             
             </div>
-            <div class="row">
-              <h2 class="section-title">Pricing Options</h2>
-            <div class="col-md-4 col-sm-6">
-                <div class="pricign-box">
-                    <div class="pricing-box-header">
-                        <h2>Starter</h2>
-                        <p>Unlimited Helpdesk</p>
-                    </div>
-                    <div class="pricing-box-price">
-                        <h3>$ 20 <sub>/ month</sub> </h3>
-                    </div>
-                    <div class="pricing-box-content">
-                        <ul>
-                            <li><i class="icon-inbox"></i>24 Hour Helpdesk</li>
-                            <li><i class="icon-cloud-download"></i>Ulimited Tickets</li>
-                            <li><i class="icon-dashboard"></i> Chat Sessions </li>
-                            <li><i class="icon-shopping-cart"></i>Knowledge Base</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-footer">
-                        <a href="#" class="btn btn-default">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="pricign-box pricign-box-pro">
-                    <div class="pricing-box-header">
-                        <h2>Standard</h2>
-                        <p>Unlimited Remote Support</p>
-                    </div>
-                    <div class="pricing-box-price">
-                        <h3>$ 49 <sub>/ month</sub> </h3>
-                    </div>
-                    <div class="pricing-box-content">
-                        <ul>
-                            <li><i class="icon-inbox"></i> 24 Hour Phone Support</li>
-                            <li><i class="icon-cloud-download"></i> Unlimited Helpdesk</li>
-                            <li><i class="icon-dashboard"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-sitemap"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-shopping-cart"></i> Exercitation in id in officia.</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-footer">
-                        <a href="#" class="btn btn-robotic">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="pricign-box">
-                    <div class="pricing-box-header">
-                        <h2>Personal</h2>
-                        <p>nisi anim mollit in labore ut esse</p>
-                    </div>
-                    <div class="pricing-box-price">
-                        <h3>$ 10 <sub>/ month</sub> </h3>
-                    </div>
-                    <div class="pricing-box-content">
-                        <ul>
-                            <li><i class="icon-inbox"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-cloud-download"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-dashboard"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-sitemap"></i> Exercitation in id in officia.</li>
-                            
-                        </ul>
-                    </div>
-                    <div class="pricing-box-footer">
-                        <a href="#" class="btn btn-default">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        
+
+
 </div>

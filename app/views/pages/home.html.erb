@@ -97,50 +97,18 @@
 
 
         <div class="row">
-            <div class="col-md-12">
-                <section class="team-home">
-                    <h1 class="section-title">Our Mission</h1>
-                    <p class="lead">&laquo;Technology should be invisible. Computers, smartphones, and websites should just work. We will make your tech dissapear into the background.&raquo;</p>
-                    <div class="row">
-                        <div class="col-md-4">
-              
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team-home-item">
-                                <div class="team-home-img">
-                                    <%= image_tag "th2.jpg" %>
-                                </div>
-                                <div class="team-home-content">
-                                    <h3>Jody Albritton - Owner</h3>
-                                    <p>Programmer. Web Guy. Engineer</p>
-                                    <p>Jody has been working in technology related fields for over 15 years.</p>
-                                </div>
-                                <div class="team-home-footer">
-                                    <%= link_to "Read More", page_path('about') %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            
-                        </div>
-                    </div>
-                </section> <!-- team-home -->
-            </div>
-        </div>
-
-        <div class="row">
             <div class="col-lg-8 col-md-7">
                 <section class="home-about">
                     <div class="section-title">
-                        <h1>About us</h1>
+                        <h1>About Us</h1>
                     </div>
-                    <p>For the last four years, Optimus has provided consulting to companies and edcuational institutions <strong>small</strong> and large. We use the best open source technologies and leverage the vast amount of resources available on the internet. </p>
+                    <p>We provide outstanding service across all areas of technology. From websites to hardware support, Optimus provides you with a full service IT department without the massive expense of keeping one in house. We leverage the vast amount of available open source software to keep your costs down and your operations running smoothly. </p>
                 </section>
             </div>
             <div class="col-lg-4 col-md-5">
                 <section class="home-clients">
                     <div class="section-title">
-                        <h1>Our clients</h1>
+                        <h1>Our Clients</h1>
                     </div>
                     <% client_highlight.each do |ch| %>
                         <%= link_to ch.url do %>

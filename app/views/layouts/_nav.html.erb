@@ -29,7 +29,7 @@
                     <li><%= link_to "Contact", page_path('contact') %></li>
                 <% if user_signed_in? %>
                     <% if current_user.has_role? :admin %>
-                    <li><%= link_to "Admin", admin_index_path %></li>
+                    <li><%= link_to "Admin", admin_index_path, data: { no_turbolink: true } %></li>
                     <% end %>
                 <% end %>
 
@@ -39,7 +39,7 @@
                     <ul class="dropdown-menu">
 
                     <% if user_signed_in? %>
-                      <li><%= link_to edit_user_registration_path  do%>
+                      <li><%= link_to edit_user_registration_path, data: { no_turbolink: true }  do%>
                         <i class="icon-user"></i> Edit Acccount
                       <% end %>
                       </li>
@@ -48,8 +48,8 @@
                           <% end %>
                         </li>
                     <% else %>
-                      <li><%= link_to 'Sign in', new_user_session_path %></li>
-                      <li><%= link_to 'Sign up', new_user_registration_path %></li>
+                      <li><%= link_to 'Sign in', new_user_session_path, data: { no_turbolink: true } %></li>
+                      <li><%= link_to 'Sign up', new_user_registration_path, data: { no_turbolink: true } %></li>
 
                     <% end %>
                     </li>

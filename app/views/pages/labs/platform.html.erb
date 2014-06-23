@@ -1,3 +1,6 @@
+<%  add_breadcrumb "Home", :root_path, :options => { :title => "Home" } %>
+<%  add_breadcrumb "Labs", "#", :options => { :title => "Labs" } %>
+<%  add_breadcrumb "Platform", page_path('labs/platform'), :options => { :title => "Platform" } %>
 <% content_for :page_title, 'Optimus Labs Platform' %>
 <% content_for :page_description, 'The Optimus Platform is an entire suite of tools designed around the needs of the small business owner. You can manage your customers or clients, keep track of inventory, manage service requests, and much much more.' %>
 <% content_for :meta_tags do %>
@@ -16,9 +19,7 @@
                 <h1>Optimus Platform</h1>
 
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Labs</a></li>
-                    <li class="active">Platform</li>
+                    <%= render_breadcrumbs :tag => :li, :separator => "", :class=>"breadcrumb-label text-light-gray" %>
                 </ol>
             </header>
             <div class="row">
@@ -77,78 +78,5 @@
             </div>
             </div>
 
-            <section class="pricing">
-            <div class="row">
-            <h2 class="section-title">Pricing</h2>
-            <div class="col-md-4 col-sm-6">
-                <div class="pricign-box">
-                    <div class="pricing-box-header">
-                        <h2>Starter</h2>
-                        <p>Optimus Platform with Subdomain Hosting</p>
-                    </div>
-                    <div class="pricing-box-price">
-                        <h3>$ 49 <sub>/ month</sub> </h3>
-                    </div>
-                    <div class="pricing-box-content">
-                        <ul>
-                            <li><i class="icon-inbox"></i> Customer Relationship Management</li>
-                            <li><i class="icon-cloud-download"></i> Ticketing System</li>
-                            <li><i class="icon-dashboard"></i> Custom Dashboard</li>
-                            <li><i class="icon-shopping-cart"></i> Track Products </li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-footer">
-                        <a href="#" class="btn btn-default">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="pricign-box pricign-box-pro">
-                    <div class="pricing-box-header">
-                        <h2>Personal</h2>
-                        <p>nisi anim mollit in labore ut esse</p>
-                    </div>
-                    <div class="pricing-box-price">
-                        <h3>$ 10 <sub>/ month</sub> </h3>
-                    </div>
-                    <div class="pricing-box-content">
-                        <ul>
-                            <li><i class="icon-inbox"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-cloud-download"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-dashboard"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-sitemap"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-shopping-cart"></i> Exercitation in id in officia.</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-footer">
-                        <a href="#" class="btn btn-robotic">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="pricign-box">
-                    <div class="pricing-box-header">
-                        <h2>Personal</h2>
-                        <p>nisi anim mollit in labore ut esse</p>
-                    </div>
-                    <div class="pricing-box-price">
-                        <h3>$ 10 <sub>/ month</sub> </h3>
-                    </div>
-                    <div class="pricing-box-content">
-                        <ul>
-                            <li><i class="icon-inbox"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-cloud-download"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-dashboard"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-sitemap"></i> Exercitation in id in officia.</li>
-                            <li><i class="icon-shopping-cart"></i> Exercitation in id in officia.</li>
-                        </ul>
-                    </div>
-                    <div class="pricing-box-footer">
-                        <a href="#" class="btn btn-default">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </section>
-        
+            
 </div>
