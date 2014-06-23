@@ -29,12 +29,8 @@ class Admin::MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    unless current_user == nil
-      @user = current_user 
-      @message = @user.messages.new
-    else
+    
       @message = Message.new
-  end
   end
 
   # GET /messages/1/edit
