@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessor :full_name, :phone, :recipient
+  attr_accessor :full_name, :phone, :recipient, :to_address
 
   belongs_to :client
   belongs_to :project
