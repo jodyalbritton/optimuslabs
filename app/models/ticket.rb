@@ -9,7 +9,10 @@ class Ticket < ActiveRecord::Base
   validates_presence_of :subject
   validates_presence_of :description
 
-
+  def total_time
+    self.interactions.sum :time
+  end
+  
   def get_label
   	if self.ticket_status.state == "Open"
   		"success"

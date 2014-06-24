@@ -80,8 +80,10 @@
        <%= form_for ([:admin, @contact, @new_interaction]), :class=>"form-horizontal", :remote => true  do |f|  %>
         <div class="form-group">
           <%= f.label :event, :class => "col-sm-1 control-label" %>
-          <div class="col-sm-2">
-          <%= f.text_field  :event, :class=>"form-control" %>
+           <div class="col-sm-3">
+
+           <%= f.text_field :interaction_event_name, data: {autocomplete_source: admin_interaction_events_path},
+            :class=> "form-control", :required => true %>
           </div>
           <%= f.label :time, :class => "col-sm-1 control-label" %>
            <button type="button"  onclick='Example1.Timer.toggle();' class="btn btn-default"/>
@@ -119,6 +121,11 @@
 
 <script>
   $("#interaction_form").toggle(300);
+  $(function() {
+        $( "#interaction_interaction_event_name" ).autocomplete({
+          source: $('#interaction_interaction_event_name').data('autocomplete-source')
+    });
+  });
 </script>
 
 <script>
@@ -141,4 +148,17 @@
     $(init);
 });
 
+// Common functions
+function pad(number, length) {
+    var str = '' + number;
+    while (str.length < length) {str = '0' + str;}
+    return str;
+}
+function formatTime(time) {
+    var hour = parseInt(time / 3600),
+        sec = parseInt(time / 100) - (hour * 60),
+        sec = parseInt(time / 100) - (min * 60),
+        hundredths = pad(time - (sec * 100) - (min * 6000), 2);
+    return (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + ":" + hundredths;
+}
 </script>
