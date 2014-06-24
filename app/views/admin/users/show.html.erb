@@ -78,8 +78,10 @@
        <%= form_for ([:admin, @user, @new_interaction]), :class=>"form-horizontal", :remote => true  do |f|  %>
         <div class="form-group">
           <%= f.label :event, :class => "col-sm-1 control-label" %>
-          <div class="col-sm-2">
-          <%= f.text_field  :event, :class=>"form-control" %>
+            <div class="col-sm-3">
+
+           <%= f.text_field :interaction_event_name, data: {autocomplete_source: admin_interaction_events_path},
+            :class=> "form-control", :required => true %>
           </div>
           <%= f.label :time, :class => "col-sm-1 control-label" %>
            <button type="button"  onclick='Example1.Timer.toggle();' class="btn btn-default"/>
@@ -117,6 +119,11 @@
 
 <script>
   $("#interaction_form").toggle(300);
+  $(function() {
+        $( "#interaction_interaction_event_name" ).autocomplete({
+          source: $('#interaction_interaction_event_name').data('autocomplete-source')
+    });
+  });
 </script>
 
 <script>

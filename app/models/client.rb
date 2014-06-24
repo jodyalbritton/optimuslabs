@@ -15,20 +15,22 @@ class Client < ActiveRecord::Base
 
     has_many :contact_interactions, :through => :contacts, :source => :interactions
   	has_many :ticket_interactions, :through => :tickets, :source => :interactions
+    has_many :user_interactions, :through => :users, :source => :interactions
     
 
   	
     def total_interaction_time
         a = self.contact_interactions.sum :time
         b = self.ticket_interactions.sum :time
+        c = self.user_interactions.sum :time
 
-        a + b
+        a + b + c
     
 
     end 
 
     def all_interactions 
-      self.contact_interactions + self.ticket_interactions
+      self.contact_interactions + self.ticket_interactions + self.user_interactions
     end
 
 

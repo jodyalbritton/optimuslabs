@@ -26,6 +26,10 @@ class Admin::InteractionsController < ApplicationController
         @ticket = Ticket.find(params[:ticket_id])
         @interactions = @ticket.interactions.order('created_at DESC')
         @interaction = @ticket.interactions.create(interaction_params)
+      elsif params[:user_id]
+        @user = User.friendly.find(params[:user_id])
+        @interactions = @user.interactions.order('created_at DESC')
+        @interaction = @user.interactions.create(interaction_params)
 
       else 
         @interactions = Interaction.order('created_at DESC')

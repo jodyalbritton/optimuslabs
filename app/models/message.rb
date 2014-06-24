@@ -5,7 +5,7 @@ class Message < ActiveRecord::Base
   belongs_to :project
   belongs_to :conversation
   has_many :message_receipts
-
+  has_many :attachments, as: :attachable 
 
   before_create :get_sender
   after_create :create_receipts, :create_interaction
