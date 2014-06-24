@@ -11,11 +11,11 @@ class Ticket < ActiveRecord::Base
 
 
   def get_label
-  	if self.status == "Open"
+  	if self.ticket_status.state == "Open"
   		"success"
-    elsif self.status == "In Progress"
+    elsif self.ticket_status.state == "In Progress"
     	"warning"
-    elsif self.status == "Pending"
+    elsif self.ticket_status.state == "Pending"
     	"info"
     else	
         "default"

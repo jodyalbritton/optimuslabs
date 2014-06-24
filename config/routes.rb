@@ -40,6 +40,7 @@ Rails.application.routes.draw do
         collection { post :sort }
       end
       resources :categories
+      resources :interaction_events
       resources :rate_types
       resources :severity_types
       resources :ticket_statuses
@@ -55,6 +56,7 @@ Rails.application.routes.draw do
       end
       resources :messages
       resources :interactions
+
       resources :contacts do
         resources :interactions
       end
