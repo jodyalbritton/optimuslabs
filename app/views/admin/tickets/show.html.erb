@@ -31,15 +31,18 @@
    
        <%= form_for ([:admin, @ticket, @new_interaction]), :class=>"form-horizontal", :remote => true  do |f|  %>
         <div class="form-group">
-          <%= f.label :event, :class => "col-sm-1 control-label" %>
-          <div class="col-sm-2">
-          <%= f.text_field  :event, :class=>"form-control" %>
+      
+        <%= f.label :event, :class => "col-sm-1 control-label" %>
+          <div class="col-sm-3">
+
+           <%= f.text_field :interaction_event_name, data: {autocomplete_source: admin_interaction_events_path},
+            :class=> "form-control", :required => true %>
           </div>
           <%= f.label :time, :class => "col-sm-1 control-label" %>
-           <button type="button"  onclick='Example1.Timer.toggle();' class="btn btn-default"/>
+           <button type="button"  onclick='Example1.Timer.toggle();' class="btn btn-default">
             <span class="fa fa-play"></span>/<span class="fa fa-pause"></span>
             </button>
-          <button type='button'  onclick='Example1.resetStopwatch();' class="btn btn-default" />
+          <button type='button'  onclick='Example1.resetStopwatch();' class="btn btn-default" >
             <span class="fa fa-stop"></span>
           </button>
           <div class="col-sm-1">
@@ -65,9 +68,9 @@
   </div> <!-- / .timeline -->
 </div>
 <div class="col-md-4">
-<div class="panel colourable">
+<div class="panel panel-<%= @ticket.get_label %>">
           <div class="panel-heading">
-            <span class="panel-title">Current Status:&nbsp <%= @ticket.status %></span>
+            <span class="panel-title">Current Status:&nbsp <%= @ticket.ticket_status.state %></span>
             <div class="panel-heading-controls">
               <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
                <%= link_to edit_admin_ticket_path(@ticket), :class => 'btn btn-xs' do %>
@@ -86,7 +89,7 @@
                       Location
                     </li>
                     <li class="list-group-item">
-                      <span class="badge badge-info">14</span>
+                      <span class="badge badge-info"><%= Time.at(@ticket.interactions.sum :time).utc.strftime('%H:%M:%S') %></span>
                       Time Spent:
                     </li>
                     <li class="list-group-item">
@@ -132,6 +135,12 @@
 </script>
 <script>
   $("#interaction_form").toggle(300);
+
+  $(function() {
+        $( "#interaction_interaction_event_name" ).autocomplete({
+          source: $('#interaction_interaction_event_name').data('autocomplete-source')
+    });
+  });
 </script>
           </div>
 </div>

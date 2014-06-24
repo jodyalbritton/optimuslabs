@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623154304) do
+ActiveRecord::Schema.define(version: 20140624022038) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(version: 20140623154304) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "interaction_events", force: true do |t|
+    t.string   "name"
+    t.integer  "interaction_id"
+    t.text     "description"
+    t.boolean  "billable",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "interactions", force: true do |t|
     t.integer  "interactive_id"
     t.string   "interactive_type"
@@ -111,8 +120,11 @@ ActiveRecord::Schema.define(version: 20140623154304) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "content"
-    t.integer  "time",             default: 0
+    t.integer  "time",                 default: 0
+    t.integer  "interaction_event_id"
   end
+
+  add_index "interactions", ["interaction_event_id"], name: "index_interactions_on_interaction_event_id", using: :btree
 
   create_table "invoice__statuses", force: true do |t|
     t.string   "state"

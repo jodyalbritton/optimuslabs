@@ -59,7 +59,7 @@
 							<% end %>
 							<div class="stat-cell col-xs-4 padding-sm no-padding-hr">
 								<!-- Big text -->
-								<span class="text-bg"><strong><%= Time.at(@client.total_interactions).utc.strftime("%H:%M:%S") %></strong></span><br>
+								<span class="text-bg"><strong><%= Time.at(@client.total_interaction_time).utc.strftime("%H:%M:%S") %></strong></span><br>
 								<!-- Extra small text -->
 								<span class="text-xs">Interaction Time</span>
 							</div>

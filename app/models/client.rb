@@ -18,12 +18,18 @@ class Client < ActiveRecord::Base
     
 
   	
-    def total_interactions
-      a= self.contact_interactions.sum :time 
-      b= self.ticket_interactions.sum :time
-      a + b
+    def total_interaction_time
+        a = self.contact_interactions.sum :time
+        b = self.ticket_interactions.sum :time
+
+        a + b
+    
 
     end 
+
+    def all_interactions 
+      self.contact_interactions + self.ticket_interactions
+    end
 
 
   	 
