@@ -1,4 +1,4 @@
-  <% content_for :page_header do %>
+<% content_for :page_header do %>
    <%= @invoice.subject %>
   <% end %>
   <% content_for :page_actions do %>
@@ -17,7 +17,7 @@
 <div class="panel-heading hidden-print">
             <span class="panel-title">Customer Invoice</span>
             <div class="panel-heading-controls">
-              <span class="panel-heading-text"><em><%= link_to "Print", admin_invoice_print_path(@invoice) %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+              <span class="panel-heading-text"><em><%= link_to "Back", admin_invoice_path(@invoice) %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
                <%= link_to edit_admin_invoice_path(@invoice), :class => 'btn btn-xs' do %>
                 <span class="btn-label icon fa fa-plus"></span>Edit
                <% end %>
@@ -33,10 +33,10 @@
         </h3>
         <address>
           <%= Setting.company_address %><br>
-           <%= Setting.company_city %>, <%= Setting.company_state %>, <%= Setting.company_zip %><br>
+          <%= Setting.company_city %>, <%= Setting.company_state %>, <%= Setting.company_zip %><br>
          
         </address>
-        <div class="invoice-date">
+        <div class="invoice-date pull-right">
           <small><strong>Date</strong></small><br>
          <%= @invoice.created_at.strftime('%B %d, %Y') %>
         </div>
@@ -102,23 +102,6 @@
           </tbody>
         </table>
        
-          <div>
-            <strong>Notes:</strong>
-            <% @invoice.notes.each do |note| %>
-              <div class="row">
-                <div class="col-md-1">
-
-                 <%= note.created_at.strftime("%d/%m/%Y") %>
-                </div>
-                <div class="col-md-9">
-                <%= note.body %>
-                </div>
-              </div>
-            <% end %>
-          </div>
       </div> <!-- / .invoice-table -->
     </div> <!-- / .invoice -->
 <!-- /5. $INVOICE_PAGE -->
-
-
-

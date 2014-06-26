@@ -18,6 +18,20 @@ class Admin::PaymentsController < ApplicationController
   	@payment = Payment.new
   end
 
+  def create
+    @payment = Payment.new(payment_params)
+
+    respond_to do |format|
+      if @payment.save
+        format.html { redirect_to ([:admin, @payment]), notice: 'Payment was successfully created.' }
+        format.json { render :show, status: :created, location: @payment }
+      else
+        format.html { render :new }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
+      end
+    end
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment

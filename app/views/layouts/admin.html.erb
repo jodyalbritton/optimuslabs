@@ -76,7 +76,7 @@ Use search to find needed section.
 
 	Main navigation
 -->
-	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+	<div id="main-navbar" class="navbar navbar-inverse hidden-print " role="navigation">
 		<!-- Main menu toggle -->
 		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
 		
@@ -219,7 +219,7 @@ Use search to find needed section.
 			  </ul>
 			</li>
 -->
-	<div id="main-menu" role="navigation">
+	<div id="main-menu" role="navigation" class="hidden-print">
 		<div id="main-menu-inner">
 			<ul class="navigation">
 				<li>
@@ -503,12 +503,12 @@ Use search to find needed section.
 	</div> <!-- / #main-menu -->
 <!-- /4. $MAIN_MENU -->
 
-	<div id="content-wrapper">
+	<div id="content-wrapper" class="hidden-print">
 
 
 					<%= yield %>
 	
-	<div id="main-menu-bg"></div>
+	<div id="main-menu-bg" class="hidden-print"></div>
 	</div> <!-- / #main-wrapper -->
 
 
