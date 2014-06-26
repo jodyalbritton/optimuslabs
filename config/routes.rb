@@ -67,7 +67,10 @@ Rails.application.routes.draw do
       resources :settings do 
         
       end
-      resources :invoices
+      resources :invoices do
+          get :print
+      end
+
       resources :payments
       resources :tickets do
         resources :attachments

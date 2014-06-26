@@ -4,8 +4,7 @@ class Admin::InvoicesController < ApplicationController
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Invoices", :admin_invoices_path
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  layout "layouts/admin"
-
+  layout :resolve_layout
   # GET /invoices
   # GET /invoices.json
   def index
@@ -86,8 +85,24 @@ class Admin::InvoicesController < ApplicationController
     end
   end
 
+  def print
+  
+  @invoice = Invoice.find(params[:invoice_id])
+  end
+
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
+    def resolve_layout
+    case action_name
+    when "print"
+      "layouts/print"
+    else
+      "layouts/admin"
+    end
+  end
     def set_invoice
       if params[:client_id]
       @client = Client.find(params[:client_id])
