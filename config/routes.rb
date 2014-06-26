@@ -46,7 +46,9 @@ Rails.application.routes.draw do
       resources :ticket_statuses
       resources :invoice_statuses
       resources :clients do 
-        resources :invoices
+        resources :invoices do 
+          resources :payments
+        end
         resources :tasks
         resources :tickets 
         resources :users 
@@ -68,6 +70,7 @@ Rails.application.routes.draw do
         
       end
       resources :invoices do
+          resources :payments
           get :print
       end
 

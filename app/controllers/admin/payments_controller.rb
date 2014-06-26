@@ -7,19 +7,45 @@ class Admin::PaymentsController < ApplicationController
   layout "layouts/admin"
 
   def index
-  	@payments = Payment.all
+  	if params[:invoice_id]
+       @invoice = Invoice.find(params[:invoice_id])
+
+       @payments = @invoice.payments.all
+
+      else
+        @payments = Payment.all
+      end
   end
 
   def show
   end 
   
+  def edit
+  end
+
 
   def new
-  	@payment = Payment.new
+    if params[:invoice_id]
+       @invoice = Invoice.find(params[:invoice_id])
+
+       @payment = @invoice.payments.new
+
+      else
+        @payment  = Payment.new
+    end
+  	
   end
 
   def create
-    @payment = Payment.new(payment_params)
+
+    if params[:invoice_id]
+       @invoice = Invoice.find(params[:invoice_id])
+
+       @payement = @invoice.payments.new(payment_params)
+
+      else
+        @payment  = Payment.new(payment_params)
+    end
 
     respond_to do |format|
       if @payment.save
@@ -32,13 +58,26 @@ class Admin::PaymentsController < ApplicationController
     end
   end 
 
+  def update
+
+    respond_to do |format|
+      if @payment.update(payment_params)
+        format.html { redirect_to ([:admin, @payment]), notice: 'Payment was successfully created.' }
+        format.json { render :show, status: :created, location: @payment }
+      else
+        format.html { render :new }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
+      end
+    end
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
-      if params[:client_id]
-      @client = Client.find(params[:client_id])
+      if params[:invoice_id]
+       @invoice = Invoice.find(params[:invoice_id])
 
-      @payement = @client.payments.find(params[:id])
+       @payment = @invoice.payments.find(params[:id])
 
       else
         @payment = Payment.find(params[:id])
