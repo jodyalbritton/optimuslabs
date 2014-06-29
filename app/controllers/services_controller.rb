@@ -4,7 +4,7 @@ class ServicesController < ApplicationController
   
 
   def index
-  	@services = Service.all
+  	@services = Service.where(:listed => true)
   end
 
   def show
