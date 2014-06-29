@@ -49,9 +49,9 @@
       </div>
       <div class="form-group">
         <%= f.label :category, :class => "control-label" %>
-        <div>
-          <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
-        </div>
+      <div>
+        <%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control", :required => true %>
+      </div>
       </div>
       <div class="form-group">
         <%= f.label :cost, :class => "control-label" %>
@@ -83,6 +83,11 @@
   
   
    <script>
+          $(function() {
+           $( "#product_category_name" ).autocomplete({
+          source: $('#product_category_name').data('autocomplete-source')
+            });
+          });
           init.push(function () {
             var options = {
               todayBtn: "linked",

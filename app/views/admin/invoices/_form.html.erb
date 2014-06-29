@@ -19,10 +19,10 @@
     </div>
   </div>
   <div class="form-group">
-      <%= f.label :client, :class => "col-sm-2 control-label" %>
-      <div class="col-sm-10">
-          <%= f.collection_select :client_id, Client.where(:active => true), :id, :name, :class=>"form-control" %>   
-     </div>
+      <%= f.label :Client, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :client_name, data: {autocomplete_source: admin_clients_path}, :class=> "form-control", :required => true %>
+    </div>
   </div>
   <div class="form-group">
     <%= f.label :State, :class => "col-sm-2 control-label" %>
@@ -82,3 +82,11 @@
   </div>
 
 <% end %>
+
+<script>
+ $(function() {
+        $( "#invoice_client_name" ).autocomplete({
+          source: $('#invoice_client_name').data('autocomplete-source')
+    });
+  });
+</script>

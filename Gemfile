@@ -59,7 +59,9 @@ gem 'acts_as_list'
 #mailing 
 
 
-
+group :development do
+  gem 'meta_request'
+end
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -34,6 +34,8 @@ class Client < ActiveRecord::Base
     end
 
 
+   
+
   	 
 
 end

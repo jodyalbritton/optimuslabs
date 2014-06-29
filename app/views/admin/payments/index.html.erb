@@ -33,7 +33,7 @@
             <td><%= link_to payment.id,  ([:admin,payment])  %></td>
             <td class="hidden-sm hidden-xs"><%= payment.created_at %></td>
             <td class="hidden-sm hidden-xs"><%= payment.amount %></td>      
-        <td>
+        <td class="col-md-1">
         <%= link_to edit_admin_payment_path(payment) do %>
               <span class="btn btn-default icon fa fa-pencil"></span>
             <% end %>

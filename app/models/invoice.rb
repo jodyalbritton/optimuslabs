@@ -1,10 +1,14 @@
 class Invoice < ActiveRecord::Base
-  belongs_to :client
-  has_many :items
-  has_many :notes, as: :notable
-  has_many :payments
-  belongs_to :invoice_status
+  
+  ##### Database Relations #####
 
+  has_many :items, dependent: :destroy, counter_cache: true
+  has_many :notes, as: :notable, dependent: :destroy, counter_cache: true
+  has_many :payments
+  
+
+  belongs_to :client
+  belongs_to :invoice_status
   before_save :update_balance
 
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
@@ -13,6 +17,8 @@ class Invoice < ActiveRecord::Base
   attr_accessor :purchasable_identifier
 
  
+  
+#### Payment and Balance ####
 
   def update_balance
     self.balance = self.total_price
@@ -46,5 +52,14 @@ class Invoice < ActiveRecord::Base
     sprintf("%.02f",total_price)
  	
   end
+
+####  Client Name Auto-complete ####
+    def client_name
+      self.client.try(:name)
+    end
+
+    def client_name=(name)
+      self.client = Client.find_by(name: name) if name.present?
+    end
 
 end
