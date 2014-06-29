@@ -8,4 +8,13 @@ class Product < ActiveRecord::Base
   	validates_attachment_content_type :header_photo, :content_type => /\Aimage\/.*\Z/
   has_many :attachments, as: :attachable 
   belongs_to :category
+
+
+def category_name
+  self.category.try(:name)
+end
+
+def category_name=(name)
+  self.category = Category.find_or_create_by(name: name) if name.present?
+end
 end

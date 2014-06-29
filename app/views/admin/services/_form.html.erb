@@ -64,7 +64,7 @@
   <div class="form-group">
     <%= f.label :category, :class => "col-sm-2 control-label" %>
     <div class="col-sm-2">
-      <%= f.collection_select :category_id, Category.all, :id, :name, {class: "form-control"}%>
+      <%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control", :required => true %>
     </div>
      <%= f.label :cost, :class => "col-sm-1 control-label" %>
     <div class="col-sm-2">
@@ -124,6 +124,11 @@
 <!-- /5. $DEFAULT_MODAL -->
 
 <script>
+          $(function() {
+           $( "#service_category_name" ).autocomplete({
+          source: $('#service_category_name').data('autocomplete-source')
+            });
+          });
           init.push(function () {
             var options = {
               todayBtn: "linked",

@@ -9,7 +9,13 @@ class Admin::ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    if params[:term]
+      @clients = Client.order(:name).where("name like ?", "%#{params[:term]}%")
+      render json: @clients.map(&:name)
+    else
+      @clients = Client.all
+    end
+
 
   end
 
