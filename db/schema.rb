@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626022042) do
+ActiveRecord::Schema.define(version: 20140629215154) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(version: 20140626022042) do
     t.integer  "sort_value",                                    default: 0
     t.string   "slug"
     t.integer  "position"
+    t.boolean  "listed",                                        default: false
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
