@@ -42,14 +42,28 @@
                     <div class="block">
                         <h2><i class="icon-time"></i> Archives</h2>
                         <ul>
-                            <% @posts_by_month.each do |monthname, posts| %>
-                            <h3><%= monthname %></h3>
-                            <ul>
-                               <% posts.each do |post| %>
-                                 <li><%= link_to post.title, post_path(post) %></li>
-                               <% end %>
-                            </ul>
+                            <li>
+                              <% @posts_by_year.each do |year, posts| %>
+                                <ul>
+                                   <li><h4><%= year.strftime('%Y') %></h4></li>
+                                   <ul>
+                                    <% posts.group_by { |t| t.published_at.beginning_of_month }.sort.each do |month, posts| %>
+                                    <li>
+                                      <ul>
+                                        <li><h4><%= month.strftime('%B') %></h4></li>
+                                        <% posts.each do |post| %>
+                                          <li><%= link_to post.title, post_path(post) %></li>
+                                         <% end %>
+                                      </ul>
+                                    </li>
+                                   <% end %>
+                                </ul>
+                               
                             <% end %>
-                            </ul>
+
+                            
+                           
+                          
+                    
                     </div>
                 </aside> <!-- Sidebar -->

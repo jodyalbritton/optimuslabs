@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   	end 
     @tags = ActsAsTaggableOn::Tag.all
     @categories = Category.all
-  	@posts_by_month = Post.all.group_by { |post| post.published_at.strftime("%B %Y") }
+  	@posts_by_year = Post.all.group_by { |post| post.published_at.beginning_of_year }
   end
 
   def show
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 	
     @tags = ActsAsTaggableOn::Tag.all
      @categories = Category.all
-    @posts_by_month = Post.all.group_by { |post| post.published_at.strftime("%B") }
+    @posts_by_year = Post.all.group_by { |post| post.published_at.beginning_of_year }
   end
 
 
@@ -29,14 +29,13 @@ class PostsController < ApplicationController
 def tagged
   if params[:tag].present? 
     @categories = Category.all
-  	@posts = Post.tagged_with(params[:tag])
-    @posts_by_month = Post.all.group_by { |post| post.published_at.strftime("%B") }
-    @tags = ActsAsTaggableOn::Tag.all
+  	@posts = Post.tagged_with(params[:tag]).order(:published_at).reverse
+    @posts_by_year = Post.all.group_by { |post| post.published_at.beginning_of_year }
    
   else 
   	@tags = ActsAsTaggableOn::Tag.all
-    @posts = Post.all
-    @posts_by_month = Post.all.group_by { |post| post.published_at.strftime("%B") }
+    @posts = Post.order(:published_at).reverse
+    @posts_by_year = Post.all.group_by { |post| post.published_at.beginning_of_year }
      @categories = Category.all
   end  
 end
@@ -44,14 +43,14 @@ end
 def categorized
   if params[:category].present? 
     @categories = Category.all
-    @posts = Post.where('category' => params[:category])
-    @posts_by_month = Post.all.group_by { |post| post.published_at.strftime("%B") }
+    @posts = Post.where('category' => params[:category]).order(:published_at).reverse
+   @posts_by_year = Post.all.group_by { |post| post.published_at.beginning_of_year }
     @tags = ActsAsTaggableOn::Tag.all
    
   else 
     @tags = ActsAsTaggableOn::Tag.all
     @posts = Post.all
-    @posts_by_month = Post.all.group_by { |post| post.published_at.strftime("%B") }
+   @posts_by_year = Post.all.group_by { |post| post.published_at.beginning_of_year }
     @categories = Category.all
   end  
 end

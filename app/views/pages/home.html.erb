@@ -133,7 +133,7 @@
                         <%= image_tag post.photo(:medium), :class=>"img-responsive"%>
                         <% end %>
                         <h3><%= link_to post.title, post_path(post) %></h3>
-                        <p><%= strip_tags(post.body).first(200) %></p>
+                        <p><%= strip_tags(post.body).first(200) %>...<%= link_to "Read More", post %></p>
                     </div>
                 </div>
             <% end %>
