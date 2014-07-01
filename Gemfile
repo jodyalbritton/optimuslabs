@@ -32,6 +32,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-gplus'
+gem "omniauth-google-oauth2"
 gem "rolify"
 gem 'authority'
 gem "figaro"
