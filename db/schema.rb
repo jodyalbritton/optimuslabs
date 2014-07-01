@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701014817) do
+ActiveRecord::Schema.define(version: 20140701100143) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -103,6 +103,16 @@ ActiveRecord::Schema.define(version: 20140701014817) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "interaction_events", force: true do |t|
     t.string   "name"
@@ -535,11 +545,17 @@ ActiveRecord::Schema.define(version: 20140701014817) do
     t.datetime "updated_at"
     t.string   "uid"
     t.integer  "category_id"
-    t.boolean  "featured",    default: true
-    t.boolean  "listed",      default: true
+    t.boolean  "featured",      default: true
+    t.boolean  "listed",        default: true
     t.string   "yt_tags"
+    t.integer  "views"
+    t.integer  "position"
+    t.datetime "published_at"
+    t.datetime "yt_updated_at"
+    t.string   "slug"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree
+  add_index "videos", ["slug"], name: "index_videos_on_slug", unique: true, using: :btree
 
 end
