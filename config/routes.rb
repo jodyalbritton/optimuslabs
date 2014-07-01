@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
   resources :products, only: [:index, :show]
+  resources :videos,   only: [:index, :show]
   resources :contacts, only: [:new, :create, :thanks]
   
 
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
         collection { post :sort }
       end
       resources :categories
+      resources :videos
       resources :interaction_events
       resources :rate_types
       resources :severity_types

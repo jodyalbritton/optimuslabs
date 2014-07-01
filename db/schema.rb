@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629215154) do
+ActiveRecord::Schema.define(version: 20140701014817) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -523,5 +523,23 @@ ActiveRecord::Schema.define(version: 20140629215154) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "videos", force: true do |t|
+    t.string   "link"
+    t.string   "title"
+    t.string   "author"
+    t.string   "duration"
+    t.integer  "likes"
+    t.integer  "dislikes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "uid"
+    t.integer  "category_id"
+    t.boolean  "featured",    default: true
+    t.boolean  "listed",      default: true
+    t.string   "yt_tags"
+  end
+
+  add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree
 
 end
