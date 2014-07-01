@@ -41,11 +41,20 @@ class Video < ActiveRecord::Base
       self.title = video.title
       self.duration = parse_duration(video.duration)
       self.author = video.author.name
-      self.likes = video.rating.likes
-      self.views = video.view_count
+      self.likes = video.rating.try(:likes)
+      self.views = video.try(:view_count)
       self.yt_updated_at = video.updated_at
       self.published_at  = video.published_at
-      self.dislikes = video.rating.dislikes
+      self.dislikes = video.rating.try(:dislikes)
+      if self.likes == nil 
+        self.likes = 0
+      end
+      if self.views == nil
+        self.views = 0
+      end
+      if self.dislikes == nil
+        self.dislikes = 0
+      end
     rescue
       self.title = '' ; self.duration = '00:00:00' ; self.author = '' ; self.likes = 0 ; self.dislikes = 0
     end
@@ -59,11 +68,20 @@ class Video < ActiveRecord::Base
       self.title = video.title
       self.duration = parse_duration(video.duration)
       self.author = video.author.name
-      self.likes = video.rating.likes
-      self.views = video.view_count
+      self.likes = video.rating.try(:likes)
+      self.views = video.try(:view_count)
       self.yt_updated_at = video.updated_at
       self.published_at  = video.published_at
-      self.dislikes = video.rating.dislikes
+      self.dislikes = video.rating.try(:dislikes)
+      if self.likes == nil 
+        self.likes = 0
+      end
+      if self.views == nil
+        self.views = 0
+      end
+      if self.dislikes == nil
+        self.dislikes = 0
+      end
   end
   def parse_duration(d)
     hr = (d / 3600).floor
