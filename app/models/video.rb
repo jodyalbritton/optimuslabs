@@ -1,7 +1,9 @@
 class Video < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
-
+  belongs_to :category
+  acts_as_taggable # Alias for acts_as_taggable_on
+  
 
   before_update :update_details
 
