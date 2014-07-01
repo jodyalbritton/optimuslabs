@@ -354,6 +354,25 @@ Use search to find needed section.
 						
 					</ul>
 				</li>
+				<% end %>
+				<% if Setting.videos_enabled == 'true' %>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-gift"></i><span class="mm-text">Videos</span></a>
+					<ul>
+						<li>
+							<%= link_to admin_videos_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Videos</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to new_admin_video_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Video</span>
+							<% end %>
+						</li>
+						
+					</ul>
+				</li>
+				<% end %>
 				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-money"></i><span class="mm-text">Finances</span></a>
 					<ul>
@@ -404,7 +423,7 @@ Use search to find needed section.
 								</li>
 							</ul>
 						</li>		
-				<% end %>
+				
 
 				<% if Setting.messages_enabled == "true" %>
 				<li>

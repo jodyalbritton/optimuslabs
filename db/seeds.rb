@@ -35,6 +35,7 @@
     blog_enabled = Setting.blog_enabled = 'false'
     sponsors_enabled = Setting.sponsors_enabled = 'false'
     products_enabled = Setting.products_enabled = 'false'
+    videos_enabled = Setting.videos_enabled = 'false'
     tickets_enabled =Setting.tickets_enabled = 'false'
     messages_enabled = Setting.messages_enabled = 'false'
     services_enabled = Setting.services_enabled = 'false'

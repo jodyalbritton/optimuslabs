@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
  
 #Users and Roles 
-    devise_for :users, :controllers => { :registrations => "registrations" }
+    devise_for :users, :controllers => { :registrations => "registrations", omniauth_callbacks: 'omniauth_callbacks' }
   
  
 #Site Features
@@ -102,6 +102,7 @@ Rails.application.routes.draw do
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
   get '/blog', to: 'posts#index'
+  match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
  
 
 
