@@ -233,6 +233,7 @@ Devise.setup do |config|
   config.omniauth :facebook, ENV["FB_KEY"], ENV["FB_SECRET"]
   config.omniauth :twitter, "KEY", "SECRET"
   config.omniauth :gplus, ENV["GPLUS_KEY"], ENV["GPLUS_SECRET"]
+  config.omniauth :google_oauth2, ENV["GPLUS_KEY"], ENV["GPLUS_SECRET"]
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
