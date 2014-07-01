@@ -15,9 +15,7 @@ class ApplicationController < ActionController::Base
 
 
 
-<<<<<<< HEAD
-=======
-  end
+
   
   def ensure_signup_complete
     # Ensure we don't go into an infinite loop
@@ -30,7 +28,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
->>>>>>> upstream/master
 protected
 
   def configure_permitted_parameters

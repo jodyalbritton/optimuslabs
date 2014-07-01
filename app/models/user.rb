@@ -24,13 +24,10 @@ class User < ActiveRecord::Base
  has_many :interactions, as: :interactive
  has_many :clients
  validates :username,
-<<<<<<< HEAD
+
   :uniqueness => { :case_sensitive => false}
  
-=======
-  :uniqueness => {
-    :case_sensitive => false}
->>>>>>> upstream/master
+
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   def self.find_for_oauth(auth, signed_in_resource = nil)
