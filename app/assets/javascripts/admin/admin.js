@@ -19,6 +19,8 @@
 //= require admin/jquery.ui.touch-punch
 //= require admin/jquery.tokeninput
 //= require admin/froala-editor.min.js
+//= require admin/jquery.bind_with_delay
+//= require admin/yt_player
 //= require cocoon
 //= require_self
 
