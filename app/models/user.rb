@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  TEMP_EMAIL_PREFIX = 'change@me'
-  TEMP_EMAIL_REGEX = /\Achange@me/
+
   extend FriendlyId
   friendly_id :username, use: :slugged
   rolify
@@ -27,8 +26,8 @@ class User < ActiveRecord::Base
   :uniqueness => {
     :case_sensitive => false}
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
-validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  
+
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
@@ -48,15 +47,15 @@ validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
       # If no verified email was provided we assign a temporary email and ask the
       # user to verify it on the next step via UsersController.finish_signup
       email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
+      email = auth.info.email 
       user = User.where(:email => email).first if email
 
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
           name: auth.extra.raw_info.name,
-          username: auth.info.nickname || auth.uid,
-          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          #username: auth.info.nickname || auth.uid,
+          email: email ,
           password: Devise.friendly_token[0,20]
         )
         user.skip_confirmation!
@@ -73,7 +72,7 @@ validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   end
 
   def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
+    self.email
   end
 
   def time_worked_this_week
