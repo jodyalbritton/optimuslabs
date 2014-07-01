@@ -232,8 +232,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, ENV["FB_KEY"], ENV["FB_SECRET"]
-  config.omniauth :twitter, "KEY", "SECRET"
-  config.omniauth :gplus, ENV["GPLUS_KEY"], ENV["GPLUS_SECRET"]
+  config.omniauth :twitter,  ENV["TWITTER_KEY"], ENV["TWITTER_SECRET"]
   config.omniauth :google_oauth2, ENV["GPLUS_KEY"], ENV["GPLUS_SECRET"]
   
   # ==> Warden configuration
