@@ -1,4 +1,10 @@
 class Video < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
+
+  before_update :update_details
+
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 
   before_create -> do
@@ -36,12 +42,29 @@ class Video < ActiveRecord::Base
       self.duration = parse_duration(video.duration)
       self.author = video.author.name
       self.likes = video.rating.likes
+      self.views = video.view_count
+      self.yt_updated_at = video.updated_at
+      self.published_at  = video.published_at
       self.dislikes = video.rating.dislikes
     rescue
       self.title = '' ; self.duration = '00:00:00' ; self.author = '' ; self.likes = 0 ; self.dislikes = 0
     end
   end
 
+
+  def update_details
+  
+      client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
+      video = client.video_by(self.uid)
+      self.title = video.title
+      self.duration = parse_duration(video.duration)
+      self.author = video.author.name
+      self.likes = video.rating.likes
+      self.views = video.view_count
+      self.yt_updated_at = video.updated_at
+      self.published_at  = video.published_at
+      self.dislikes = video.rating.dislikes
+  end
   def parse_duration(d)
     hr = (d / 3600).floor
     min = ((d - (hr * 3600)) / 60).floor

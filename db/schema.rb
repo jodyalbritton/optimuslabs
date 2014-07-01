@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701014817) do
+ActiveRecord::Schema.define(version: 20140701051851) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -535,11 +535,17 @@ ActiveRecord::Schema.define(version: 20140701014817) do
     t.datetime "updated_at"
     t.string   "uid"
     t.integer  "category_id"
-    t.boolean  "featured",    default: true
-    t.boolean  "listed",      default: true
+    t.boolean  "featured",      default: true
+    t.boolean  "listed",        default: true
     t.string   "yt_tags"
+    t.integer  "views"
+    t.integer  "position"
+    t.time     "published_at"
+    t.time     "yt_updated_at"
+    t.string   "slug"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree
+  add_index "videos", ["slug"], name: "index_videos_on_slug", unique: true, using: :btree
 
 end

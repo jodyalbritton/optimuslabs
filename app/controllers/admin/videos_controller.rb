@@ -25,6 +25,16 @@ class Admin::VideosController < ApplicationController
       render 'new'
     end
   end
+  
+  def update
+   
+    if @video.update(video_params)
+      flash[:success] = 'Video updated!'
+      redirect_to admin_videos_url
+    else
+      render 'new'
+    end
+  end
 
   def destroy
      @video.destroy
@@ -37,11 +47,11 @@ class Admin::VideosController < ApplicationController
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_video
-      @video = Video.find(params[:id])
+      @video = Video.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:link)
+      params.require(:video).permit(:link, :views, :description, :likes, :dislikes, :author, :title, :duration, :yt_updated_at, :published_at)
     end
 end
