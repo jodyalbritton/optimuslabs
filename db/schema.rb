@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701100143) do
+ActiveRecord::Schema.define(version: 20140701112248) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -519,6 +519,7 @@ ActiveRecord::Schema.define(version: 20140701100143) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "name"
   end
 
   add_index "users", ["client_id"], name: "index_users_on_client_id", using: :btree
