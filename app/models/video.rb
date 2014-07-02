@@ -32,7 +32,14 @@ class Video < ActiveRecord::Base
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
     client.video_by(self.uid)
   end
+  
+  def category_name
+    self.category.try(:name)
+  end
 
+  def category_name=(name)
+    self.category = Category.find_or_create_by(name: name) if name.present?
+  end
   private
 
 
@@ -96,4 +103,6 @@ class Video < ActiveRecord::Base
 
     hr.to_s + ':' + min.to_s + ':' + sec.to_s
   end
+
+  
 end
