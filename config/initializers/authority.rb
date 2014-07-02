@@ -29,6 +29,7 @@ Authority.configure do |config|
  :update  => 'update',
  :update_all => 'update',
  :sort => 'sort',
+ :crop =>  'crop',
  :print => 'print',
  :destroy => 'delete',
  :tags => 'tags'
@@ -44,6 +45,7 @@ Authority.configure do |config|
   #
   config.abilities =  {
      :sort => 'sortable',
+     :crop => "croppable",
      :print=> 'printable',
      :tags => 'taggable',
      :create => 'creatable',

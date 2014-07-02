@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       end
       resources :products do 
         resources :attachments
+        post 'crop', :on => :member
         collection { post :sort }
       end
       resources :categories
@@ -71,6 +72,7 @@ Rails.application.routes.draw do
      
       resources :services do 
           resources :attachments
+          post 'crop', :on => :member
          end
       resources :settings do 
         

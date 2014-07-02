@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
   authorize_actions_for ApplicationAuthorizer
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Products", :admin_categories_path
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :crop]
   layout "layouts/admin"
 
   # GET /products
@@ -33,7 +33,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully created.' }
+        format.html format.html { render 'crop' ,  notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -54,6 +54,9 @@ class Admin::ProductsController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def crop
   end
 
   # DELETE /products/1
@@ -84,6 +87,7 @@ class Admin::ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :description, :category_name, :photo, :cost, :price, :position, :header_photo, :summary )
+      params.require(:product).permit(:name, :description, :category_name, :photo, :cost, :price, :position, :header_photo, :summary,
+      :photo_original_w, :photo_original_h, :photo_box_w, :photo_crop_x, :photo_crop_y, :photo_crop_w, :photo_crop_h, :photo_aspect )
     end
 end

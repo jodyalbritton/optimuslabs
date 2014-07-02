@@ -31,8 +31,9 @@
                   <%= sanitize(@service.description) %>
               </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" id="sidebar">
                <h3> Service Logo </h3>
+                <%= link_to 'Crop', crop_admin_service_path(@service), :remote => true, :method => :post %></td>
                 <%= image_tag @service.logo(:medium) %>
               </div>
             </div>
