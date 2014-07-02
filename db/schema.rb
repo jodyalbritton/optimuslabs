@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701112248) do
+ActiveRecord::Schema.define(version: 20140702151606) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -90,6 +90,20 @@ ActiveRecord::Schema.define(version: 20140701112248) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "client_id"
+    t.integer  "created_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["client_id"], name: "index_events_on_client_id", using: :btree
+  add_index "events", ["created_by_id"], name: "index_events_on_created_by_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -307,6 +321,20 @@ ActiveRecord::Schema.define(version: 20140701112248) do
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
+
+  create_table "projects", force: true do |t|
+    t.integer  "client_id"
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "description"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
+  add_index "projects", ["client_id"], name: "index_projects_on_client_id", using: :btree
 
   create_table "rate_types", force: true do |t|
     t.string   "name"
@@ -554,9 +582,15 @@ ActiveRecord::Schema.define(version: 20140701112248) do
     t.datetime "published_at"
     t.datetime "yt_updated_at"
     t.string   "slug"
+    t.integer  "sponsor_id"
+    t.boolean  "sponsored",     default: false
+    t.text     "embed"
+    t.string   "url"
+    t.text     "description"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree
   add_index "videos", ["slug"], name: "index_videos_on_slug", unique: true, using: :btree
+  add_index "videos", ["sponsor_id"], name: "index_videos_on_sponsor_id", using: :btree
 
 end

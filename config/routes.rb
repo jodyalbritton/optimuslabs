@@ -41,7 +41,11 @@ Rails.application.routes.draw do
         collection { post :sort }
       end
       resources :categories
-      resources :videos
+      resources :videos do
+        collection do
+          get :tags
+        end
+      end
       resources :interaction_events
       resources :rate_types
       resources :severity_types

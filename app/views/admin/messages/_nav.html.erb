@@ -1,6 +1,8 @@
   <div class="mail-nav">
     <div class="compose-btn">
-      <a href="pages-new-email.html" class="btn btn-primary btn-labeled btn-block"><i class="btn-label fa fa-pencil-square-o"></i>New Email</a>
+      <%= link_to new_admin_message_path, :class=> "btn btn-primary btn-labeled btn-block" do %>
+      <i class="btn-label fa fa-pencil-square-o"></i>New Email
+      <% end %>
     </div>
     <div class="navigation">
       <ul class="sections">

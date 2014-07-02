@@ -32,7 +32,14 @@ class Video < ActiveRecord::Base
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
     client.video_by(self.uid)
   end
+  
+  def category_name
+    self.category.try(:name)
+  end
 
+  def category_name=(name)
+    self.category = Category.find_or_create_by(name: name) if name.present?
+  end
   private
 
 
@@ -45,6 +52,9 @@ class Video < ActiveRecord::Base
       self.author = video.author.name
       self.likes = video.rating.try(:likes)
       self.views = video.try(:view_count)
+      self.url = video.player_url
+      self.embed = video.embed_html5
+      self.description = video.try(:description)
       self.yt_updated_at = video.updated_at
       self.published_at  = video.published_at
       self.dislikes = video.rating.try(:dislikes)
@@ -72,6 +82,9 @@ class Video < ActiveRecord::Base
       self.author = video.author.name
       self.likes = video.rating.try(:likes)
       self.views = video.try(:view_count)
+      self.url = video.player_url
+      self.embed = video.embed_html5
+      self.description = video.try(:description)
       self.yt_updated_at = video.updated_at
       self.published_at  = video.published_at
       self.dislikes = video.rating.try(:dislikes)
@@ -96,4 +109,6 @@ class Video < ActiveRecord::Base
 
     hr.to_s + ':' + min.to_s + ':' + sec.to_s
   end
+
+  
 end
