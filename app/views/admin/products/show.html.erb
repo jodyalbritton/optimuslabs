@@ -27,8 +27,8 @@
                   <%= sanitize(@product.description) %>
               </div>
               
-              <div class="col-md-4">
-            
+              <div class="col-md-4" id="sidebar">
+                <%= link_to 'Crop', crop_admin_product_path(@product), :remote => true, :method => :post %></td>
                 <%= image_tag @product.photo(:medium) %>
               </div>
             </div>

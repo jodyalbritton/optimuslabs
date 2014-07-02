@@ -3,7 +3,7 @@ class Admin::ServicesController < ApplicationController
   authorize_actions_for ApplicationAuthorizer
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Services", :admin_services_path
-  before_action :set_service, only: [:show, :edit, :update, :destroy]
+  before_action :set_service, only: [:show, :edit, :update, :destroy, :crop]
   layout "layouts/admin"
 
   # GET /services
@@ -55,7 +55,8 @@ class Admin::ServicesController < ApplicationController
       end
     end
   end
-
+  def crop
+  end
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
@@ -74,6 +75,6 @@ class Admin::ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :description, :summary, :category_name, :listed, :logo, :header, :logo_icon, :cost, :price, :rate_type_id, :position, :featured)
+      params.require(:service).permit(:name, :description, :summary, :category_name, :listed, :logo, :header, :logo_icon, :cost, :price, :rate_type_id, :position, :featured, :logo_original_w, :logo_original_h, :logo_box_w, :logo_crop_x, :logo_crop_y, :logo_crop_w, :logo_crop_h, :logo_aspect )
     end
 end

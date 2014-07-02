@@ -38,6 +38,7 @@ gem 'authority'
 gem "figaro"
 gem 'acts-as-taggable-on',  '~> 3.2.5'
 gem "paperclip", "~> 4.1"
+gem "papercrop"
 gem 'friendly_id', '~> 5.0.0'
 gem "breadcrumbs_on_rails"
 gem 'kaminari'
