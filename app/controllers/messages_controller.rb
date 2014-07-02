@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        MessageNotification.new_message(@message).deliver
 
         format.html { redirect_to page_path('home'), notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
