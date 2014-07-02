@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  start_date: 2014-07-02 09:11:37
+  end_date: 2014-07-02 09:11:37
+  client_id: 
+  created_by_id: 
+
+two:
+  name: MyString
+  description: MyText
+  start_date: 2014-07-02 09:11:37
+  end_date: 2014-07-02 09:11:37
+  client_id: 
+  created_by_id: 

@@ -52,6 +52,9 @@ class Video < ActiveRecord::Base
       self.author = video.author.name
       self.likes = video.rating.try(:likes)
       self.views = video.try(:view_count)
+      self.url = video.player_url
+      self.embed = video.embed_html5
+      self.description = video.try(:description)
       self.yt_updated_at = video.updated_at
       self.published_at  = video.published_at
       self.dislikes = video.rating.try(:dislikes)
@@ -79,6 +82,9 @@ class Video < ActiveRecord::Base
       self.author = video.author.name
       self.likes = video.rating.try(:likes)
       self.views = video.try(:view_count)
+      self.url = video.player_url
+      self.embed = video.embed_html5
+      self.description = video.try(:description)
       self.yt_updated_at = video.updated_at
       self.published_at  = video.published_at
       self.dislikes = video.rating.try(:dislikes)

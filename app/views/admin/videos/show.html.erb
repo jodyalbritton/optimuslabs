@@ -28,11 +28,35 @@
                 </div>
               <div>
                   <h3> Description </h3>
-                   <p></p>
+                   <p><%= @video.description %></p>
               </div>
               </div>
               <div class="col-md-4">
-               
+                <div class="panel colourable">
+                  <div class="panel-heading">
+                    <span class="panel-title">Stats</span>
+                  </div>
+                  <div class="panel-body">
+                    <ul class="list-group">
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @video.views %></span>
+                      Views
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @video.likes %></span>
+                      Likes
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge"><%= @video.duration %></span>
+                      Duration
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @video.category.name %></span>
+                      Category
+                    </li>
+                  </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
