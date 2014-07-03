@@ -25,7 +25,8 @@ Rails.application.routes.draw do
        match  'edit_all' => :edit_all, :via => :get
        match  'update_all' => :update_all, :via => :put
       end
-      resources :company
+      resources :chat_messages, only: [:create]
+      resources :company 
       resources :timesheets
       resources :users do
         resources :timesheets

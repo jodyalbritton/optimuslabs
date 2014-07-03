@@ -1,5 +1,7 @@
+<div class="row">
+<div class="col-md-6">
 <div class="panel widget-followers">
-					<div class="panel-heading">
+	<div class="panel-heading">
 						<span class="panel-title"><i class="panel-title-icon fa fa-check"></i>Employees</span>
 					</div> <!-- / .panel-heading -->
 					<div class="panel-body">
@@ -22,8 +24,29 @@
 							</div>
 						</div>
 
-						<% end %>
+		<% end %>
+	</div> <!-- / .panel-body -->
+</div>
+</div>
+<div class="col-md-6">
+<div class="panel widget-chat">
+					<div class="panel-heading">
+						<span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>Chat</span>
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body chat-messages">
+						
+					 
+
 					</div> <!-- / .panel-body -->
+				    <%= form_for ([:admin, @chat_message]), remote: true, :class=> "panel-footer chat-controls" do |f| %>
+						<%= f.hidden_field :socket_id %>
+						<%= f.hidden_field :name, :value => @user.first_name %>
+						<div class="chat-controls-input">
+							<%= f.text_area :message, rows: 1, cols: 40, :class=>"form-control" %>
+						
+						</div>
+						<button class="btn btn-primary chat-controls-btn">Send</button>
+					<% end %>
 				</div>
-
-
+		    </div>
+		 </div>
