@@ -10,12 +10,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
   attr_accessor :login
 
-  has_attached_file :avatar, :styles => { :large => "600x600", :medium => "200x200#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
+  has_attached_file :avatar, :styles => { :large => "600x600", :medium => "200x200#", :thumb => "100x100#", :mini => "
+    40x40#" }, :default_url => ":style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
  belongs_to :client
  has_many :posts, :foreign_key => 'author_id'
  has_many :notes, :foreign_key => 'created_by_id'
  has_many :messages
+ has_many :chat_messages
  has_many :message_receipts, :as => :receivable
  has_one :contact
  has_many :payments, as: :source

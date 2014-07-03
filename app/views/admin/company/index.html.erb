@@ -1,3 +1,6 @@
+<script>
+  		var user_string = <%= current_user.id.to_s %>
+  		</script>
 <div class="row">
 <div class="col-md-6">
 <div class="panel widget-followers">
@@ -29,24 +32,67 @@
 </div>
 </div>
 <div class="col-md-6">
-<div class="panel widget-chat">
+<div class="panel widget-chat" id="company-chat">
 					<div class="panel-heading">
 						<span class="panel-title"><i class="panel-title-icon fa fa-comments-o"></i>Chat</span>
 					</div> <!-- / .panel-heading -->
-					<div class="panel-body chat-messages">
-						
-					 
+					<div class="panel-body chat-messages" id="chat-messages">
+					
+					<% @message_history.each do |message| %>
+						<% if message.user_id == current_user.id %>	
+							<div class="message right">
+									<%= image_tag current_user.avatar.url(:mini), :class=> "message-avatar" %>
+					 				<div class="message-body">
+					 					<div class="message-heading">
+                     						I said 
+                      					<div class="message-text">
+                     	 					<%= message.message %>
+                       					</div>
+                       					</div>
+                      				</div>
+   					 		</div> 
+						<% else %>
+						    <div class="message">
+						    		<%= image_tag message.user.avatar.url(:mini), :class=> "message-avatar" %>
+					 				<div class="message-body">
+					 					<div class="message-heading">
+                     						<%= message.user.first_name %> said 
+                      					<div class="message-text">
+                     	 					<%= message.message %>
+                       					</div>
+                       					</div>
+                      				</div>
+   					 		</div>
+						<% end %>
 
-					</div> <!-- / .panel-body -->
-				    <%= form_for ([:admin, @chat_message]), remote: true, :class=> "panel-footer chat-controls" do |f| %>
+					
+   					 <% end %>
+   					 </div>
+
+					<!-- / .panel-body -->
+				    <%= form_for ([:admin, @chat_message]), remote: true, :html => {:class=> "panel-footer chat-controls"} do |f| %>
 						<%= f.hidden_field :socket_id %>
-						<%= f.hidden_field :name, :value => @user.first_name %>
+						<%= f.hidden_field :channel, :value => "COMPANY_CHAT" %>
+						<%= f.hidden_field :user_id, :value => @user.id %>
 						<div class="chat-controls-input">
-							<%= f.text_area :message, rows: 1, cols: 40, :class=>"form-control" %>
-						
+					    <%= f.text_field :message, :class=>"form-control", :required => true %>
+						<%= f.submit "Send", :class=> "btn btn-primary chat-controls-btn pull-right", :data => {disable_with: "Sending"}%>
 						</div>
-						<button class="btn btn-primary chat-controls-btn">Send</button>
+
+				   
 					<% end %>
 				</div>
 		    </div>
 		 </div>
+
+
+
+		<script>
+        init.push(function () {
+          $('#company-chat .panel-body').slimScroll({ height: 300, alwaysVisible: true, color: '#888',allowPageScroll: true,
+          	  start: 'bottom'
+          	   });
+        })
+  		</script>
+
+  		
