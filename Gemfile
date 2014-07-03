@@ -57,7 +57,7 @@ gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 gem 'high_voltage', github: 'thoughtbot/high_voltage'
 gem 'acts_as_list'
-
+gem 'pusher'
 
 
 

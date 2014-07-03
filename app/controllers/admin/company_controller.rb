@@ -7,6 +7,8 @@ class Admin::CompanyController < ApplicationController
 	add_breadcrumb "Admin", :admin_index_path
 
 	def index
+		@user = User.find(current_user)
+		@chat_message = ChatMessage.new
 		@employees = User.where(:employee => true)
 		@employees_on_the_clock = @employees.where(:clocked_in => true)
 	end

@@ -24,6 +24,7 @@
 //= require admin/jquery.bind_with_delay
 //= require admin/yt_player
 //= require cocoon
+//= require admin/chat
 //= require_self
 
 
