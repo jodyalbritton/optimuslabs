@@ -1,4 +1,5 @@
-class ChatMessage
-  include ActiveModel::Model
-  attr_accessor :name, :message, :socket_id
-end
+class ChatMessage < ActiveRecord::Base
+  belongs_to :user
+
+  attr_accessor :name
+end 

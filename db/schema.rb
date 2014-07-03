@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702151606) do
+ActiveRecord::Schema.define(version: 20140703075243) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -36,6 +36,21 @@ ActiveRecord::Schema.define(version: 20140702151606) do
   end
 
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
+
+  create_table "chat_messages", force: true do |t|
+    t.integer  "user_id"
+    t.string   "message"
+    t.string   "socket_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "channel"
+    t.string   "avatar"
+    t.string   "username"
+    t.string   "first_name"
+    t.string   "last_name"
+  end
+
+  add_index "chat_messages", ["user_id"], name: "index_chat_messages_on_user_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.string   "name"

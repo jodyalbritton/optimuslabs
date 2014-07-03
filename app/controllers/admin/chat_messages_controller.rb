@@ -9,12 +9,14 @@ class Admin::ChatMessagesController < ApplicationController
   end
 
   def create
-    
+    @chat_message = ChatMessage.create(chat_message_params)
     
     Pusher['chat'].trigger('new_message', {
-      name: params[:chat_message][:name],
-      message:  params[:chat_message][:message],
-      socket_id: params[:chat_message][:socket_id]
+      user_id: @chat_message.user.id,
+      first_name: @chat_message.user.first_name,
+      avatar:   view_context.image_path(@chat_message.user.avatar(:thumb)),
+      message:  @chat_message.message,
+      socket_id: @chat_message.socket_id
     })
     
     
@@ -28,6 +30,6 @@ class Admin::ChatMessagesController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def chat_message_params
-      params.require(:chat_message).permit(:name, :message, :socket_id)
+      params.require(:chat_message).permit(:user_id, :message, :socket_id, :channel, :first_name, :last_name, :avatar)
     end
 end
