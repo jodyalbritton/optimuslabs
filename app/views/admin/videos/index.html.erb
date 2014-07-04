@@ -1,6 +1,6 @@
 
   <% content_for :page_header do %>
-    Listing Categories
+    Listing Videos
   <% end %>
   <% content_for :page_actions do %>
     <%= link_to new_admin_video_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
@@ -22,8 +22,8 @@
       <tr>
             <th>Name</th>
             <th>Video</th>
-            <th></th>
-        <th></th>
+            
+        
         <th></th>
       </tr>
     </thead>
@@ -33,16 +33,24 @@
             <td>
               <div class="col-md-2">
 
-              <div class="yt_video thumbnail">
-                <%= image_tag "https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
-                              class: 'yt_preview img-rounded', :"data-uid" => video.uid %>
+              <div class="thumbnail">
+                <%= link_to admin_video_path(video) do %>
+                  <%= image_tag "https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
+                              class: 'img-rounded', :"data-uid" => video.uid %>
+                <% end %>
               </div>
             </div>
             </td>
             <td><%= video.title %></td>
-            <td><%= link_to 'Show', admin_video_path(video) %></td>
-        <td><%= link_to 'Edit', edit_admin_video_path(video) %></td>
-        <td><%= link_to 'Destroy', admin_video_path(video), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         
+        <td class="col-md-1">
+          <%= link_to edit_admin_video_path(video) do %>
+              <span class="btn btn-default icon fa fa-pencil"></span>
+            <% end %>
+            <%= link_to  admin_video_path(video), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+              <span class="btn btn-danger icon fa fa-trash-o"></span>
+            <% end %>
+        </td>
       <% end %>
     </tbody>
   </table>
