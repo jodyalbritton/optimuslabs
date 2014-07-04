@@ -47,6 +47,7 @@ gem "rails-settings-cached", "0.4.1"
 gem 'rails-settings-ui'
 gem 'simple_form'
 gem "cocoon"
+gem 'aasm'
 gem 'faker'
 gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 gem 'modernizr-rails'

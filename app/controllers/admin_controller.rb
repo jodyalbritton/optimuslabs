@@ -7,12 +7,10 @@ class AdminController < ApplicationController
   	
  def index
     @tasks = Task.where(:completed => false).order(:position)
-    @tickets = Ticket.all
+    @tickets = Ticket.opened + Ticket.pending + Ticket.in_progress
   	@new_task = Task.new
-    @unpaid_invoices = Invoice.where(:paid => false || nil)
-
+    @unpaid_invoices = Invoice.quoted + Invoice.opened + Invoice.in_progress 
   end
-
   def add
     @tasks = Task.all
 	  @task = Task.create(:item =>params[:task][:item])

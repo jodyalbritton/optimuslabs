@@ -70,7 +70,7 @@
 <div class="col-md-4">
 <div class="panel panel-<%= @ticket.get_label %>">
           <div class="panel-heading">
-            <span class="panel-title">Current Status:&nbsp <%= @ticket.ticket_status.state %></span>
+            <span class="panel-title">Current Status:&nbsp <%= @ticket.aasm.human_state %></span>
             <div class="panel-heading-controls">
               <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
                <%= link_to edit_admin_ticket_path(@ticket), :class => 'btn btn-xs' do %>

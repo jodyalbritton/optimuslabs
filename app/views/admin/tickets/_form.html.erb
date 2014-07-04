@@ -2,8 +2,8 @@
 
 				Form example
 -->
-				<%= simple_form_for [:admin, @ticket], :html => { :class => "form-horizontal" } do |f| %>
-					<% @status = ["Open", "Closed", "Pending", "In Progess"]%>
+				<%= form_for [:admin, @ticket], :html => { :class => "form-horizontal" } do |f| %>
+			
 					<div class="panel-heading">
 						<span class="panel-title">Ticket Form</span>
 					</div>
@@ -11,13 +11,14 @@
 						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">Client</label>
 							<div class="col-sm-10">
-								<%= f.association :client, :input_html=>{:class=> "form-control"}, :label=> false, :required => true, :include_blank => false%>
+								<%= f.text_field :client_name, data: {autocomplete_source: admin_clients_path}, :class=> "form-control", :required => true %>
+							
 							</div>
 						</div> <!-- / .form-group -->
 						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">Severity</label>
 							<div class="col-sm-10">
-								<%= f.association :severity_type, :input_html=>{:class=> "form-control"}, :label=> false, :required => true, :include_blank => false%>
+								<%=f.collection_select(:severity_type_id, SeverityType.all, :id, :name, {:include_blank => false}, {:class => 'form-control'}) %>
 							</div>
 						</div> <!-- / .form-group -->
 						<div class="form-group">
@@ -47,14 +48,19 @@
 						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">State</label>
 							<div class="col-sm-10">
-								<%= f.association :ticket_status, :input_html=>{:class=> "form-control"}, :label=> false, label_method: :state, :include_blank => false%>
+								<%= f.select :status, Ticket.aasm_states_for_select,{}, { :class => 'form-control' } %>
 							</div>
 						</div> <!-- / .form-group -->
-						<div class="form-group" style="margin-bottom: 0;">
-							<div class="col-sm-offset-2 col-sm-10">
-								<%= f.submit "Update", :class=> "btn btn-primary" %>
-							</div>
-						</div> <!-- / .form-group -->
+						<div class="panel-footer text-right">
+							<%= f.submit "Update", :class=> "btn btn-primary" %>
+						</div>
 					</div>
 				<% end %>
 <!-- /10. $FORM_EXAMPLE -->
+<script>
+ $(function() {
+        $( "#ticket_client_name" ).autocomplete({
+          source: $('#ticket_client_name').data('autocomplete-source')
+    });
+  });
+</script>
