@@ -24,8 +24,9 @@
               <div class="col-md-8">
                 <%= sanitize @post.body%>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4" id= "sidebar">
                <h3> Post Photo </h3>
+               <%= link_to 'Crop', crop_admin_post_path(@post), :remote => true, :method => :post %></td>
                 <%= image_tag @post.photo.url(:medium) %>
               </div>
             </div>

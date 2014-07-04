@@ -1,1 +1,12 @@
+ <% content_for :page_header do %>
+   <%= @video.title %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_video_path(@video), :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+<%= render 'admin/header' %>
+
+
 <%= render "form" %>

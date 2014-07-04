@@ -7,7 +7,7 @@ class Admin::PostsController < ApplicationController
   add_breadcrumb "Posts", :admin_posts_path
 
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :crop]
 
   # GET /posts
   # GET /posts.json
@@ -20,6 +20,9 @@ class Admin::PostsController < ApplicationController
   # GET /posts/1.json
   def show
   
+  end
+
+  def crop
   end
 
   # GET /posts/new
@@ -99,6 +102,7 @@ class Admin::PostsController < ApplicationController
     
 
     def post_params
-      params.require(:post).permit(:title, :body, :published_at, :author_id, :draft, :excerpt, :author, :tag_list, :category, :photo, :category_name, :meta_keywords, :meta_descritpion)
+      params.require(:post).permit(:title, :body, :published_at, :author_id, :draft, :excerpt, :author, :tag_list, :category, :photo, :category_name, :meta_keywords, :meta_descritpion,
+        :photo_original_w, :photo_original_h, :photo_box_w, :photo_crop_x, :photo_crop_y, :photo_crop_w, :photo_crop_h, :photo_aspect )
     end
 end

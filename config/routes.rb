@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         resources :interactions
       end
       resources :posts do
+        post 'crop', :on => :member
         collection do
           get :tags
         end
