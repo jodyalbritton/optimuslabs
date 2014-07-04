@@ -53,7 +53,7 @@ class Admin::UsersController < ApplicationController
 
      respond_to do |format|
       if successfully_updated
-        format.html { redirect_to edit_admin_user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
