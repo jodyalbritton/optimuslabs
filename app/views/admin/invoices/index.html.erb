@@ -29,6 +29,9 @@
       <tr>
             <th>Subject</th>
             <th>Client</th>
+            <th>Status</th>
+            <th>Total </th>
+            <th>Balance </th>
             <th></th>
     
 
@@ -39,6 +42,10 @@
       <%= content_tag_for(:tr, @invoices) do |invoice| %>
             <td><%= link_to invoice.subject, admin_invoice_path(invoice) %></td>
             <td><%= invoice.client.name %></td>
+            <td><%= invoice.aasm_state %></td>
+            <td><%= invoice.total_price %></td>
+            <td><%= invoice.current_balance %></td>
+            
             
       
         <td class="col-md-1">

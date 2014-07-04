@@ -11,12 +11,12 @@ class Admin::TicketsController < ApplicationController
   def index
     if params[:client_id]
     @client = Client.find(params[:client_id])
-    @tickets = @client.tickets.all
+    @tickets = @client.tickets.opened + @client.tickets.pending + @client.tickets.in_progress
     elsif params[:closed]
-    @tickets = Ticket.where(:status => "Closed")
+    @tickets = Ticket.closed
 
     else 
-    @tickets = Ticket.where.not(:status => "Closed")
+    @tickets = Ticket.opened + Ticket.pending + Ticket.in_progress
 
 
     end
@@ -89,6 +89,6 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:subject, :client_id, :description, :severity, :ticket_status_id, :location, :resolution)
+      params.require(:ticket).permit(:subject, :client_name, :description, :severity, :ticket_status_id, :location, :resolution, :status, :severity_type_id)
     end
 end
