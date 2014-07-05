@@ -20,4 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      ticket:
+        aasm_state:
+          pending: Pending
+          opened: Open
+          closed: Closed
+          in_progress: In Progress
+
+en:
+  activerecord:
+    attributes:
+      invoice:
+        aasm_state:
+          quoted: Quoted
+          opened: Open
+          closed: Closed
+          paid: Paid
+          in_progress: In Progress

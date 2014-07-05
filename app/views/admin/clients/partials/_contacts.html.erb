@@ -21,7 +21,7 @@
               <tbody>
               <% @client.contacts.each do |contact|%>
                 <tr>
-                  <td><%= link_to contact.full_name, admin_contact_path(contact) %></td>
+                  <td><%= link_to contact.full_name, admin_client_contact_path(contact.client,contact) %></td>
                   <td><%= contact.email %></td>
                 </tr>
               <% end %>

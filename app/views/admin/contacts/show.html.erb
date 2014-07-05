@@ -4,16 +4,22 @@
     $('body').addClass('page-profile');
   });
 </script>
-<% content_for :page_header do %>
-   <%=@contact.full_name %>
+  <% content_for :page_header do %>
+   <%= @contact.full_name %>
   <% end %>
   <% content_for :page_actions do %>
-   <%= link_to admin_contacts_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
-                <span class="btn-label icon fa fa-chevron-left"></span>Back
-    <% end %>
-   
+    <% if params[:client_id] %>
+      <%= link_to admin_client_contacts_path(params[:client_id]), :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                  <span class="btn-label icon fa fa-plus"></span>Back
+      <% end %>
+    <% else %>
+       <%= link_to admin_contacts_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                  <span class="btn-label icon fa fa-plus"></span>Back
+      <% end %>
   <% end %>
-<%= render 'admin/header' %>
+  <% end %>
+
+  <%= render "admin/header" %>
 
 <div class= "row">
   <div class="left-col">
@@ -49,10 +55,17 @@
             <div class="panel-heading">
               <span class="panel-title">Contact Notes</span>
               <div class="panel-heading-controls">
-                <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
-                 <%= link_to edit_admin_contact_path(@contact), :class => 'btn btn-xs' do %>
-                  <span class="btn-label icon fa fa-plus"></span>Edit
-                 <% end %>
+                <% if params[:client_id] %>
+                  <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+                   <%= link_to edit_admin_client_contact_path(params[:client_id],@contact), :class => 'btn btn-xs' do %>
+                    <span class="btn-label icon fa fa-plus"></span>Edit
+                   <% end %>
+                <% else %>
+                  <span class="panel-heading-text"><em> <%= link_to new_admin_interaction_path, :remote => true do %>New Interaction<% end %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+                   <%= link_to edit_admin_contact_path(@contact), :class => 'btn btn-xs' do %>
+                    <span class="btn-label icon fa fa-plus"></span>Edit
+                   <% end %>
+                <% end %>
               </div>
             </div> <!-- / .panel-heading -->
             <div class="panel-body">

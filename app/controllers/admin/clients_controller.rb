@@ -22,26 +22,32 @@ class Admin::ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
+     add_breadcrumb @client.name
      @new_task = Task.new
+     @unpaid_invoices = (@client.invoices.opened + @client.invoices.in_progress + @client.invoices.quoted).first(10)
   end
 
   # GET /clients/new
   def new
+    add_breadcrumb "New"
     @client = Client.new
   end
 
   # GET /clients/1/edit
   def edit
+    session[:return_to] = request.referer
+    add_breadcrumb "Edit"
   end
 
   # POST /clients
   # POST /clients.json
   def create
+    session[:return_to] = request.referer
     @client = Client.new(client_params)
 
     respond_to do |format|
       if @client.save
-        format.html { redirect_to admin_client_path(@client), notice: 'Client was successfully created.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Client was successfully created.' }
         format.json { render :show, status: :created, location: @client }
       else
         format.html { render :new }
@@ -55,7 +61,7 @@ class Admin::ClientsController < ApplicationController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.html { redirect_to ([:admin, @client]), notice: 'Client was successfully updated.' }
+        format.html {  redirect_to session.delete(:return_to), notice: 'Client was successfully updated.' }
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit }

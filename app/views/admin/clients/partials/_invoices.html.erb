@@ -20,9 +20,9 @@
                 </tr>
               </thead>
               <tbody>
-              <% @client.invoices.each do |invoice|%>
+              <% @unpaid_invoices.each do |invoice|%>
                 <tr>
-                  <td><%= link_to invoice.subject, admin_invoice_path(invoice) %></td>
+                  <td><%= link_to invoice.subject, admin_client_invoice_path(invoice.client, invoice) %></td>
                   <td><%= sprintf("%.02f", invoice.balance) %></td>
                   <td><%= invoice.current_balance %></td>
                   <td><%= sprintf("%.02f",invoice.total_payments) %></td>

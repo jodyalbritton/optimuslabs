@@ -21,7 +21,7 @@
             <% @client.tickets.each do |ticket| %>
               <div class="ticket">
                 <span class="label label-success ticket-label"><%= ticket.status %></span>
-                <%= link_to ([:admin, ticket]), :class=> "ticket-title" do %> <%= ticket.subject %><span>#<%= ticket.id %></span><% end %>
+                <%= link_to ([:admin,@client, ticket]), :class=> "ticket-title" do %> <%= ticket.subject %><span>#<%= ticket.id %></span><% end %>
                 <span class="ticket-info">
                   Opened by <a href="#" title=""><%= ticket.client.name %></a> today
                 </span>

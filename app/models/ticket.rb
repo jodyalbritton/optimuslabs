@@ -10,6 +10,9 @@ class Ticket < ActiveRecord::Base
   validates_presence_of :client
   validates_presence_of :subject
   validates_presence_of :description
+  
+
+  scope :not_closed,  where('state != "closed')
 
   def total_time
     self.interactions.sum :time
