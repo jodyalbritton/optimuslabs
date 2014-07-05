@@ -1,29 +1,35 @@
 class Admin::InvoicesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :load_breadcrumbs
   authorize_actions_for ApplicationAuthorizer
-  add_breadcrumb "Admin", :admin_index_path
-  add_breadcrumb "Invoices", :admin_invoices_path
+ 
+  
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   layout :resolve_layout
   # GET /invoices
   # GET /invoices.json
   def index
+
       if params[:client_id]
         @client = Client.find(params[:client_id])
         @invoices = @client.invoices.all
       else
         @invoices = Invoice.all
       end
+      session[:return_to] = request.referer
   end
 
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+      
+        
+    add_breadcrumb @invoice.subject
+    session[:return_to] = request.referer
   end
 
   # GET /invoices/new
   def new
-
+    add_breadcrumb "New"
     if params[:client_id]
     @client = Client.find(params[:client_id])
     @invoice = @client.invoices.new
@@ -31,18 +37,19 @@ class Admin::InvoicesController < ApplicationController
    
     else   
     @invoice = Invoice.new
-  
-
     end
   end
 
   # GET /invoices/1/edit
   def edit
+    add_breadcrumb "Edit"
+    session[:return_to] = request.referer
   end
 
   # POST /invoices
   # POST /invoices.json
   def create
+
     if params[:client_id]
     @client = Client.find(params[:client_id])
     @invoice = @client.invoices.new(invoice_params)
@@ -52,7 +59,11 @@ class Admin::InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to ([:admin, @invoice]), notice: 'Invoice was successfully created.' }
+        if session[:return_to]
+          format.html { redirect_to session.delete(:return_to), notice: 'Invoice was successfully created.' }
+        else
+          format.html { redirect_to admin_invoices_path, notice: 'Invoice was successfully created.' }
+        end  
         format.json { render :show, status: :created, location: @invoice }
       else
         format.html { render :new }
@@ -66,7 +77,11 @@ class Admin::InvoicesController < ApplicationController
   def update
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to ([:admin, @invoice]), notice: 'Invoice was successfully updated.' }
+        if session[:return_to]
+          format.html { redirect_to session.delete(:return_to), notice: 'Invoice was successfully updated.' }
+        else
+          format.html { redirect_to admin_invoices_path, notice: 'Invoice was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @invoice }
       else
         format.html { render :edit }
@@ -80,7 +95,11 @@ class Admin::InvoicesController < ApplicationController
   def destroy
     @invoice.destroy
     respond_to do |format|
-      format.html { redirect_to admin_invoices_url, notice: 'Invoice was successfully destroyed.' }
+      if session[:return_to]
+          format.html { redirect_to session.delete(:return_to), notice: 'Invoice was successfully deleted.' }
+        else
+          format.html { redirect_to admin_invoices_path, notice: 'Invoice was successfully deleted.' }
+        end
       format.json { head :no_content }
     end
   end
@@ -95,14 +114,32 @@ class Admin::InvoicesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def resolve_layout
-    case action_name
-    when "print"
-      "layouts/print"
-    else
-      "layouts/admin"
+    def load_breadcrumbs
+
+      if params[:client_id]
+      @tickets_client = Client.find(params[:client_id])
+      add_breadcrumb "Admin", :admin_index_path
+      add_breadcrumb "Clients", :admin_clients_path
+      add_breadcrumb  @tickets_client.name, admin_client_path(@tickets_client)
+      add_breadcrumb "Invoices", :admin_client_invoices_path
+
+
+      else
+      add_breadcrumb "Admin", :admin_index_path
+      add_breadcrumb "Invoices", :admin_invoices_path
+      end 
+  
     end
-  end
+    def resolve_layout
+      case action_name
+        when "print"
+          "layouts/print"
+        else
+          "layouts/admin"
+      end
+    end
+
+
     def set_invoice
       if params[:client_id]
       @client = Client.find(params[:client_id])
@@ -110,7 +147,7 @@ class Admin::InvoicesController < ApplicationController
       @invoice = @client.invoices.find(params[:id])
 
       else
-        @invoice = Invoice.find(params[:id])
+      @invoice = Invoice.find(params[:id])
       end
     end
 

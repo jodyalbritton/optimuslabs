@@ -26,7 +26,7 @@
             <div class="panel-padding no-padding-vr">
             <% @tickets.each do |ticket| %>
               <div class="ticket">
-                <span class="label label-<%=ticket.get_label %> ticket-label"><%= ticket.status %></span>
+                <span class="label label-<%=ticket.get_label %> ticket-label"><%= ticket.aasm.human_state %></span>
                 <%= link_to admin_ticket_path(ticket), :class=>"ticket-title" do %> 
                 <%= ticket.subject %><span>#<%= ticket.id %></span>
                 <% end %>

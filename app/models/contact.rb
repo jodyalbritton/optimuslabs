@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
   belongs_to :user 
   has_many :interactions, as: :interactive
   
-  before_update :create_full_name
+  before_save :create_full_name
 
   attr_accessor :total_time
   def create_full_name 

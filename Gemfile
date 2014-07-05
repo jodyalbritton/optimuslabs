@@ -59,7 +59,8 @@ gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'high_voltage', github: 'thoughtbot/high_voltage'
 gem 'acts_as_list'
 gem 'pusher'
-
+gem 'jquery-datatables-rails', '~> 2.1.10.0.2'
+gem 'lodash-rails'
 
 
 # Use ActiveModel has_secure_password

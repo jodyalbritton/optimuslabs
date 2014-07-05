@@ -3,9 +3,16 @@
     Listing Users
   <% end %>
   <% content_for :page_actions do %>
-    <%= link_to new_admin_user_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
-                <span class="btn-label icon fa fa-plus"></span>Create User
-    <% end %>
+    <% if params[:client_id] %>
+             <%= link_to admin_client_path(params[:client_id]), :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+
+                  <span class="btn-label icon fa fa-chevron-left"></span>Back
+              <% end %>
+      <% else %>
+              <%= link_to admin_index_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                  <span class="btn-label icon fa fa-chevron-left"></span>Back
+              <% end %>
+      <% end %>
   <% end %>
   <% content_for :page_search do %>
   <form action="" class="pull-right col-xs-12 col-sm-6">
@@ -16,50 +23,68 @@
             </form>
   <% end %> 
 <%= render 'admin/header' %>
-<div class="table-responsive">
-  <table id="table" class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-            <th>Name</th>
-            <th>Admin</th>
-            <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <%= content_tag_for(:tr, @users) do |user| %>
-            <td><%= user.username %></td>
-            <td><%= user.has_role? :admin %></td>
-            <td><%= link_to 'Show', admin_user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-        <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Users</span>
+            <div class="panel-heading-controls">
+              <%= link_to new_admin_user_path do %>
+              <button class="btn btn-xs btn-warning btn-outline"><span class="fa fa-plus"></span>&nbsp;&nbsp;New</button>
+              <% end %>
+            </div> <!-- / .panel-heading-controls -->
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+           <div class="table-responsive">
+              <table id="table" class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>First Name </th>
+                    <th>Last Name </th>
+                    <th>Admin</th>
+                    <th class="no-sort"></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <%= content_tag_for(:tr, @users) do |user| %>
+                    <td><%= user.username %></td>
+                    <td><%= user.first_name %></td>
+                    <td><%= user.last_name %></td>
+                    <td><%= user.has_role? :admin %></td>
+                       
+                    <td class="col-md-2 text-center">
+                      <%= link_to admin_user_path(user) do %>
+                        <span class="btn btn-default icon fa fa-eye"></span>
+                      <% end %>
+                      <%= link_to edit_admin_user_path(user) do %>
+                        <span class="btn btn-default icon fa fa-pencil"></span>
+                      <% end %>
+                      <%= link_to  admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+                        <span class="btn btn-danger icon fa fa-trash-o"></span>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
 
 <script>
-  $(function () {
-    $( '#table' ).searchable({
-        striped: true,
-        oddRow: { 'background-color': '#f5f5f5' },
-        evenRow: { 'background-color': '#fff' },
-        searchType: 'fuzzy'
-    });
-    
-    $( '#searchable-container' ).searchable({
-        searchField: '#container-search',
-        selector: '.row',
-        childSelector: '.col-xs-12',
-        show: function( elem ) {
-            elem.slideDown(100);
-        },
-        hide: function( elem ) {
-            elem.slideUp( 100 );
-        }
-    })
+ oTable = $('#table').dataTable({
+  "sPaginationType": "bootstrap",
+   "dom": 'T<"clear">lfrtip',
+   "sDom": '<"H"lr>t<"F"ip>',
+   "order": [[ 0, "asc" ]],
+   "aoColumnDefs" : [ {
+            'bSortable' : false,
+            'aTargets' : ["no-sort"]
+        } ]
+        
 });
-</script>
+
+  $("#search").keyup(function() {
+   oTable.fnFilter(this.value);
+  });</script>
