@@ -1,8 +1,8 @@
-<%= simple_form_for([:admin, @payment], :html => { :class => "form-horizontal", :multipart => true }) do |f| %>
+<%= form_for([:admin, @payment], :html => { :class => "form-horizontal panel", :multipart => true }) do |f| %>
   <% if @payment.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h4><%= pluralize(@payment.errors.count, "error") %> prohibited this contact from being saved:</h4>
+      <h4><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h4>
 
       <ul>
       <% @payment.errors.full_messages.each do |msg| %>
@@ -11,27 +11,35 @@
       </ul>
     </div>
   <% end %>
-
+        <div class="panel-body">
           <div class="form-group">
             <%= f.label :amount, :class => "col-sm-2 control-label" %>
             <div class="col-sm-10">
-              <%= f.number_field :amount, :class => "form-control" %>
+              <%= f.text_field :amount, :class => "form-control", data: {autonumeric: true} %>
             </div>
           </div>
+
           <div class="form-group">
-            <%= f.label :invoice, :class => "col-sm-2 control-label" %>
+            <%= f.label :payment_method, :class => "col-sm-2 control-label" %>
             <div class="col-sm-10">
-              <%= f.association :invoice, label_method: :id, :class => "form-control", :label=> false, :include_blank => false %>
+            <%= f.collection_select :payment_method_id, PaymentMethod.all, :id, :name, :class=> "form-control" %>
+            
             </div>
           </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <%= f.submit :class => "btn btn-primary" %>
-            </div>
+          
+            <% if @payment_source != nil %>
+            <%= f.hidden_field :source_id, :value => @payment_source.id %>
+            <%= f.hidden_field :source_type, :value => @payment_source.class.to_s %>
+            <% end %>
+            <% if @payable != nil %>
+            <%= f.hidden_field :payable_id, :value => @payable.id %>
+            <%= f.hidden_field :payable_type, :value => @payable.class.to_s %>
+            <% end %>
+        
           </div>
         </div>
-          
-          
-      </div>
+        <div class="panel-footer text-right">
+              <%= f.submit :class => "btn btn-primary" %>
+        </div>
 
 <% end %>

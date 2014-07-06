@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
  has_many :timesheets
  has_many :interactions, as: :interactive
  has_many :clients
+ has_many :payments, as: :source 
  validates :username,
   :uniqueness => {
     :case_sensitive => false}

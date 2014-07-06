@@ -59,8 +59,8 @@
                      
                       <td><%= invoice.client.name %></td>
                       <td><%= invoice.aasm_human_state %></td>
-                      <td><%= invoice.total_price %></td>
-                      <td><%= invoice.current_balance %></td>
+                      <td><%= humanized_money_with_symbol invoice.total_price %></td>
+                      <td><%= humanized_money_with_symbol invoice.current_balance %></td>
                       
                       
                 

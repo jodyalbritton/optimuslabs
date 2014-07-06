@@ -23,6 +23,9 @@
            
             <th class="hidden-sm hidden-xs">Date</th>
             <th class="hidden-sm hidden-xs">Amount</th>
+            <th>Source</th>
+            <th>For </th>
+
             <th class="no-sort"></th>
        
       </tr>
@@ -31,8 +34,10 @@
     <tbody>
           <%= content_tag_for(:tr, @payments) do |payment| %>
             <td><%= link_to payment.id,  ([:admin,payment])  %></td>
-            <td class="hidden-sm hidden-xs"><%= payment.created_at %></td>
-            <td class="hidden-sm hidden-xs"><%= payment.amount %></td>      
+            <td class="hidden-sm hidden-xs"><%= payment.created_at.strftime("%m/%d/%Y") %></td>
+            <td class="hidden-sm hidden-xs"><%= payment.amount %></td> 
+            <td class="hidden-sm hidden-xs"><%= payment.get_payment_source %></td> 
+            <td class="hidden-sm hidden-xs"><%= payment.get_payable_for %></td>       
             <td class="col-md-2 text-center">
             <%= link_to admin_payment_path(payment) do %>
               <span class="btn btn-default icon fa fa-eye"></span>

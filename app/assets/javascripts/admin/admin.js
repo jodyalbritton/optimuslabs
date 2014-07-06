@@ -28,6 +28,7 @@
 //= require dataTables/extras/dataTables.tableTools
 //= require admin/yt_player
 //= require cocoon
+//= require autonumeric
 //= require admin/chat
 //= require_self
 

@@ -1,4 +1,5 @@
 class Invoice < ActiveRecord::Base
+  monetize :balance_cents
   #### Include Acts as State Machine ####
   include AASM
   
@@ -7,7 +8,7 @@ class Invoice < ActiveRecord::Base
 
   has_many :items, dependent: :destroy, counter_cache: true
   has_many :notes, as: :notable, dependent: :destroy, counter_cache: true
-  has_many :payments
+  has_many :payments, as: :payable
   
 
   belongs_to :client
@@ -30,14 +31,14 @@ class Invoice < ActiveRecord::Base
   
   def total_payments
 
-   self.payments.sum :amount
+   self.payments.sum(:amount_cents)
 
 
 
   end 
   def current_balance 
-    
-   sprintf("%.02f", balance - total_payments)
+    (self.balance_cents - self.total_payments) / 100.00
+   
   end 
 
   def total_price

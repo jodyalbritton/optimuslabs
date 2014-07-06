@@ -7,6 +7,7 @@ class Client < ActiveRecord::Base
   	has_many :tasks
   	has_many :contacts
   	has_many :users
+    has_many :payments, as: :source 
 
     belongs_to :assigned_to, :class_name => "User"
     belongs_to :client_owner, :class_name => "User"
