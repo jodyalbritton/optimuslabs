@@ -1,3 +1,4 @@
+<% @payment = @invoice.payments.new %> 
 <%= form_for([:admin, @payment], :html => { :class => "form-horizontal panel", :multipart => true }) do |f| %>
   <% if @payment.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -15,7 +16,7 @@
           <div class="form-group">
             <%= f.label :amount, :class => "col-sm-2 control-label" %>
             <div class="col-sm-10">
-              <%= f.text_field :amount, :class => "form-control", data: {autonumeric: true} %>
+              <%= f.text_field :amount, :class => "form-control", data:  {autonumeric: {aSign: '$'}} %>
             </div>
           </div>
 
