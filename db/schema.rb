@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706100808) do
+ActiveRecord::Schema.define(version: 20140706112631) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -190,7 +190,6 @@ ActiveRecord::Schema.define(version: 20140706100808) do
     t.text     "notes"
     t.string   "attention"
     t.integer  "inv_number"
-    t.decimal  "balance",           precision: 8, scale: 2
     t.boolean  "paid"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -284,7 +283,6 @@ ActiveRecord::Schema.define(version: 20140706100808) do
   end
 
   create_table "payments", force: true do |t|
-    t.decimal  "amount",            precision: 8, scale: 2, default: 0.0,   null: false
     t.integer  "invoice_id"
     t.integer  "source_id"
     t.string   "source_type"
@@ -296,10 +294,8 @@ ActiveRecord::Schema.define(version: 20140706100808) do
     t.datetime "updated_at"
     t.integer  "payable_id"
     t.string   "payable_type"
-    t.integer  "amount_cents",                              default: 0,     null: false
-    t.string   "amount_currency",                           default: "USD", null: false
-    t.integer  "balance_cents",                             default: 0,     null: false
-    t.string   "balance_currency",                          default: "USD", null: false
+    t.integer  "amount_cents",      default: 0,     null: false
+    t.string   "amount_currency",   default: "USD", null: false
   end
 
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
