@@ -60,6 +60,8 @@ GEM
     authority (3.0.0)
       activesupport (>= 3.0.0)
       rake (>= 0.8.7)
+    autonumeric-rails (1.9.24.0)
+      jquery-rails (>= 2.0.2)
     bcrypt (3.1.7)
     bootstrap-datepicker-rails (1.3.0.2)
       railties (>= 3.0)
@@ -153,6 +155,15 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.5)
     modernizr-rails (2.7.1)
+    monetize (0.3.0)
+      money (~> 6.1.0.beta1)
+    money (6.1.1)
+      i18n (~> 0.6.4)
+    money-rails (0.12.0)
+      activesupport (>= 3.0)
+      monetize (~> 0.3.0)
+      money (~> 6.1.1)
+      railties (>= 3.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -303,6 +314,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 3.2.5)
   acts_as_list
   authority
+  autonumeric-rails
   bootstrap-datepicker-rails
   breadcrumbs_on_rails
   canonical-rails!
@@ -324,6 +336,8 @@ DEPENDENCIES
   lodash-rails
   meta_request
   modernizr-rails
+  money
+  money-rails
   mysql2
   omniauth-facebook
   omniauth-google-oauth2

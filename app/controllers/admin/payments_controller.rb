@@ -37,15 +37,8 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def create
-
-    if params[:invoice_id]
-       @invoice = Invoice.find(params[:invoice_id])
-
-       @payement = @invoice.payments.new(payment_params)
-
-      else
         @payment  = Payment.new(payment_params)
-    end
+    
 
     respond_to do |format|
       if @payment.save
@@ -86,6 +79,6 @@ class Admin::PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:amount, :invoice_id)
+      params.require(:payment).permit(:amount, :invoice_id, :payable_id, :payable_type, :source_id, :source_type)
     end
 end

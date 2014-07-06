@@ -35,6 +35,9 @@ gem 'omniauth-gplus'
 gem "omniauth-google-oauth2"
 gem "rolify"
 gem 'authority'
+gem 'money'
+gem 'money-rails'
+gem 'autonumeric-rails'
 gem "figaro"
 gem 'acts-as-taggable-on',  '~> 3.2.5'
 gem "paperclip", "~> 4.1"

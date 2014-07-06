@@ -86,6 +86,7 @@ Rails.application.routes.draw do
       end
 
       resources :payments
+      resources :payment_methods
       resources :tickets do
         resources :attachments
         resources :interactions

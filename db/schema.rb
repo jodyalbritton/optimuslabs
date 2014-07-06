@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704121651) do
+ActiveRecord::Schema.define(version: 20140706100808) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -199,6 +199,8 @@ ActiveRecord::Schema.define(version: 20140704121651) do
     t.datetime "paid_on"
     t.datetime "quoted_on"
     t.string   "status"
+    t.integer  "balance_cents",                             default: 0,     null: false
+    t.string   "balance_currency",                          default: "USD", null: false
   end
 
   add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
@@ -273,8 +275,16 @@ ActiveRecord::Schema.define(version: 20140704121651) do
 
   add_index "notes", ["created_by_id"], name: "index_notes_on_created_by_id", using: :btree
 
+  create_table "payment_methods", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "position"
+  end
+
   create_table "payments", force: true do |t|
-    t.decimal  "amount",            precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "amount",            precision: 8, scale: 2, default: 0.0,   null: false
     t.integer  "invoice_id"
     t.integer  "source_id"
     t.string   "source_type"
@@ -284,6 +294,12 @@ ActiveRecord::Schema.define(version: 20140704121651) do
     t.string   "avs_response"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "payable_id"
+    t.string   "payable_type"
+    t.integer  "amount_cents",                              default: 0,     null: false
+    t.string   "amount_currency",                           default: "USD", null: false
+    t.integer  "balance_cents",                             default: 0,     null: false
+    t.string   "balance_currency",                          default: "USD", null: false
   end
 
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree

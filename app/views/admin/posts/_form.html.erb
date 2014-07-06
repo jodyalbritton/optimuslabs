@@ -2,7 +2,7 @@
 
 
 
-<%= form_for [:admin, @post], :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for [:admin, @post], :html => { :class => "form-horizontal panel" } do |f| %>
   <% if @post.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -15,7 +15,7 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="panel-body">
   <div class= "row">
     <div class="col-md-8">
       <div class="form-group">
@@ -106,12 +106,13 @@
  
 
   
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+
+
+   <div class="panel-footer text-right">
+  
       <%= f.submit :class => "btn btn-primary" %>
-    </div>
+    
   </div>
- 
 <% end %>
 
 

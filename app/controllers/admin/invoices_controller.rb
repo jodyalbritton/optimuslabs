@@ -21,9 +21,10 @@ class Admin::InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
-      
-        
     add_breadcrumb @invoice.subject
+    @payment = @invoice.payments.new 
+    @payable = @invoice
+    @payment_source = @invoice.client
     session[:return_to] = request.referer
   end
 
