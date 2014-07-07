@@ -50,6 +50,8 @@ Use search to find needed section.
 	<!--[if lt IE 9]>
 		<script src="../assets/javascripts/ie.min.js"></script>
 	<![endif]-->
+
+
 </head>
 
 
@@ -453,6 +455,21 @@ Use search to find needed section.
 							</ul>
 						</li>
 						<li class="mm-dropdown">
+							<a tabindex="-1" href="#"><span class="mm-text">Payment Methods</span></a>
+							<ul>
+								<li>
+									<%= link_to admin_payment_methods_path, :tabindex=>"-1" do %>
+									<span class="mm-text">List Payment Methods</span>
+									<% end %>
+								</li>
+								<li>
+								    <%= link_to new_admin_payment_method_path, :tabindex=>"-1" do %>
+								    <span class="mm-text">New Payment Method</span>
+									<% end %>
+								</li>								
+							</ul>
+						</li>
+						<li class="mm-dropdown">
 							<a tabindex="-1" href="#"><span class="mm-text">Severity Types</span></a>
 							<ul>
 								<li>
@@ -534,10 +551,12 @@ Use search to find needed section.
 
 
 <script type="text/javascript">
-	init.push(function () {
-		// Javascript code here
-	})
-	window.PixelAdmin.start(init);
+
+
+
+
+
+
 </script>
 
 
