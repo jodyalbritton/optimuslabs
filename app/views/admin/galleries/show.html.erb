@@ -1,0 +1,72 @@
+
+  <% content_for :page_header do %>
+   <%= @gallery.name %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_categories_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<%= render 'admin/header' %>
+
+
+
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Photos</span>
+            <div class="panel-heading-controls">
+              <span class="panel-heading-text"><em><%= link_to "New Photo", new_admin_gallery_photo_path(@gallery) %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_gallery_path(@gallery), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <% @gallery.photos.each do |photo| %>
+              <div class="col-xs-4">
+                  <%= link_to photo.file.url, :class=> "thumbnail", data: {:gallery=>""} do %>
+                  <%= image_tag photo.file.url(:medium) %>
+                  
+                  <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+</div>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

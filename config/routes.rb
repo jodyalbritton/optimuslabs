@@ -44,6 +44,15 @@ Rails.application.routes.draw do
         collection { post :sort }
       end
       resources :categories
+      resources :galleries do 
+        resources :photos
+      end
+
+      resources :photos do
+         collection do
+          get :tags
+        end
+      end
       resources :videos do
         collection do
           get :tags

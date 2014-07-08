@@ -41,6 +41,10 @@
 //= require admin/yt_player
 //= require cocoon
 //= require autonumeric
+//= require blueimp/jquery.blueimp-gallery.min
+//= require blueimp/blueimp-gallery-indicator
+//= require blueimp/blueimp-gallery-fullscreen
+//= require blueimp/bootstrap-image-gallery
 //= require admin/chat
 //= require_self
 

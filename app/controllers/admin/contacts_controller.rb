@@ -44,6 +44,7 @@ class Admin::ContactsController < ApplicationController
     else   
     @contact = Contact.new
     end
+    session[:return_to] = request.referer
   end
 
   # GET /contacts/1/edit
