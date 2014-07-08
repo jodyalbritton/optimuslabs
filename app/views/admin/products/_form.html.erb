@@ -2,7 +2,8 @@
 
 
 
-<%= form_for [:admin, @product], :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for [:admin, @product], :html => { :class => "form-horizontal panel" } do |f| %>
+  <div class="panel-body">
   <% if @product.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -15,112 +16,111 @@
       </ul>
     </div>
   <% end %>
-  <div class="row">
-    <div class="col-md-8">
-      
-      <div class="form-group">
-        <%= f.label :header_photo, :class => "control-label col-md-2" %>
-        <div class="col-md-6">
-          <%= f.file_field :header_photo, :class=>"form-control" %>
+     
+        <div class="col-md-8">
+          <%= f.label :header_photo, :class => "control-label" %>
+          <div class="form-group no-margin-hr">
+        
+              <%= f.file_field :header_photo, :class=>"form-control" %>
+          </div>
+          <div class="form-group no-margin-hr">
+            <%= f.label :description, :class => "control-label" %>
+            
+              <%= f.text_area :description, :class => "form-control" %>
+            
+          </div>
+        </div>
+        <div class="col-md-4">
+           <div class="form-group no-margin-hr">
+            <%= f.label :name, :class => "control-label" %>
+            <div>
+              <%= f.text_field :name, :class => "form-control" %>
+            </div>
+          </div>
+           <div class="form-group no-margin-hr">
+            <%= f.label :summary, :class => "control-label" %>
+            
+            <%= f.text_area :summary, :class=> "form-control" %>
+           
+          </div>
+           <div class="form-group no-margin-hr">
+            <%= f.label :category, :class => "control-label" %>
+          <div>
+            <%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control", :required => true %>
+          </div>
+          </div>
+           <div class="form-group no-margin-hr">
+            <%= f.label :cost, :class => "control-label" %>
+            <div>
+             <%= f.text_field :cost, :class => "form-control", data:  {autonumeric: {aSign: '$'}} %>
+            </div>
+          </div>
+           <div class="form-group no-margin-hr">
+             <%= f.label :price, :class => "control-label" %>
+            <div>
+              <%= f.text_field :price, :class => "form-control", data:  {autonumeric: {aSign: '$'}} %>
+            </div>
+          </div>
+          <div class="form-group no-margin-hr">
+            <%= f.label :featured, :class => "control-label" %>
+            <%= f.check_box :featured, :class=> "form-control" %>
+          </div>
+          <div class="form-group no-margin-hr">
+            <%= f.label :listed, :class => "control-label" %>
+            <%= f.check_box :listed, :class=> "form-control" %>
+          </div>
+          <div class="form-group no-margin-hr">
+            <%= f.label :position, :class => "control-label" %>   
+            <%= f.number_field :position, :class=> "form-control" %>
+          </div>
+          <div class="form-group no-margin-hr">
+            <%= f.label :photo, :class => "control-label" %>
+            <div>
+              <%= f.file_field :photo, :class=>"form-control" %>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-offset-2">
-        <%= image_tag @product.header_photo.url(:large), :class=> "img-responsive" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :description, :class => "col-sm-2 control-label" %>
-        <div class="col-sm-10">
-          <%= f.text_area :description, :class => "form-control" %>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :name, :class => "control-label" %>
-        <div>
-          <%= f.text_field :name, :class => "form-control" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= f.label :summary, :class => "control-label" %>
-        <div>
-          <%= f.text_area :summary, :class=> "form-control" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= f.label :category, :class => "control-label" %>
-      <div>
-        <%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control", :required => true %>
-      </div>
-      </div>
-      <div class="form-group">
-        <%= f.label :cost, :class => "control-label" %>
-        <div>
-          <%= f.number_field :cost%>
-        </div>
-      </div>
-      <div class="form-group">
-         <%= f.label :price, :class => "control-label" %>
-        <div>
-          <%= f.number_field :price%>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= f.label :photo, :class => "control-label" %>
-        <div>
-          <%= f.file_field :photo, :class=>"form-control" %>
-        </div>
-      </div>
-      <div class="center-block">
-         <%= image_tag @product.photo.url(:medium), :class=> "img-responsive" %>
-        </div>
-      
-    </div>
-  
-
-  
-  
-  
-  
-   <script>
-          $(function() {
-           $( "#product_category_name" ).autocomplete({
-          source: $('#product_category_name').data('autocomplete-source')
-            });
-          });
-          init.push(function () {
-            var options = {
-              todayBtn: "linked",
-              format: "yyyy-mm-dd",
-              orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
-            }
-            $('#bs-datepicker-example').datepicker(options);
-
-            $('#bs-datepicker-component').datepicker(options);
-
-            var options2 = {
-              orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
-            }
-            $('#bs-datepicker-range').datepicker(options2);
-
-            $('#bs-datepicker-inline').datepicker();
-          });
-        </script>
-
-
- 
- 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+   
+  <div class="panel-footer text-right">
+    
       <%= f.submit :class => "btn btn-primary" %>
-    </div>
   </div>
- 
+
 <% end %>
 
 
-     <script>
-      $(function(){
-          $('#product_description').editable({inlineMode: false, height: 600})
-      });
-  </script>
+      <script>
+          $(function(){
+              $('#product_description').editable({inlineMode: false, height: 600})
+          });
+      </script>
+
+       <script>
+            $(function() {
+             $( "#product_category_name" ).autocomplete({
+            source: $('#product_category_name').data('autocomplete-source')
+              });
+            });
+            init.push(function () {
+              var options = {
+                todayBtn: "linked",
+                format: "yyyy-mm-dd",
+                orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
+              }
+              $('#bs-datepicker-example').datepicker(options);
+
+              $('#bs-datepicker-component').datepicker(options);
+
+              var options2 = {
+                orientation: $('body').hasClass('right-to-left') ? "auto right" : 'auto auto'
+              }
+              $('#bs-datepicker-range').datepicker(options2);
+
+              $('#bs-datepicker-inline').datepicker();
+            });
+
+             $('#product_header_photo').pixelFileInput({ placeholder: 'No file selected...' });
+             $('#product_photo').pixelFileInput({ placeholder: 'No file selected...' });
+        </script>
+  

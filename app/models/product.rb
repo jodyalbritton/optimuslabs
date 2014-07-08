@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
   extend FriendlyId
+  monetize :price_cents
+  monetize :cost_cents
   acts_as_list
   friendly_id :name, use: :slugged
   has_attached_file :photo, :styles => { :medium => "500x500#", :thumb => "100x100>" }, :default_url => ":style/missing.png"
@@ -11,11 +13,11 @@ class Product < ActiveRecord::Base
   belongs_to :category
 
 
-def category_name
-  self.category.try(:name)
-end
+  def category_name
+    self.category.try(:name)
+  end
 
-def category_name=(name)
-  self.category = Category.find_or_create_by(name: name) if name.present?
-end
+  def category_name=(name)
+    self.category = Category.find_or_create_by(name: name) if name.present?
+  end
 end

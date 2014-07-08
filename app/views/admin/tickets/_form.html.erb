@@ -8,6 +8,18 @@
 						<span class="panel-title">Ticket Form</span>
 					</div>
 					<div class="panel-body">
+						<% if @ticket.errors.any? %>
+						    <div class="alert alert-danger alert-dismissable">
+						      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						      <h4><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h4>
+
+						      <ul>
+						      <% @ticket.errors.full_messages.each do |msg| %>
+						        <li><%= msg %></li>
+						      <% end %>
+						      </ul>
+						    </div>
+						  <% end %>
 						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">Client</label>
 							<div class="col-sm-10">
@@ -36,7 +48,7 @@
 						<div class="form-group">
 							<label for="asdasdas" class="col-sm-2 control-label">Description</label>
 							<div class="col-sm-10">
-								<%= f.text_area :description, :class=> "form-control" %>
+								<%= f.text_area :description, :class=> "form-control", :required => true %>
 							</div>
 						</div> <!-- / .form-group -->
 						<div class="form-group">

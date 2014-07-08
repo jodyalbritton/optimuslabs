@@ -43,6 +43,7 @@ class Admin::TicketsController < ApplicationController
     else   
     @ticket = Ticket.new
     end
+    session[:return_to] = request.referer
   end
 
   # GET /tickets/1/edit

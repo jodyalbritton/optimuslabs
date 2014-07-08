@@ -1,5 +1,8 @@
 class Service < ActiveRecord::Base
  extend FriendlyId
+ monetize :price_cents
+ monetize :cost_cents
+ 
   friendly_id :name, use: :slugged
   acts_as_list
 	has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => ":style/missing.png"

@@ -39,6 +39,7 @@ class Admin::InvoicesController < ApplicationController
     else   
     @invoice = Invoice.new
     end
+    session[:return_to] = request.referer
   end
 
   # GET /invoices/1/edit

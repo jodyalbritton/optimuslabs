@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706112631) do
+ActiveRecord::Schema.define(version: 20140708153339) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -324,17 +324,15 @@ ActiveRecord::Schema.define(version: 20140706112631) do
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
 
   create_table "products", force: true do |t|
-    t.string   "name",                                              default: "",    null: false
+    t.string   "name",                      default: "",    null: false
     t.text     "description"
-    t.integer  "stock",                                             default: 0
-    t.boolean  "available",                                         default: false
+    t.integer  "stock",                     default: 0
+    t.boolean  "available",                 default: false
     t.datetime "available_on"
     t.string   "slug"
     t.string   "meta_description"
     t.string   "meta_keywords"
-    t.string   "sku",                                               default: "",    null: false
-    t.decimal  "cost",                      precision: 8, scale: 2, default: 0.0
-    t.decimal  "price",                     precision: 8, scale: 2, default: 0.0
+    t.string   "sku",                       default: "",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo_file_name"
@@ -347,8 +345,13 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "header_photo_content_type"
     t.integer  "header_photo_file_size"
     t.datetime "header_photo_updated_at"
-    t.boolean  "featured",                                          default: true
+    t.boolean  "featured",                  default: true
     t.text     "summary"
+    t.integer  "cost_cents",                default: 0,     null: false
+    t.string   "cost_currency",             default: "USD", null: false
+    t.integer  "price_cents",               default: 0,     null: false
+    t.string   "price_currency",            default: "USD", null: false
+    t.boolean  "listed",                    default: true
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
@@ -402,8 +405,6 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "header_content_type"
     t.integer  "header_file_size"
     t.datetime "header_updated_at"
-    t.decimal  "price",               precision: 30, scale: 10
-    t.decimal  "cost",                precision: 30, scale: 10
     t.decimal  "duration",            precision: 30, scale: 10
     t.integer  "rate_type_id"
     t.boolean  "featured",                                      default: false
@@ -411,6 +412,10 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "slug"
     t.integer  "position"
     t.boolean  "listed",                                        default: false
+    t.integer  "price_cents",                                   default: 0,     null: false
+    t.string   "price_currency",                                default: "USD", null: false
+    t.integer  "cost_cents",                                    default: 0,     null: false
+    t.string   "cost_currency",                                 default: "USD", null: false
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
