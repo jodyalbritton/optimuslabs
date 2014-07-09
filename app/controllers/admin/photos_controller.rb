@@ -17,24 +17,33 @@ class Admin::PhotosController < ApplicationController
     session[:return_to] = request.referer
   end
 
-    def create
-      if params[:gallery_id]
-        @gallery = Gallery.friendly.find(params[:gallery_id])
-        @photo = @gallery.photos.create(photo_params)
-      else 
-        @photo = Photo.create(photo_params)
+  def create
+    if params[:gallery_id]
+      @gallery = Gallery.friendly.find(params[:gallery_id])
+      @photo = @gallery.photos.create(photo_params)
+    else 
+      @photo = Photo.create(photo_params)
+    end
+    respond_to do |format|
+      if @photo.save
+        format.html { redirect_to admin_gallery_path(@gallery), notice: 'Photo was successfully created.' }
+        format.json { render :show, status: :created, location: @Photo }
+      else
+        format.html { render :new }
+        format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
-      respond_to do |format|
-        if @photo.save
-          format.html {redirect_to session.delete(:return_to), notice: 'Photo was successfully created.' }
-          format.json { render :show, status: :created, location: @Photo }
-        else
-          format.html { render :new }
-          format.json { render json: @photo.errors, status: :unprocessable_entity }
-        end
-      end
-    end 
-    
+    end
+  end 
+  
+  def destroy
+  @gallery = Gallery.find(@photo.gallery)
+  @photo.destroy
+  respond_to do |format|
+    format.html { redirect_to admin_gallery_path(@gallery), notice: 'Photo was successfully destroyed.' }
+    format.json { head :no_content }
+  end
+  
+  end
     private
 
     def set_photo
