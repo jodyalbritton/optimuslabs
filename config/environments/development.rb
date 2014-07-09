@@ -25,7 +25,7 @@ Rails.application.configure do
   :port => 25,
   :domain => "testoptimus.com",
 }
-
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -37,7 +37,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
   config.assets.compile = true
-
+  Rails.application.routes.default_url_options[:host] = "localhost:3000"
 
 
   # Adds additional error checking when serving assets at runtime.
