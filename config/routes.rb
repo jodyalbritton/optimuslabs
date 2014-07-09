@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :messages, only: [:new, :create]
   resources :products, only: [:index, :show]
   resources :videos,   only: [:index, :show]
+  resources :galleries,   only: [:index, :show] do 
+    resources :photos,   only: [:show]
+  end 
   resources :contacts, only: [:new, :create, :thanks]
   
 
