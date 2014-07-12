@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708194158) do
+ActiveRecord::Schema.define(version: 20140712180038) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20140708194158) do
   add_index "clients", ["client_owner_id"], name: "index_clients_on_client_owner_id", using: :btree
 
   create_table "contacts", force: true do |t|
-    t.string   "full_name"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -175,14 +174,6 @@ ActiveRecord::Schema.define(version: 20140708194158) do
 
   add_index "interactions", ["interaction_event_id"], name: "index_interactions_on_interaction_event_id", using: :btree
 
-  create_table "invoice__statuses", force: true do |t|
-    t.string   "state"
-    t.text     "description"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "invoice_statuses", force: true do |t|
     t.string   "state"
     t.text     "description"
@@ -265,8 +256,10 @@ ActiveRecord::Schema.define(version: 20140708194158) do
     t.datetime "updated_at"
     t.string   "email"
     t.integer  "contact_id"
+    t.string   "ancestry"
   end
 
+  add_index "messages", ["ancestry"], name: "index_messages_on_ancestry", using: :btree
   add_index "messages", ["client_id"], name: "index_messages_on_client_id", using: :btree
   add_index "messages", ["contact_id"], name: "index_messages_on_contact_id", using: :btree
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
@@ -557,11 +550,13 @@ ActiveRecord::Schema.define(version: 20140708194158) do
     t.datetime "closed_at"
     t.datetime "pended_at"
     t.datetime "in_progress_at"
+    t.integer  "user_id"
   end
 
   add_index "tickets", ["client_id"], name: "index_tickets_on_client_id", using: :btree
   add_index "tickets", ["severity_type_id"], name: "index_tickets_on_severity_type_id", using: :btree
   add_index "tickets", ["ticket_status_id"], name: "index_tickets_on_ticket_status_id", using: :btree
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
   create_table "timesheets", force: true do |t|
     t.datetime "clocked_in"
@@ -616,10 +611,6 @@ ActiveRecord::Schema.define(version: 20140708194158) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "name"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
   end
 
   add_index "users", ["client_id"], name: "index_users_on_client_id", using: :btree
@@ -651,8 +642,8 @@ ActiveRecord::Schema.define(version: 20140708194158) do
     t.string   "yt_tags"
     t.integer  "views"
     t.integer  "position"
-    t.datetime "published_at"
-    t.datetime "yt_updated_at"
+    t.time     "published_at"
+    t.time     "yt_updated_at"
     t.string   "slug"
     t.integer  "sponsor_id"
     t.boolean  "sponsored",     default: false

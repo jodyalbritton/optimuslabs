@@ -4,15 +4,12 @@ class Contact < ActiveRecord::Base
   belongs_to :client
   belongs_to :user 
   has_many :interactions, as: :interactive
-  
-  before_save :create_full_name
+  has_many :message_receipts, :as => :receivable
 
   attr_accessor :total_time
-  def create_full_name 
-  	if self.full_name == nil 
-  		self.full_name = self.first_name + " " + self.last_name
-  	end
-
+  
+  def full_name 
+    self.first_name + " " + self.last_name
   end
 
   def total_time

@@ -10,8 +10,7 @@
     <div class="mail-container-header show">
       <a href="#" class="m-details-star"><i class="fa fa-star"></i></a> <span class="label label-pa-purple"><%= @message.source %></span>&nbsp;
      <%= @message.subject %>&nbsp;
-     
-     <i class="fa fa-paperclip" style="font-size: 18px;"></i>
+    
     </div>
 
     <div class="mail-controls clearfix">
@@ -23,29 +22,25 @@
           <% end %>
         </div>
 
-        <div class="btn-group">
-          <button type="button" class="btn"><i class="fa fa fa-file-text-o"></i></button>
-          <button type="button" class="btn"><i class="fa fa-exclamation-circle"></i></button>
-          <button type="button" class="btn"><i class="fa fa-trash-o"></i></button>
-        </div>
 
-      </div>
-
-      <div class="btn-toolbar pull-right" role="toolbar">
-        <div class="btn-group">
-          <button type="button" class="btn"><i class="fa fa-mail-reply"></i></button>
-          <div class="btn-group">
-            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#"><i class="fa fa-mail-reply"></i>&nbsp;&nbsp;Reply</a></li>
-              <li><a href="#"><i class="fa fa-mail-forward"></i>&nbsp;&nbsp;Forward</a></li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
 
-
+    <% @message.ancestors.each do |desc| %>
+      <a href="#" data-toggle="collapse" data-target="#message-<%=desc.id %>" >
+      <div class="mail-info">
+        <div class="from" >
+          <div class="name"><%= desc.find_sender.full_name %> </div>
+          <div class="email"><%= desc.find_sender.email %></div>
+        </div>
+       <div class="date"><%= desc.created_at %></div>
+        </div>
+      </a>
+       <div class="mail-message-body collapse" id="message-<%= desc.id %>" >
+        <%= desc.body %>
+         
+       </div>
+    <% end %>
     <div class="mail-info">
       <div class="from">
         <div class="name"><%= @message.find_sender.full_name %> </div>
@@ -60,18 +55,23 @@
         <%= @message.body %>
          
     </div>
-
+    
     <ul class="mail-attachments">
       
     </ul>
 
     <div class="message-details-reply">
-      <form id="message-details-reply" action="">
-        <textarea class="form-control" rows="5"></textarea>
+        <% @reply_message = Message.new %>
+        <%= form_for([:admin, @reply_message], :html => { :class => "form-horizontal" }) do |f| %>
+        <%= f.text_area :body, :class=> "form-control", :rows=> 5 %>
+        <%= f.hidden_field :email, :value => current_user.contact.email %>
+        <%= f.hidden_field :parent_id, :value => @message.id %>
+        <%= f.hidden_field :recipient, :value => @message.find_sender.email %>
+        <%= f.hidden_field :subject, :value => "RE: "+ @message.subject %>
         <div class="expanding-input-hidden" style="margin-top: 10px;">
-          <button class="btn btn-primary pull-right">Send Message</button>
+          <%= f.submit "Send Message", :class=> "btn btn-primary pull-right" %> 
         </div>
-      </form>
+      <% end %>
     </div>
 
   </div>
@@ -97,7 +97,7 @@
       $('.mail-nav').addClass('fixed');
     }
 
-    $("#message-details-reply").expandingInput({
+    $(".message-details-reply").expandingInput({
       target: 'textarea',
       hidden_content: '> div',
       placeholder: 'Click here to <a htef="#" class="text-muted"><strong>Reply</strong></a> or <a htef="#" class="text-muted"><strong>Forward</strong></a>',

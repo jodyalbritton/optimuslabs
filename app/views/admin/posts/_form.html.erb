@@ -1,7 +1,3 @@
-
-
-
-
 <%= form_for [:admin, @post], :html => { :class => "form-horizontal panel" } do |f| %>
   <% if @post.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -85,12 +81,11 @@
      </div>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :photo, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.file_field :photo, :class=>"form-control" %>
-    </div>
-  </div>
+    <div class="col-md-12">
+        <div id="upload-preview" class="col-md-10 col-md-offset-2">
+            <%= image_tag @post.photo.url(:medium), :class=> "img img-responsive" %>
+            <%= f.file_field :photo, :class=> "form-control file"%>
+        </div>
     </div>
   </div>
   
@@ -119,6 +114,8 @@
   <script>
       $(function(){
           $('#post_body').editable({inlineMode: false, height: 600})
+          $('#post_photo').pixelFileInput({ placeholder: 'No file selected...' });
+          $('#post_draft').switcher();
       });
   </script>
 
@@ -173,4 +170,24 @@
 
             
           });
+</script>
+
+
+
+
+<script>
+$(document).ready(function(){
+    var preview = $("#upload-preview img");
+
+    $("#post_photo").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+});
 </script>

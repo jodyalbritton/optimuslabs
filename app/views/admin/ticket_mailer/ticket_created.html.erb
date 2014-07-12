@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Support Ticket # <%= @ticket.id  %></h1>
+    <p>
+      A support ticket has been created for you at <%= Setting.company_name %>.  You can view the status
+      of the ticket and add additional information by logging in with your credentials at <%= Setting.company_url %>
+    </p>
+     <h2> Ticket Details </h2>
+      <h3>Subject: <%= @ticket.subject %><h3>
+      <h3>Details:<h3>
+      <p><%= @ticket.description %></p>
+  </body>
+</html>

@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   extend FriendlyId
   friendly_id :username, use: :slugged
   rolify
@@ -9,10 +8,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
   attr_accessor :login
+ before_create :build_default_contact
+ after_update :update_contact
 
-  has_attached_file :avatar, :styles => { :large => "600x600", :medium => "200x200#", :thumb => "100x100#", :mini => "
-    40x40#" }, :default_url => ":style/missing.png"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+ has_attached_file :avatar, :styles => { :large => "600x600", :medium => "200x200#", :thumb => "100x100#", :mini => "
+  40x40#" }, :default_url => ":style/missing.png"
+
  belongs_to :client
  has_many :posts, :foreign_key => 'author_id'
  has_many :notes, :foreign_key => 'created_by_id'
@@ -22,14 +23,14 @@ class User < ActiveRecord::Base
  has_one :contact
  has_many :payments, as: :source
  has_many :timesheets
+ has_many :tickets
  has_many :interactions, as: :interactive
  has_many :clients
  has_many :payments, as: :source 
  validates :username,
   :uniqueness => {
     :case_sensitive => false}
-
-  
+ validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/  
 
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
@@ -100,21 +101,35 @@ class User < ActiveRecord::Base
         end
   end
 
+  def build_default_contact 
+       build_contact
+       self.contact.first_name = self.first_name
+       self.contact.last_name = self.last_name
+       self.contact.user_id = self.id 
+       
+  end 
 
+  def update_contact
+        
+        self.contact.first_name = self.first_name
+        self.contact.last_name = self.last_name 
+        self.contact.client_id = self.client_id
+        self.contact.save
+  end 
   def full_name 
     first_name + " " + last_name
   end  
 
   def inbox
-  	message_receipts.inbox
+  	contact.message_receipts.inbox.order(:created_at).reverse
   end
 
   def inbox_and_unread
-  	message_receipts.inbox_and_unread
+  	contact.message_receipts.inbox_and_unread.order(:created_at).reverse
   end
 
   def sent
-  	message_receipts.sent
+  	contact.message_receipts.sent.order(:created_at).reverse
   end
 
   def login=(login)

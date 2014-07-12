@@ -33,7 +33,7 @@
             <span class="panel-title">Contact Information</span>
           </div>
           <div class="list-group">
-            <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-building-o" style="color: #888"></i> <%= @contact.client.name %></a>
+            <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-building-o" style="color: #888"></i> <%= @contact.client.try(:name) %></a>
             <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-phone" style="color: #4ab6d5"></i> <%= @contact.phone %></a>
             <a href="#" class="list-group-item"><i class="profile-list-icon fa fa-envelope" style="color: #888"></i> <%= @contact.email %></a>
           </div>
