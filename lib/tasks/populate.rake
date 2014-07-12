@@ -23,10 +23,11 @@ namespace :db do
 
       40.times do |c|
         contact = Contact.create!(:full_name => Faker::Company.name,
-          :full_name => Faker::Name.name,
+          :first_name => Faker::Name.first_name,
+          :last_name => Faker::Name.last_name,
           :email => Faker::Internet.email,
           :phone => Faker::PhoneNumber.cell_phone,
-           :client_id => 1+rand(20),
+          :client_id => 1+rand(20),
           :notes => Faker::Lorem.paragraph(sentence_count = 1))
 
 
