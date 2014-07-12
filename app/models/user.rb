@@ -103,14 +103,12 @@ class User < ActiveRecord::Base
 
   def build_default_contact 
        build_contact
-       self.contact.first_name = self.first_name
-       self.contact.last_name = self.last_name
-       self.contact.user_id = self.id 
+       update_contact
        
   end 
 
   def update_contact
-        
+        self.contact.email = self.email
         self.contact.first_name = self.first_name
         self.contact.last_name = self.last_name 
         self.contact.client_id = self.client_id
