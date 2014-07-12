@@ -18,7 +18,7 @@
     <![endif]-->
    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
    <%= javascript_include_tag :modernizr, 'data-turbolinks-track' => true  %>
-   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   
   <%= canonical_tag -%>
   <%= csrf_meta_tags %>
@@ -33,7 +33,7 @@
                 ga('require', 'displayfeatures');
                 ga('send', 'pageview');
     </script>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 <body>
 
@@ -134,6 +134,7 @@
             <p>&copy; 2014 <a href="#">Optimus Labs</a> All rights reserved.</p>
         </div>
     </footer>
+ 
  <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'getoptimus'; // required: replace example with your forum shortname
@@ -147,6 +148,7 @@
     }());
     </script>
 
+ 
 
 </body>
 </html>

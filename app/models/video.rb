@@ -1,4 +1,5 @@
 class Video < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
   extend FriendlyId
   friendly_id :title, use: :slugged
   belongs_to :category
@@ -26,8 +27,22 @@ class Video < ActiveRecord::Base
   end
 
   validates :link, presence: true, format: YT_LINK_FORMAT
+  
+  def get_share_url
+    video_url(self)
+  end 
+  def facebook_likes
+  uri = URI("http://graph.facebook.com/"+self.get_share_url)
+  data = Net::HTTP.get(uri)
+  @likes = JSON.parse(data)['likes']
+  end
+  
 
-
+  def g_plus_count
+  uri = URI("https://plusone.google.com/_/+1/fastbutton?url="+self.get_share_url)
+  data = Net::HTTP.get(uri)
+  @likes = JSON.parse(data)['g_plus_count']
+  end
   def get_details
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
     client.video_by(self.uid)

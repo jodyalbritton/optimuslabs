@@ -26,10 +26,13 @@
 //= require admin/main-navbar
 //= require admin/main-menu
 //= require admin/switcher.js
+//= require admin/fastclick
 //= require admin/jquery.searchable
 //= require admin/jquery.timer
 //= require admin/jquery.ui.touch-punch
 //= require admin/jquery.tokeninput
+//= require admin/file-input
+//= require admin/expanding-input
 //= require admin/froala-editor.min.js
 //= require admin/jquery.bind_with_delay
 //= require dataTables/jquery.dataTables
@@ -39,12 +42,21 @@
 //= require admin/yt_player
 //= require cocoon
 //= require autonumeric
+//= require blueimp/jquery.blueimp-gallery.min
+//= require blueimp/blueimp-gallery-indicator
+//= require blueimp/blueimp-gallery-fullscreen
+//= require blueimp/bootstrap-image-gallery
 //= require admin/chat
 //= require_self
 
 
-$( document ).ready(function() {
+var ready;
+ready = function() {
+
   PixelAdmin.start(init);
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
 
 

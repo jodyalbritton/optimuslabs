@@ -24,13 +24,18 @@ class Admin::MessagesController < ApplicationController
   def show
     @user = current_user
     @inbox = @user.inbox
-   
+  
+    mark_read = @user.contact.message_receipts.inbox.find_by_message_id(@message.id)
+    unless mark_read == nil
+    mark_read.read = true
+    mark_read.save
+    end
+
   end
 
   # GET /messages/new
   def new
-    
-      @message = Message.new
+      @message = Message.new(:parent_id => params[:parent_id])
   end
 
   # GET /messages/1/edit
@@ -40,17 +45,14 @@ class Admin::MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-     unless current_user == nil
-      @user = current_user 
-      @message = @user.messages.new(message_params)
-    else
+   
       @message = Message.new(message_params)
-  end
+  
    
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to [:admin, @message], notice: 'Message was successfully created.' }
+        format.html { redirect_to admin_messages_path, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
@@ -91,6 +93,6 @@ class Admin::MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:full_name, :email, :body, :subject, :phone, :source)
+      params.require(:message).permit(:full_name, :email, :body, :subject, :phone, :source, :recipient_email, :recipient, :parent_id)
     end
 end

@@ -1,62 +1,70 @@
-<!-- 10. $FORM_EXAMPLE =============================================================================
+<%= form_for [:admin, @ticket], :html => { :class => "form-horizontal" } do |f| %>
 
-				Form example
--->
-				<%= form_for [:admin, @ticket], :html => { :class => "form-horizontal" } do |f| %>
-			
-					<div class="panel-heading">
-						<span class="panel-title">Ticket Form</span>
-					</div>
-					<div class="panel-body">
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">Client</label>
-							<div class="col-sm-10">
-								<%= f.text_field :client_name, data: {autocomplete_source: admin_clients_path}, :class=> "form-control", :required => true %>
-							
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">Severity</label>
-							<div class="col-sm-10">
-								<%=f.collection_select(:severity_type_id, SeverityType.all, :id, :name, {:include_blank => false}, {:class => 'form-control'}) %>
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">Subject</label>
-							<div class="col-sm-10">
-								<%= f.text_field :subject, :class=> "form-control", :required=> true %>
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">Location</label>
-							<div class="col-sm-10">
-								<%= f.text_field :location, :class=> "form-control", :required=> true %>
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">Description</label>
-							<div class="col-sm-10">
-								<%= f.text_area :description, :class=> "form-control" %>
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">Resolution</label>
-							<div class="col-sm-10">
-								<%= f.text_area :resolution, :class=> "form-control" %>
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="form-group">
-							<label for="asdasdas" class="col-sm-2 control-label">State</label>
-							<div class="col-sm-10">
-								<%= f.select :status, Ticket.aasm_states_for_select,{}, { :class => 'form-control' } %>
-							</div>
-						</div> <!-- / .form-group -->
-						<div class="panel-footer text-right">
-							<%= f.submit "Update", :class=> "btn btn-primary" %>
-						</div>
-					</div>
-				<% end %>
-<!-- /10. $FORM_EXAMPLE -->
+	<div class="panel-heading">
+		<span class="panel-title">Ticket Form</span>
+	</div>
+	<div class="panel-body">
+		<% if @ticket.errors.any? %>
+		    <div class="alert alert-danger alert-dismissable">
+		      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		      <h4><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h4>
+
+		      <ul>
+		      <% @ticket.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">Client</label>
+			<div class="col-sm-10">
+				<%= f.text_field :client_name, data: {autocomplete_source: admin_clients_path}, :class=> "form-control", :required => true %>
+			    <%= f.hidden_field :user_id, :value => current_user.id %> 
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">Severity</label>
+			<div class="col-sm-10">
+				<%=f.collection_select(:severity_type_id, SeverityType.all, :id, :name, {:include_blank => false}, {:class => 'form-control'}) %>
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">Subject</label>
+			<div class="col-sm-10">
+				<%= f.text_field :subject, :class=> "form-control", :required=> true %>
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">Location</label>
+			<div class="col-sm-10">
+				<%= f.text_field :location, :class=> "form-control", :required=> true %>
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-10">
+				<%= f.text_area :description, :class=> "form-control", :required => true %>
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">Resolution</label>
+			<div class="col-sm-10">
+				<%= f.text_area :resolution, :class=> "form-control" %>
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="form-group">
+			<label for="asdasdas" class="col-sm-2 control-label">State</label>
+			<div class="col-sm-10">
+				<%= f.select :status, Ticket.aasm_states_for_select,{}, { :class => 'form-control' } %>
+			</div>
+		</div> <!-- / .form-group -->
+		<div class="panel-footer text-right">
+			<%= f.submit "Update", :class=> "btn btn-primary" %>
+		</div>
+	</div>
+<% end %>
+
 <script>
  $(function() {
         $( "#ticket_client_name" ).autocomplete({

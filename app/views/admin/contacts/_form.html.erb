@@ -17,12 +17,10 @@
         <div class="row">
           <div class="col-md-3">
            <div class="col-md-12">
-            <div id="upload-preview" id="upload-preview">
-            <%= image_tag @contact.avatar.url(:medium), :class=> "img img-responsive" %>
+            <div id="upload-preview" class="col-lg-9 col-lg-offset-1">
+              <%= image_tag @contact.avatar.url(:medium), :class=> "img img-responsive" %>
+              <%= f.file_field :avatar, :class=> "form-control file"%>
             </div>
-           </div>
-           <div class="col-md-8 col-offset-md-2">
-           <%= f.file_field :avatar, :class=> "form-control file"%>
            </div>
           </div>
           <div class="col-md-9">
@@ -82,16 +80,19 @@
  $(function() {
         $( "#contact_client_name" ).autocomplete({
           source: $('#contact_client_name').data('autocomplete-source')
-    });
+        });
+        $('#contact_avatar').pixelFileInput({ placeholder: 'No file selected...' });
+
   });
 </script>
 
-<script type="text/javascript">      
-//JS File
 
-    var preview = $(".upload-preview img");
 
-    $(".file").change(function(event){
+<script>
+$(document).ready(function(){
+    var preview = $("#upload-preview img");
+
+    $("#contact_avatar").change(function(event){
        var input = $(event.currentTarget);
        var file = input[0].files[0];
        var reader = new FileReader();
@@ -101,5 +102,5 @@
        };
        reader.readAsDataURL(file);
     });
-
+});
 </script>

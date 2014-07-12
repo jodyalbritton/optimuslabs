@@ -14,18 +14,24 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.default_url_options = { :host => "testoptimus.com",
-                                               :port => "3000" }
+
   
   config.action_mailer.raise_delivery_errors = false
 
+ config.action_mailer.default_url_options = { :host => "localhost",
+                                              :port => 3000
+
+   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address => "testoptimus.com",
+  :address => "localhost",
   :port => 25,
-  :domain => "testoptimus.com",
-}
+  :domain => "getoptimus.com",
+  :openssl_verify_mode => 'none',
+  :enable_starttls_auto => false
+  }
 
+  
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -37,7 +43,7 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
   config.assets.compile = true
-
+  Rails.application.routes.default_url_options[:host] = "localhost:3000"
 
 
   # Adds additional error checking when serving assets at runtime.

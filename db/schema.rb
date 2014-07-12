@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706112631) do
+ActiveRecord::Schema.define(version: 20140712180038) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20140706112631) do
   add_index "clients", ["client_owner_id"], name: "index_clients_on_client_owner_id", using: :btree
 
   create_table "contacts", force: true do |t|
-    t.string   "full_name"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -133,6 +132,16 @@ ActiveRecord::Schema.define(version: 20140706112631) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "galleries", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+  end
+
+  add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
+
   create_table "identities", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -164,14 +173,6 @@ ActiveRecord::Schema.define(version: 20140706112631) do
   end
 
   add_index "interactions", ["interaction_event_id"], name: "index_interactions_on_interaction_event_id", using: :btree
-
-  create_table "invoice__statuses", force: true do |t|
-    t.string   "state"
-    t.text     "description"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "invoice_statuses", force: true do |t|
     t.string   "state"
@@ -255,8 +256,10 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.datetime "updated_at"
     t.string   "email"
     t.integer  "contact_id"
+    t.string   "ancestry"
   end
 
+  add_index "messages", ["ancestry"], name: "index_messages_on_ancestry", using: :btree
   add_index "messages", ["client_id"], name: "index_messages_on_client_id", using: :btree
   add_index "messages", ["contact_id"], name: "index_messages_on_contact_id", using: :btree
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
@@ -300,6 +303,24 @@ ActiveRecord::Schema.define(version: 20140706112631) do
 
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
 
+  create_table "photos", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "category_id"
+    t.integer  "gallery_id"
+    t.string   "slug"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "photos", ["category_id"], name: "index_photos_on_category_id", using: :btree
+  add_index "photos", ["gallery_id"], name: "index_photos_on_gallery_id", using: :btree
+  add_index "photos", ["slug"], name: "index_photos_on_slug", unique: true, using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "body"
@@ -324,17 +345,15 @@ ActiveRecord::Schema.define(version: 20140706112631) do
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
 
   create_table "products", force: true do |t|
-    t.string   "name",                                              default: "",    null: false
+    t.string   "name",                      default: "",    null: false
     t.text     "description"
-    t.integer  "stock",                                             default: 0
-    t.boolean  "available",                                         default: false
+    t.integer  "stock",                     default: 0
+    t.boolean  "available",                 default: false
     t.datetime "available_on"
     t.string   "slug"
     t.string   "meta_description"
     t.string   "meta_keywords"
-    t.string   "sku",                                               default: "",    null: false
-    t.decimal  "cost",                      precision: 8, scale: 2, default: 0.0
-    t.decimal  "price",                     precision: 8, scale: 2, default: 0.0
+    t.string   "sku",                       default: "",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo_file_name"
@@ -347,8 +366,13 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "header_photo_content_type"
     t.integer  "header_photo_file_size"
     t.datetime "header_photo_updated_at"
-    t.boolean  "featured",                                          default: true
+    t.boolean  "featured",                  default: true
     t.text     "summary"
+    t.integer  "cost_cents",                default: 0,     null: false
+    t.string   "cost_currency",             default: "USD", null: false
+    t.integer  "price_cents",               default: 0,     null: false
+    t.string   "price_currency",            default: "USD", null: false
+    t.boolean  "listed",                    default: true
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
@@ -402,8 +426,6 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "header_content_type"
     t.integer  "header_file_size"
     t.datetime "header_updated_at"
-    t.decimal  "price",               precision: 30, scale: 10
-    t.decimal  "cost",                precision: 30, scale: 10
     t.decimal  "duration",            precision: 30, scale: 10
     t.integer  "rate_type_id"
     t.boolean  "featured",                                      default: false
@@ -411,6 +433,10 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "slug"
     t.integer  "position"
     t.boolean  "listed",                                        default: false
+    t.integer  "price_cents",                                   default: 0,     null: false
+    t.string   "price_currency",                                default: "USD", null: false
+    t.integer  "cost_cents",                                    default: 0,     null: false
+    t.string   "cost_currency",                                 default: "USD", null: false
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
@@ -524,11 +550,13 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.datetime "closed_at"
     t.datetime "pended_at"
     t.datetime "in_progress_at"
+    t.integer  "user_id"
   end
 
   add_index "tickets", ["client_id"], name: "index_tickets_on_client_id", using: :btree
   add_index "tickets", ["severity_type_id"], name: "index_tickets_on_severity_type_id", using: :btree
   add_index "tickets", ["ticket_status_id"], name: "index_tickets_on_ticket_status_id", using: :btree
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
   create_table "timesheets", force: true do |t|
     t.datetime "clocked_in"
@@ -614,17 +642,19 @@ ActiveRecord::Schema.define(version: 20140706112631) do
     t.string   "yt_tags"
     t.integer  "views"
     t.integer  "position"
-    t.datetime "published_at"
-    t.datetime "yt_updated_at"
+    t.time     "published_at"
+    t.time     "yt_updated_at"
     t.string   "slug"
     t.integer  "sponsor_id"
     t.boolean  "sponsored",     default: false
     t.text     "embed"
     t.string   "url"
     t.text     "description"
+    t.integer  "gallery_id"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree
+  add_index "videos", ["gallery_id"], name: "index_videos_on_gallery_id", using: :btree
   add_index "videos", ["slug"], name: "index_videos_on_slug", unique: true, using: :btree
   add_index "videos", ["sponsor_id"], name: "index_videos_on_sponsor_id", using: :btree
 

@@ -9,6 +9,9 @@
     if Category.all.size == 0
     categories = Category.create(:name => 'Default', :description => 'Default Category')
 	end
+    if Gallery.all.size == 0
+    galleries = Gallery.create(:name => 'Default', :description => 'Default Gallery')
+    end
 	if RateType.all.size == 0
     rate_types = RateType.create(:name => 'Default', :unit => 1)
 	end
@@ -36,6 +39,8 @@
     sponsors_enabled = Setting.sponsors_enabled = 'false'
     products_enabled = Setting.products_enabled = 'false'
     videos_enabled = Setting.videos_enabled = 'false'
+    galleries_enabled = Setting.galleries_enabled = 'false'
+    photos_enabled = Setting.photos_enabled = 'false'
     tickets_enabled =Setting.tickets_enabled = 'false'
     messages_enabled = Setting.messages_enabled = 'false'
     services_enabled = Setting.services_enabled = 'false'

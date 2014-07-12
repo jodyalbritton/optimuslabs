@@ -138,7 +138,7 @@ Use search to find needed section.
 							<% unless current_user.inbox == nil %>
 							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
 								<a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
-									<span class="label"><%= current_user.inbox.count %></span>
+									<span class="label"><%= current_user.inbox_and_unread.count %></span>
 									<i class="nav-icon fa fa-envelope"></i>
 									<span class="small-screen-text">Income messages</span>
 								</a>
@@ -159,7 +159,7 @@ Use search to find needed section.
 								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
 									<div class="messages-list" id="main-navbar-messages">
 									    <% unless current_user.inbox == nil %>
-										<% current_user.inbox.each do |notification| %>
+										<% current_user.inbox_and_unread.each do |notification| %>
 											<div class="message">
 												
 												<%= link_to notification.message.subject, admin_message_path(notification.message), :class=> "message-subject" %>
@@ -231,24 +231,68 @@ Use search to find needed section.
 					<i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span>
 					<% end %>
 				</li>
-				<% if Setting.blog_enabled == "true" %>
 				<li class="mm-dropdown">
-					<a href="#"><i class="menu-icon fa fa-pencil"></i><span class="mm-text">Blog</span></a>
+					<a href="#"><i class="menu-icon fa fa-pencil"></i><span class="mm-text">Content</span></a>
+					<ul>
+					
+					<% if Setting.blog_enabled == "true" %>
+					<li class="mm-dropdown">
+						<a href="#"><span class="mm-text">Blog</span></a>
+						<ul>
+							<li>
+								<%= link_to admin_posts_path, :tabindex=>"-1" do %>
+								<span class="mm-text">List Posts</span>
+								<% end %>
+							</li>
+							<li>
+								<%= link_to new_admin_post_path, :tabindex=>"-1" do %>
+								<span class="mm-text">New Post</span>
+								<% end %>
+							</li>
+						</ul>
+					</li>
+					<% end %>
+					<% if Setting.galleries_enabled == "true" %>
+					<li class="mm-dropdown">
+						<a href="#"><span class="mm-text">Galleries</span></a>
+						<ul>
+							<li>
+								<%= link_to admin_galleries_path, :tabindex=>"-1" do %>
+								<span class="mm-text">List Galleries</span>
+								<% end %>
+							</li>
+							<li>
+								<%= link_to new_admin_gallery_path, :tabindex=>"-1" do %>
+								<span class="mm-text">New Gallery</span>
+								<% end %>
+							</li>
+							
+
+							
+						</ul>
+					</li>
+					<% end %>
+					<% if Setting.videos_enabled == 'true' %>
+					<li class="mm-dropdown">
+					<a href="#"><span class="mm-text">Videos</span></a>
 					<ul>
 						<li>
-							<%= link_to admin_posts_path, :tabindex=>"-1" do %>
-							<span class="mm-text">List Posts</span>
+							<%= link_to admin_videos_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Videos</span>
 							<% end %>
 						</li>
 						<li>
-							<%= link_to new_admin_post_path, :tabindex=>"-1" do %>
-							<span class="mm-text">New Post</span>
+							<%= link_to new_admin_video_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Video</span>
 							<% end %>
 						</li>
 						
 					</ul>
 				</li>
 				<% end %>
+				</ul>
+
+				</li>
 				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-users"></i><span class="mm-text">Clients</span></a>
 					<ul>
@@ -358,24 +402,7 @@ Use search to find needed section.
 					</ul>
 				</li>
 				<% end %>
-				<% if Setting.videos_enabled == 'true' %>
-				<li class="mm-dropdown">
-					<a href="#"><i class="menu-icon fa fa-gift"></i><span class="mm-text">Videos</span></a>
-					<ul>
-						<li>
-							<%= link_to admin_videos_path, :tabindex=>"-1" do %>
-							<span class="mm-text">List Videos</span>
-							<% end %>
-						</li>
-						<li>
-							<%= link_to new_admin_video_path, :tabindex=>"-1" do %>
-							<span class="mm-text">New Video</span>
-							<% end %>
-						</li>
-						
-					</ul>
-				</li>
-				<% end %>
+				
 				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-money"></i><span class="mm-text">Finances</span></a>
 					<ul>

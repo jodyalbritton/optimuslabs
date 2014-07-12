@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
   attr_accessor :full_name, :phone, :recipient, :to_address
-
+  has_ancestry
+  
   belongs_to :client
   belongs_to :project
   belongs_to :conversation
@@ -10,7 +11,7 @@ class Message < ActiveRecord::Base
   before_create :get_sender
   after_create :create_receipts, :create_interaction
 
-  validates_presence_of :email, :subject, :full_name
+  validates_presence_of :email, :subject
 
    
 
@@ -22,14 +23,12 @@ class Message < ActiveRecord::Base
 
    def get_sender
       unless source == "CONTACT_FORM_USER"
-       	Contact.find_or_create_by(:email => email) do |contact|
-     		 contact.full_name = full_name
-        end
+       	Contact.find_by(:email => email)
       else
         
         Contact.find_or_create_by(:email => email) do |contact|
          curr_user = User.find_by_email(email)
-         contact.full_name = curr_user.full_name
+        
          contact.first_name = curr_user.first_name
          contact.last_name = curr_user.last_name
        end
@@ -38,7 +37,7 @@ class Message < ActiveRecord::Base
    
    
    def get_receiver
-      User.find_by_email(recipient)
+      Contact.find_by_email(recipient)
    end 
 
    
@@ -75,16 +74,15 @@ class Message < ActiveRecord::Base
    def create_receipt_for_sender
    	 MessageReceipt.create(
       message: self,
-      receivable_id: get_sender.id,
+      receivable_id: get_sender.id, 
       receivable_type: get_sender.class,
-      sender_id: get_sender.id,
-      sender_type: get_sender.class,
+      sender_id: get_receiver.id, 
+      sender_type: get_receiver.class,
       read: false, 
       mailbox_type: "Sent"
 
       
     )
    end 
-
 end
 

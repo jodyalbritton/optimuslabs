@@ -84,7 +84,10 @@
 <script>
 $(function() {
            $( "#sponsor_category_name" ).autocomplete({
-          source: $('#sponsor_category_name').data('autocomplete-source')
+          		source: $('#sponsor_category_name').data('autocomplete-source')
             });
+            $('#sponsor_avatar').pixelFileInput({ placeholder: 'No file selected...' });
           });
 </script>
+
+

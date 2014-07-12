@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :messages, only: [:new, :create]
   resources :products, only: [:index, :show]
   resources :videos,   only: [:index, :show]
+  resources :galleries,   only: [:index, :show] do 
+    resources :photos,   only: [:show]
+  end 
   resources :contacts, only: [:new, :create, :thanks]
   
 
@@ -44,6 +47,15 @@ Rails.application.routes.draw do
         collection { post :sort }
       end
       resources :categories
+      resources :galleries do 
+        resources :photos
+      end
+
+      resources :photos do
+         collection do
+          get :tags
+        end
+      end
       resources :videos do
         collection do
           get :tags

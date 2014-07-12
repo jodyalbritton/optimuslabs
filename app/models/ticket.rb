@@ -3,7 +3,12 @@ class Ticket < ActiveRecord::Base
   belongs_to :client
   belongs_to :severity_type
   belongs_to :ticket_status
+  belongs_to :user
   has_many :interactions, as: :interactive
+
+  #### Tickets have attachments and notes ####
+  has_many :attachments, as: :attachable, dependent: :destroy, counter_cache: true
+  has_many :notes, as: :notable, dependent: :destroy, counter_cache: true
   
   before_update :adjust_status
 
@@ -89,15 +94,15 @@ class Ticket < ActiveRecord::Base
       self.client = Client.find_by(name: name) if name.present?
     end
   ####  Set the class for the ticket badge color ####
-  def get_label
-  	if self.opened?
-  		"success"
-    elsif self.pending?
-    	"warning"
-    elsif self.in_progress?
-    	"info"
-    else	
-        "default"
+    def get_label
+    	if self.opened?
+    		"success"
+      elsif self.pending?
+      	"warning"
+      elsif self.in_progress?
+      	"info"
+      else	
+          "default"
+      end
     end
-  end
 end

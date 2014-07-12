@@ -12,6 +12,7 @@ class Admin::TicketsController < ApplicationController
       if params[:client_id]
         @client = Client.find(params[:client_id])
         @tickets = @client.tickets.all
+        session[:return_to] = admin_client_tickets_path(@client)
       elsif params[:closed]
         @tickets = Ticket.closed
       else
@@ -19,7 +20,7 @@ class Admin::TicketsController < ApplicationController
 
 
       end
-      session[:return_to] = request.referer
+      
   end
 
   # GET /tickets/1
@@ -43,6 +44,7 @@ class Admin::TicketsController < ApplicationController
     else   
     @ticket = Ticket.new
     end
+    session[:return_to] = request.referer
   end
 
   # GET /tickets/1/edit
@@ -64,6 +66,7 @@ class Admin::TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+        Admin::TicketMailer.ticket_created(@ticket).deliver
         if session[:return_to]
           format.html { redirect_to session.delete(:return_to), notice: 'Ticket was successfully created.' }
         else
@@ -82,6 +85,7 @@ class Admin::TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
+        Admin::TicketMailer.ticket_updated(@ticket).deliver
         if session[:return_to]
           format.html { redirect_to session.delete(:return_to), notice: 'Ticket was successfully updated.' }
         else
@@ -158,6 +162,6 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-       params.require(:ticket).permit(:subject, :client_name, :description, :severity, :ticket_status_id, :location, :resolution, :status, :severity_type_id)
+       params.require(:ticket).permit(:subject, :client_name, :user_id, :description, :severity, :ticket_status_id, :location, :resolution, :status, :severity_type_id)
     end
 end

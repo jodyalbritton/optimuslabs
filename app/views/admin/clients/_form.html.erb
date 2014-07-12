@@ -71,11 +71,11 @@
         </div>
         <%= f.label :featured, :class => "col-sm-1 control-label" %>
         <div class="col-sm-2">
-          <%= f.check_box :featured, :class => "form-control" %>
+          <%= f.check_box :featured, :class => "form-control switched" %>
         </div>
          <%= f.label :active, :class => "col-sm-1 control-label" %>
         <div class="col-sm-2">
-          <%= f.check_box :active, :class => "form-control" %>
+          <%= f.check_box :active, :class => "form-control switched" %>
         </div>
       </div>
     </div>
@@ -83,3 +83,10 @@
              <%= f.submit :class => "btn btn-primary" %>
     </div>
 <% end %>
+
+<script>
+  $(function() {
+       $('.switched').switcher();
+       $('#client_avatar').pixelFileInput({ placeholder: 'No file selected...' });
+  });
+</script>

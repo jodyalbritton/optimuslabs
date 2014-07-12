@@ -1,0 +1,104 @@
+
+  <% content_for :page_header do %>
+   <%= @gallery.name %>
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_galleries_path, :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<%= render 'admin/header' %>
+
+
+
+<div class="panel colourable">
+  <div class="panel-heading">
+    <span class="panel-title">Photos</span>
+    <div class="panel-heading-controls">
+      <span class="panel-heading-text"><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newPhoto">Add Photo</button>|
+       <%= link_to edit_admin_gallery_path(@gallery), :class => 'btn btn-xs' do %>
+        <span class="btn-label icon fa fa-plus"></span>Edit
+       <% end %>
+    </div>
+  </div> <!-- / .panel-heading -->
+  <div class="panel-body">
+    <div class="row">
+      <% @gallery.photos.each do |photo| %>
+      <div class="col-xs-3">
+        <div class="thumb-contents thumbnail">
+            <%= link_to photo.file.url, data: {:gallery=>""} do %>
+            <%= image_tag photo.file.url(:medium) %>
+            <% end %>
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                 <%= link_to  admin_photo_path(photo), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+                    <button class="btn" data-original-title="Cancel"><i class="icon fa fa-trash-o"></i></button>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 5. $DEFAULT_MODAL =============================================================================
+
+        Default modal
+-->
+        <!-- Modal -->
+        <div id="newPhoto" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">New Photo</h4>
+              </div>
+              <div class="modal-body">
+                  <%= render "admin/photos/form" %>
+              </div> <!-- / .modal-body -->
+            </div> <!-- / .modal-content -->
+          </div> <!-- / .modal-dialog -->
+        </div> <!-- /.modal -->
+        <!-- / Modal -->
+
+       
+<!-- /5. $DEFAULT_MODAL -->

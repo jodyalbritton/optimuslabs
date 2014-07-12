@@ -15,6 +15,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :invoice_status
   before_save :update_balance
 
+  #### Invoices have items and notes ####
   accepts_nested_attributes_for :items, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :notes, :reject_if => :all_blank, :allow_destroy => true
 
@@ -22,7 +23,7 @@ class Invoice < ActiveRecord::Base
 
  
   
-#### Payment and Balance ####
+  #### Payment and Balance ####
 
   def update_balance
     self.balance = self.total_price
