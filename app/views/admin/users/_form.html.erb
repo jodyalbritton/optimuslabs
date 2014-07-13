@@ -1,7 +1,50 @@
- 
-
-
+<%= form_for([:admin, @user], :html => { :class => "form-horizontal panel", :multipart => true }) do |f| %>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-3">
+       <div class="form-group">
+        <label for="InputUserName">Username<sup>*</sup></label>
+        <%= f.text_field :username, autofocus: true, :class=>"form-control", :required=> true  %>
+      </div>
+       <div class="col-md-12">
+        <div id="upload-preview" class="col-lg-9 col-lg-offset-1">
+          <%= image_tag @user.avatar.url(:medium), :class=> "img img-responsive" %>
+          <%= f.file_field :avatar, :class=> "form-control file"%>
+        </div>
+       </div>
        
+        <div class="form-group">
+            <label for="InputFirstName">Title</label>
+             <%= f.text_field :title, :class=>"form-control" %>
+        </div>
+             <div class="form-group">
+            <label for="InputFirstName">Employee</label>
+             <%= f.check_box :employee, :class=>"form-control" %>
+        </div>
+      </div>
+      <div class="col-md-9">
+       <div class="row">
+        <div class="col-md-6">
+       <div class="form-group no-margin-hr">
+        <%= f.label :first_name, :class => "control-label" %>
+
+        <%= f.text_field :first_name, :class => "form-control", :required=> true %>  
+       </div>
+        </div>
+        <div class="col-md-6">
+         <div class="form-group no-margin-hr">
+                  <%= f.label :last_name, :class => "control-label" %>
+        
+                  <%= f.text_field :last_name, :class => "form-control", :required=> true %>  
+          </div>
+        </div>
+        </div>
+        <div class="form-group no-margin-hr">
+          <%= f.label :client, :class => "control-label" %>
+          <%= f.text_field :client_name, data: {autocomplete_source: admin_clients_path}, :class=> "form-control", :required => true %>
+        </div>
+       
+<<<<<<< HEAD
            
                
                     <%= simple_form_for([:admin, @user]) do |f| %>
@@ -110,23 +153,121 @@
                
                  
                 </div>
+=======
+        <div class="form-group no-margin-hr">
+          <%= f.label :email, :class => "control-label" %>
+          <%= f.text_field :email, :class => "form-control" %>
+       
+        </div>
+        
+
+        <div class="form-group no-margin-hr">
+          <%= f.label :phone, :class => "control-label" %>
+          
+            <%= f.text_field :telephone, :class => "form-control" %>
+
+        </div>
+         <div class="form-group no-margin-hr">
+          <%= f.label :mobile_phone, :class => "control-label" %>
+          
+            <%= f.text_field :mobile_phone, :class => "form-control" %>
+
+        </div>
+      </div>
+    </div>
+
+
+    
+
+
+
+
+    <div class="form-group">
+       <label for="InputFirstName">Address</label>
+       <%= f.text_field :address, :class=>"form-control" %>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+          <div class="form-group no-margin-hr">
+              <label for="InputFirstName">City</label>
+               <%= f.text_field :city, :class=>"form-control" %>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group no-margin-hr">
+              <label for="InputFirstName">State</label>
+               <%= f.text_field :state, :class=>"form-control" %>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group no-margin-hr">
+              <label for="InputFirstName">Zip</label>
+               <%= f.text_field :zip, :class=>"form-control" %>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group no-margin-hr">
+                <label for="InputPassword">Password<sup>*</sup></label>
+                  <%= f.password_field :password, autocomplete: "off", :class=>"form-control"  %>
             </div>
-           
-                            <div class="col-sm-6">
-                               
-                       
-                            </div>
-                            <div class="col-sm-6">
-                               <%= f.submit "Update", :class=> "btn btn-primary pull-right" %>
-                                
-                            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group no-margin-hr">
+                <label for="InputConfirmPassword">Confirm Password<sup>*</sup></label>
+                <%= f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control"  %>
+                                               
+>>>>>>> upstream/master
+            </div>
+        </div>
+    </div>
+  </div>
+
+<div class="panel-footer text-right">
+   <%= f.submit "Update", :class=> "btn btn-primary" %>
+</div>
       
 <% end %>
      
 
 
 
+<script>
+ $(function() {
+        $( "#user_client_name" ).autocomplete({
+          source: $('#user_client_name').data('autocomplete-source')
+        });
+        $('#user_avatar').pixelFileInput({ placeholder: 'No file selected...' });
 
+  });
+</script>
+
+
+
+<script>
+$(document).ready(function(){
+    var current = $("#upload-preview img").attr("src");
+    var preview = $("#upload-preview img");
+
+    $("#user_avatar").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+    $(document).change(function() {
+      $("#preview-clear").click(function() {
+        preview.attr("src", current);
+    });
+});
+});
+</script>
 
 
 

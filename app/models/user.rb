@@ -140,6 +140,12 @@ class User < ActiveRecord::Base
   def login
     @login || self.username || self.email
   end
+  def client_name
+    self.client.try(:name)
+  end
 
+  def client_name=(name)
+    self.client = Client.find_by(name: name) if name.present?
+  end
 
 end
