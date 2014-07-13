@@ -32,6 +32,7 @@
     });
     return this.$clear_btn.on('click', (function(_this) {
       return function(e) {
+
         $input.wrap('<form>').parent('form').trigger('reset');
         $input.unwrap();
         $.proxy(_this.onChange, _this)();
@@ -43,7 +44,7 @@
 
   FileInput.DEFAULTS = {
     choose_btn_tmpl: '<a href="#" class="btn btn-xs btn-primary">Choose</a>',
-    clear_btn_tmpl: '<a href="#" class="btn btn-xs"><i class="fa fa-times"></i> Clear</a>',
+    clear_btn_tmpl: '<a href="#" class="btn btn-xs" id="preview-clear"><i class="fa fa-times"></i> Clear</a>',
     placeholder: null
   };
 

@@ -90,6 +90,7 @@
 
 <script>
 $(document).ready(function(){
+    var current = $("#upload-preview img").attr("src");
     var preview = $("#upload-preview img");
 
     $("#contact_avatar").change(function(event){
@@ -102,5 +103,10 @@ $(document).ready(function(){
        };
        reader.readAsDataURL(file);
     });
+    $(document).change(function() {
+      $("#preview-clear").click(function() {
+        preview.attr("src", current);
+    });
+});
 });
 </script>
