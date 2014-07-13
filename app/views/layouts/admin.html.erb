@@ -164,9 +164,9 @@ Use search to find needed section.
 												
 												<%= link_to notification.message.subject, admin_message_path(notification.message), :class=> "message-subject" %>
 												<div class="message-description">
-													from <a href="#"> </a>
+													from <a href="#"><%= notification.sender.full_name %> </a>
 													&nbsp;&nbsp;·&nbsp;&nbsp;
-													2h ago
+													<%= time_ago_in_words(notification.created_at) %>
 												</div> <!-- / .message-description -->
 											</div> <!-- / .message -->
 										<% end %>
