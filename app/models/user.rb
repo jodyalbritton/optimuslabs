@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
   attr_accessor :login
  before_create :build_default_contact
- after_update :update_contact
+ after_save :update_contact
 
  has_attached_file :avatar, :styles => { :large => "600x600", :medium => "200x200#", :thumb => "100x100#", :mini => "
   40x40#" }, :default_url => ":style/missing.png"
@@ -105,8 +105,12 @@ class User < ActiveRecord::Base
 
   def build_default_contact 
        build_contact
+<<<<<<< HEAD
        update_contact
 
+=======
+    
+>>>>>>> upstream/master
        
   end 
 
