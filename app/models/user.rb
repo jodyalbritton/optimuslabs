@@ -104,14 +104,7 @@ class User < ActiveRecord::Base
   end
 
   def build_default_contact 
-       build_contact
-<<<<<<< HEAD
-       update_contact
-
-=======
-    
->>>>>>> upstream/master
-       
+       build_contact       
   end 
 
   def update_contact
