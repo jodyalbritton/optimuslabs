@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     
 
     if params[:search] 
-  	@posts =  Post.search(params[:search]).records.page(params[:page])
+  	@posts =  Post.search(params[:search])
     else
 
     @posts = Post.order(:published_at).page(params[:page])
