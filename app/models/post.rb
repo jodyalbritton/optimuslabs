@@ -1,6 +1,5 @@
 class Post < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  searchkick
 
   attr_accessor :search
   has_attached_file :photo, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
