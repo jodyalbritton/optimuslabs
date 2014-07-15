@@ -119,7 +119,7 @@ Rails.application.routes.draw do
       resources :posts, only: [:show, :tagged, :catagorized]
    end
     
-  
+  match '/search/:query' => 'search#search', :as => 'search'
   get 'blog', to: 'posts#index', :as => 'index'
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
