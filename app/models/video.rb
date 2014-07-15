@@ -4,7 +4,7 @@ class Video < ActiveRecord::Base
   friendly_id :title, use: :slugged
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
-  searchkick text_start: [:name]
+  searchkick text_start: [:title]
 
   before_update :update_details
 
