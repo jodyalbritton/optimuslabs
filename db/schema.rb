@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712180038) do
+ActiveRecord::Schema.define(version: 20140716005842) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -642,8 +642,8 @@ ActiveRecord::Schema.define(version: 20140712180038) do
     t.string   "yt_tags"
     t.integer  "views"
     t.integer  "position"
-    t.time     "published_at"
-    t.time     "yt_updated_at"
+    t.datetime "published_at"
+    t.datetime "yt_updated_at"
     t.string   "slug"
     t.integer  "sponsor_id"
     t.boolean  "sponsored",     default: false

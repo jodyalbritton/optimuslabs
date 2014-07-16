@@ -1,11 +1,14 @@
 class Video < ActiveRecord::Base
-  include Rails.application.routes.url_helpers
+  searchkick autocomplete: ['title']
   extend FriendlyId
   friendly_id :title, use: :slugged
+  include Rails.application.routes.url_helpers
+  
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
-  searchkick autocomplete: ['title']
+  
 
+  before_create :update_details
   before_update :update_details
 
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
@@ -31,18 +34,8 @@ class Video < ActiveRecord::Base
   def get_share_url
     video_url(self)
   end 
-  def facebook_likes
-  uri = URI("http://graph.facebook.com/"+self.get_share_url)
-  data = Net::HTTP.get(uri)
-  @likes = JSON.parse(data)['likes']
-  end
-  
 
-  def g_plus_count
-  uri = URI("https://plusone.google.com/_/+1/fastbutton?url="+self.get_share_url)
-  data = Net::HTTP.get(uri)
-  @likes = JSON.parse(data)['g_plus_count']
-  end
+  
   def get_details
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
     client.video_by(self.uid)
@@ -86,6 +79,7 @@ class Video < ActiveRecord::Base
       self.title = '' ; self.duration = '00:00:00' ; self.author = '' ; self.likes = 0 ; self.dislikes = 0
     end
   end
+
 
 
   def update_details
