@@ -505,9 +505,11 @@ ActiveRecord::Schema.define(version: 20140716005842) do
   create_table "tags", force: true do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.string  "slug"
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
 
   create_table "tasks", force: true do |t|
     t.string   "item"

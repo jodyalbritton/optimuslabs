@@ -3,11 +3,9 @@ class Video < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
   include Rails.application.routes.url_helpers
-  
+  belongs_to :sponsor
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
-  
-
   before_create :update_details
   before_update :update_details
 
