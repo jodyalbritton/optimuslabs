@@ -17,8 +17,8 @@ Rails.application.routes.draw do
     resources :photos,   only: [:show]
   end 
   resources :contacts, only: [:new, :create, :thanks]
-  resourcses :tags, only: [:index, :show]
-  resourcses :categories, only: [:index, :show]
+  resources :tags, only: [:index, :show]
+  resources :categories, only: [:index, :show]
 
 #Admin interface 
 
