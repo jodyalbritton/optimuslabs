@@ -5,7 +5,7 @@ class Sponsor < ActiveRecord::Base
   friendly_id :name, use: :slugged
   has_many :videos
   belongs_to :category
-
+  acts_as_taggable # Alias for acts_as_taggable_on
   def category_name
   self.category.try(:name)
   end

@@ -4,4 +4,5 @@ class Gallery < ActiveRecord::Base
 	searchkick
 	has_many :photos
 	belongs_to :category
+	acts_as_taggable # Alias for acts_as_taggable_on
 end
