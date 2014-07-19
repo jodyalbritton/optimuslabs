@@ -1,4 +1,5 @@
 class Video < ActiveRecord::Base
+  before_save :update_details
   searchkick autocomplete: ['title']
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -6,8 +7,7 @@ class Video < ActiveRecord::Base
   belongs_to :sponsor
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
-  before_create :update_details
-  before_update :update_details
+ 
 
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 
@@ -45,6 +45,13 @@ class Video < ActiveRecord::Base
 
   def category_name=(name)
     self.category = Category.find_or_create_by(name: name) if name.present?
+  end
+  def sponsor_name
+    self.sponsor.try(:name)
+  end
+
+  def sponsor_name=(name)
+    self.sponsor = Sponsor.find_by(name: name) if name.present?
   end
   private
 
@@ -104,6 +111,10 @@ class Video < ActiveRecord::Base
       if self.dislikes == nil
         self.dislikes = 0
       end
+    def should_generate_new_friendly_id?
+      slug.blank?
+    end
+  
   end
   def parse_duration(d)
     hr = (d / 3600).floor

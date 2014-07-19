@@ -9,7 +9,12 @@ class Admin::SponsorsController < ApplicationController
 
 
   def index
-    @sponsors = Sponsor.all
+    if params[:term]
+      @sponsors = Sponsor.order(:name).where("name like ?", "%#{params[:term]}%")
+      render json: @sponsors.map(&:name)
+    else
+      @sponsors = Sponsor.all
+    end
   end
 
   def show
