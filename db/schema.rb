@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718193314) do
+ActiveRecord::Schema.define(version: 20140719191720) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -138,8 +138,10 @@ ActiveRecord::Schema.define(version: 20140718193314) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.integer  "category_id"
   end
 
+  add_index "galleries", ["category_id"], name: "index_galleries_on_category_id", using: :btree
   add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
 
   create_table "identities", force: true do |t|
