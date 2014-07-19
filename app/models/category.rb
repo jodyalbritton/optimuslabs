@@ -7,4 +7,6 @@ class Category < ActiveRecord::Base
 	has_many :products
 	has_many :videos
 	has_many :photos
+	has_many :sponsors
+	has_many :galleries
 end
