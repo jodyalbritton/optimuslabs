@@ -1,5 +1,8 @@
 class Video < ActiveRecord::Base
-  before_save :update_details
+  require 'open-uri' 
+  attr_reader :thumbnail_remote_url
+  before_validation :update_details
+  after_create :thumbnail_remote_url
   searchkick autocomplete: ['title']
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -7,7 +10,8 @@ class Video < ActiveRecord::Base
   belongs_to :sponsor
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
- 
+  has_attached_file :thumbnail, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
+  validates_attachment_content_type :thumbnail, :content_type => /\Aimage\/.*\Z/
 
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 
@@ -28,6 +32,14 @@ class Video < ActiveRecord::Base
   end
 
   validates :link, presence: true, format: YT_LINK_FORMAT
+
+  def thumbnail_remote_url
+    thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
+    self.thumbnail = open(thumb_url)
+    
+
+    
+  end
   
   def get_share_url
     video_url(self)
@@ -114,7 +126,8 @@ class Video < ActiveRecord::Base
     def should_generate_new_friendly_id?
       slug.blank?
     end
-  
+
+    
   end
   def parse_duration(d)
     hr = (d / 3600).floor
