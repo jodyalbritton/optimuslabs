@@ -23,7 +23,11 @@ class Message < ActiveRecord::Base
 
    def get_sender
       unless source == "CONTACT_FORM_USER"
-       	Contact.find_by(:email => email)
+       	Contact.find_or_create_by(:email => email) do |contact|
+          name_array = full_name.split
+          contact.first_name = name_array[0]
+          contact.last_name = name_array[1]
+        end 
       else
         
         Contact.find_or_create_by(:email => email) do |contact|
