@@ -1,5 +1,4 @@
 class Video < ActiveRecord::Base
-  require 'open-uri' 
   attr_reader :thumbnail_remote_url
   before_validation :update_details
   after_create :thumbnail_remote_url
@@ -35,7 +34,7 @@ class Video < ActiveRecord::Base
 
   def thumbnail_remote_url
     thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
-    self.thumbnail = open(thumb_url)
+    self.thumbnail =  URI.parse(thumb_url)
     
 
     
