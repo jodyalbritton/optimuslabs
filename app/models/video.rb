@@ -1,5 +1,5 @@
 class Video < ActiveRecord::Base
-  attr_reader :thumbnail_remote_url
+  attr_accessor :thumbnail_remote_url
   before_validation :update_details
   after_create :thumbnail_remote_url
   searchkick autocomplete: ['title']
