@@ -1,11 +1,12 @@
 class Sponsor < ActiveRecord::Base
  extend FriendlyId
-  has_attached_file :avatar, :styles => { :large => "600x403#", :medium => "300x300#", :thumb => "100x100>" }, :default_url => ":style/missing.png"
+  has_attached_file :avatar, :styles => { :large => "640x480>", :medium => "300x300>", :thumb => "100x100>" }, :default_url => ":style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_size :avatar, :in => 0.megabytes..4.megabytes
   friendly_id :name, use: :slugged
-
+  has_many :videos
   belongs_to :category
-
+  acts_as_taggable # Alias for acts_as_taggable_on
   def category_name
   self.category.try(:name)
   end

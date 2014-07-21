@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712180038) do
+ActiveRecord::Schema.define(version: 20140720180943) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -138,8 +138,10 @@ ActiveRecord::Schema.define(version: 20140712180038) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.integer  "category_id"
   end
 
+  add_index "galleries", ["category_id"], name: "index_galleries_on_category_id", using: :btree
   add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
 
   create_table "identities", force: true do |t|
@@ -505,9 +507,11 @@ ActiveRecord::Schema.define(version: 20140712180038) do
   create_table "tags", force: true do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.string  "slug"
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
 
   create_table "tasks", force: true do |t|
     t.string   "item"
@@ -637,20 +641,24 @@ ActiveRecord::Schema.define(version: 20140712180038) do
     t.datetime "updated_at"
     t.string   "uid"
     t.integer  "category_id"
-    t.boolean  "featured",      default: true
-    t.boolean  "listed",        default: true
+    t.boolean  "featured",               default: true
+    t.boolean  "listed",                 default: true
     t.string   "yt_tags"
     t.integer  "views"
     t.integer  "position"
-    t.time     "published_at"
-    t.time     "yt_updated_at"
+    t.datetime "published_at"
+    t.datetime "yt_updated_at"
     t.string   "slug"
     t.integer  "sponsor_id"
-    t.boolean  "sponsored",     default: false
+    t.boolean  "sponsored",              default: false
     t.text     "embed"
     t.string   "url"
     t.text     "description"
     t.integer  "gallery_id"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
   end
 
   add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree

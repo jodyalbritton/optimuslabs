@@ -1,12 +1,18 @@
 class Video < ActiveRecord::Base
-  include Rails.application.routes.url_helpers
-  extend FriendlyId
-  friendly_id :title, use: :slugged
-  belongs_to :category
-  acts_as_taggable # Alias for acts_as_taggable_on
   
 
-  before_update :update_details
+
+  before_validation :update_details
+  after_create :thumbnail_remote_url
+  searchkick autocomplete: ['title']
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+  include Rails.application.routes.url_helpers
+  belongs_to :sponsor
+  belongs_to :category
+  acts_as_taggable # Alias for acts_as_taggable_on
+  has_attached_file :thumbnail, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
+  validates_attachment_content_type :thumbnail, :content_type => /\Aimage\/.*\Z/
 
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 
@@ -27,22 +33,20 @@ class Video < ActiveRecord::Base
   end
 
   validates :link, presence: true, format: YT_LINK_FORMAT
+
+  def thumbnail_remote_url
+    thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
+    self.thumbnail =  URI.parse(thumb_url)
+    
+
+    
+  end
   
   def get_share_url
     video_url(self)
   end 
-  def facebook_likes
-  uri = URI("http://graph.facebook.com/"+self.get_share_url)
-  data = Net::HTTP.get(uri)
-  @likes = JSON.parse(data)['likes']
-  end
-  
 
-  def g_plus_count
-  uri = URI("https://plusone.google.com/_/+1/fastbutton?url="+self.get_share_url)
-  data = Net::HTTP.get(uri)
-  @likes = JSON.parse(data)['g_plus_count']
-  end
+  
   def get_details
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
     client.video_by(self.uid)
@@ -54,6 +58,13 @@ class Video < ActiveRecord::Base
 
   def category_name=(name)
     self.category = Category.find_or_create_by(name: name) if name.present?
+  end
+  def sponsor_name
+    self.sponsor.try(:name)
+  end
+
+  def sponsor_name=(name)
+    self.sponsor = Sponsor.find_by(name: name) if name.present?
   end
   private
 
@@ -88,6 +99,7 @@ class Video < ActiveRecord::Base
   end
 
 
+
   def update_details
   
       client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
@@ -112,6 +124,11 @@ class Video < ActiveRecord::Base
       if self.dislikes == nil
         self.dislikes = 0
       end
+    def should_generate_new_friendly_id?
+      slug.blank?
+    end
+
+    
   end
   def parse_duration(d)
     hr = (d / 3600).floor

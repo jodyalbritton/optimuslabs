@@ -73,6 +73,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    curb (0.8.5)
     daemons (1.1.9)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -311,6 +312,7 @@ DEPENDENCIES
   canonical-rails!
   cocoon
   coffee-rails (~> 4.0.0)
+  curb
   devise
   faker
   figaro

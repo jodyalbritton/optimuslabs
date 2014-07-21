@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     resources :photos,   only: [:show]
   end 
   resources :contacts, only: [:new, :create, :thanks]
-  
+  resources :tags, only: [:index, :show]
+  resources :categories, only: [:index, :show]
 
 #Admin interface 
 
@@ -119,7 +120,7 @@ Rails.application.routes.draw do
       resources :posts, only: [:show, :tagged, :catagorized]
    end
     
-  
+  get 'search/:action' => 'searches#:action'
   get 'blog', to: 'posts#index', :as => 'index'
   get 'blog/posts/tagged/:tag' => 'posts#tagged', :as => 'tagged'
   get 'blog/posts/categories/:category' => 'posts#categorized', :as => 'categorized'
