@@ -50,6 +50,9 @@ Rails.application.routes.draw do
       resources :categories
       resources :galleries do 
         resources :photos
+         collection do
+          get :tags
+        end
       end
 
       resources :photos do
@@ -110,6 +113,9 @@ Rails.application.routes.draw do
       end
       resources :sponsors do 
         resources :attachments
+        collection do
+          get :tags
+        end
       end
 
 
