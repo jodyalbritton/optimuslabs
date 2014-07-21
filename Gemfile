@@ -63,6 +63,7 @@ gem 'high_voltage', github: 'thoughtbot/high_voltage'
 gem 'acts_as_list'
 gem 'pusher'
 gem 'jquery-datatables-rails', '~> 2.1.10.0.2'
+gem 'jquery-fileupload-rails'
 gem 'lodash-rails'
 gem 'ancestry'
 

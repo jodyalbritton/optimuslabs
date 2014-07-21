@@ -52,7 +52,7 @@ class Admin::PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:file, :gallery_id, :category_id, :gallery, :category)
+      params.require(:photo).permit(:file, :gallery_id, :category_id, :gallery, :category, :uploaded_file)
     end
 
 end
