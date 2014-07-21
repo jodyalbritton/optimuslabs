@@ -45,6 +45,8 @@ GEM
       activerecord (>= 3, < 5)
     acts_as_list (0.4.0)
       activerecord (>= 3.0)
+    ads-rails (0.1.1)
+      rails (>= 3.1.0, < 4.2.0)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
     arel (5.0.1.20140414130214)
@@ -304,6 +306,7 @@ DEPENDENCIES
   aasm
   acts-as-taggable-on (~> 3.2.5)
   acts_as_list
+  ads-rails
   ancestry
   authority
   autonumeric-rails

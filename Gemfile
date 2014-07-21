@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 #gems for user accounts and objects
+gem 'ads-rails'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
