@@ -95,7 +95,11 @@ $(function() {
           });
 </script>
 
-
+ <script>
+      $(function(){
+          $('#sponsor_description').editable({inlineMode: false, height: 600})
+      });
+  </script>
 <script>
  $(function() {
   $("#sponsor_tag_list").tokenInput("/admin/sponsors/tags.json", {

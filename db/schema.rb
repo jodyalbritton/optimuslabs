@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720180943) do
+ActiveRecord::Schema.define(version: 20140722160313) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -267,6 +267,16 @@ ActiveRecord::Schema.define(version: 20140720180943) do
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
   add_index "messages", ["project_id"], name: "index_messages_on_project_id", using: :btree
 
+  create_table "milestones", force: true do |t|
+    t.integer  "project_id"
+    t.text     "description"
+    t.datetime "completed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "milestones", ["project_id"], name: "index_milestones_on_project_id", using: :btree
+
   create_table "notes", force: true do |t|
     t.string   "subject"
     t.string   "body"
@@ -486,6 +496,10 @@ ActiveRecord::Schema.define(version: 20140720180943) do
     t.string   "state"
     t.string   "zip"
     t.string   "slug"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
   end
 
   add_index "sponsors", ["category_id"], name: "index_sponsors_on_category_id", using: :btree

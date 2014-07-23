@@ -65,6 +65,10 @@ Rails.application.routes.draw do
           get :tags
         end
       end
+
+      resources :projects do 
+        resources :milestones
+      end
       resources :interaction_events
       resources :rate_types
       resources :severity_types

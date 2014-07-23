@@ -366,6 +366,24 @@ Use search to find needed section.
 					</ul>
 				</li>
 				<% end %>
+				<% if Setting.projects_enabled == "true" %>
+				<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-bullhorn"></i><span class="mm-text">Projects</span></a>
+					<ul>
+						<li>
+							<%= link_to admin_projects_path, :tabindex=>"-1" do %>
+							<span class="mm-text">List Projects</span>
+							<% end %>
+						</li>
+						<li>
+							<%= link_to new_admin_project_path, :tabindex=>"-1" do %>
+							<span class="mm-text">New Project</span>
+							<% end %>
+						</li>
+						
+					</ul>
+				</li>
+				<% end %>
 				<% if Setting.services_enabled == 'true' %>
 				<li class="mm-dropdown">
 					<a href="#"><i class="menu-icon fa fa-umbrella"></i><span class="mm-text">Services</span></a>

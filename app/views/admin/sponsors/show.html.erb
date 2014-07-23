@@ -24,7 +24,10 @@
             <div class="row">
               <div class="col-md-8">
                 <div class="sponsor-details">
-                  <%= @sponsor.description %>
+                  <% if @sponsor.videos.size > 0 %>
+                  <%= raw(@sponsor.videos.first.get_details.embed_html5)  %>
+                  <% end %>
+                  <%= sanitize(@sponsor.description) %>
                 </div>
               </div>
               <div class="col-md-4">

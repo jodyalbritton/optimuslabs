@@ -1,0 +1,59 @@
+
+
+<%= form_for([:admin, @project], :html => { :class => "form-horizontal panel", :multipart => true }) do |f| %>
+  <% if @project.errors.any? %>
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h4><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h4>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label :name, :class=> "col-md-2" %>
+          <div class="col-md-10">
+          <%= f.text_field :name, :class=> "form-control" %>
+          </div>
+        </div>
+      <div class="form-group">
+          <%= f.label :description, :class=> "col-md-2" %>
+          <div class="col-md-10">
+          <%= f.text_area :description, :class=> "form-control" %>
+          </div>
+        </div>            
+    
+      <div class="form-group">
+          <%= f.label :client_name, :class=> "col-md-2" %>
+          <div class="col-md-10">
+         <%= f.text_field :client_name, data: {autocomplete_source: admin_clients_path}, :class=> "form-control", :required => true %>
+          </div>
+        </div>            
+  </div>
+
+
+
+      
+
+ 
+<div class="panel-footer text-right">       
+              <%= f.submit :class => "btn btn-primary" %>
+</div>
+<% end %>
+
+<script>
+ $(function() {
+        $( "#project_client_name" ).autocomplete({
+          source: $('#project_client_name').data('autocomplete-source')
+        });
+        $('#project_avatar').pixelFileInput({ placeholder: 'No file selected...' });
+
+  });
+</script>
+
+
+
