@@ -8,17 +8,18 @@
 						<div class="row">
 							<div class="col-md-8">
 								<div class="form-group">
-									<label for="asdasdas" class="col-sm-2 control-label">Category</label>
-									<div class="col-sm-10">
-										<%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control", :required => true %>
-									</div>
-								</div> <!-- / .form-group -->
-								<div class="form-group">
 									<label for="asdasdas" class="col-sm-2 control-label">Name</label>
 									<div class="col-sm-10">
 										<%= f.text_field :name, :class=> "form-control" %>
 									</div>
 								</div> <!-- / .form-group -->
+								<div class="form-group">
+									<label for="asdasdas" class="col-sm-2 control-label">Category</label>
+									<div class="col-sm-10">
+										<%= f.text_field :category_name, data: {autocomplete_source: admin_categories_path}, :class=> "form-control", :required => true %>
+									</div>
+								</div> <!-- / .form-group -->
+								
 								<div class="form-group">
 									<label for="asdasdas" class="col-sm-2 control-label">Description</label>
 									<div class="col-sm-10">
@@ -72,12 +73,11 @@
 
 							</div>
 							<div class="col-md-4">
-								<div class="panel">
-								<%= image_tag @sponsor.avatar.url(:medium) %>
+								<div id="upload-preview" class="col-lg-9 col-lg-offset-1">
+								<%= image_tag @sponsor.avatar.url(:medium), :class=> "img img-responsive" %>
+								<%= f.file_field :avatar, :class=> "form-control file" %>
 								</div>
-								<div class="form-group">
-								<%= f.file_field :avatar, :class=> "form-control" %>
-								</div>
+							
 							</div>
 						</div>
 						 <!-- / .form-group -->
@@ -110,5 +110,29 @@ $(function() {
     tokenValue:"name",
     allowFreeTagging: true
   });
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    var current = $("#upload-preview img").attr("src");
+    var preview = $("#upload-preview img");
+
+    $("#sponsor_avatar").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+    $(document).change(function() {
+      $("#preview-clear").click(function() {
+        preview.attr("src", current);
+    });
+});
 });
 </script>
