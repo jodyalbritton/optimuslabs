@@ -1,9 +1,7 @@
 class Video < ActiveRecord::Base
-  
+  after_update :update_details
+  after_create :validate_slug 
 
-
-  before_validation :update_details, :thumbnail_remote_url
-  after_update :thumbnail_remote_url
   searchkick autocomplete: ['title']
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -16,7 +14,7 @@ class Video < ActiveRecord::Base
 
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 
-  before_create -> do
+   before_create-> do
     uid = link.match(YT_LINK_FORMAT)
 
     self.uid = uid[2] if uid && uid[2]
@@ -34,12 +32,14 @@ class Video < ActiveRecord::Base
 
   validates :link, presence: true, format: YT_LINK_FORMAT
 
+  def validate_slug 
+    if self.slug == nil 
+      self.save
+    end
+  end
   def thumbnail_remote_url
     thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
     self.thumbnail =  URI.parse(thumb_url)
-    
-
-    
   end
   
   def get_share_url
@@ -72,7 +72,7 @@ class Video < ActiveRecord::Base
   def get_additional_info
     begin
       client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
-      video = client.video_by(uid)
+      video = client.video_by(self.uid)
       self.title = video.title
       self.duration = parse_duration(video.duration)
       self.author = video.author.name
@@ -92,7 +92,11 @@ class Video < ActiveRecord::Base
       end
       if self.dislikes == nil
         self.dislikes = 0
-      end
+      end 
+      
+       thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
+       self.thumbnail =  URI.parse(thumb_url)
+       
     rescue
       self.title = '' ; self.duration = '00:00:00' ; self.author = '' ; self.likes = 0 ; self.dislikes = 0
     end
@@ -124,6 +128,8 @@ class Video < ActiveRecord::Base
       if self.dislikes == nil
         self.dislikes = 0
       end  
+      
+   
   end
   def parse_duration(d)
     hr = (d / 3600).floor
