@@ -2,8 +2,8 @@ class Video < ActiveRecord::Base
   
 
 
-  before_validation :update_details
-  after_create :thumbnail_remote_url
+  before_validation :update_details, :thumbnail_remote_url
+  after_update :thumbnail_remote_url
   searchkick autocomplete: ['title']
   extend FriendlyId
   friendly_id :title, use: :slugged
@@ -123,12 +123,7 @@ class Video < ActiveRecord::Base
       end
       if self.dislikes == nil
         self.dislikes = 0
-      end
-    def should_generate_new_friendly_id?
-      slug.blank?
-    end
-
-    
+      end  
   end
   def parse_duration(d)
     hr = (d / 3600).floor
