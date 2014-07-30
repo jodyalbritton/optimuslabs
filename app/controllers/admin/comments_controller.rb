@@ -19,8 +19,12 @@
       end
       def destroy
         @comment = Comment.find(params[:id])
+
+        @commentable = @comment.commentable
+
+
         if @comment.destroy
-          render :json => @comment, :status => :ok
+          @comments_refreshed = @commentable.comment_threads.order(:cached_votes_up).reverse
         else
           render :js => "alert('error deleting comment');"
         end

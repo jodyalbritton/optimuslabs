@@ -43,7 +43,7 @@
                   <% end %>
               
               </div>
-               <div id="votable-<% photo.id %>-vote" class="pull-right">
+               <div id="votable-<%= photo.id %>-vote" class="pull-right">
                                         
                                         <%= render "admin/votes/vote_result", :votable => photo %>
                                         <%= render "admin/votes/vote_controls", :votable => photo %>
