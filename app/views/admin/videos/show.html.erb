@@ -34,7 +34,7 @@
               <div class="col-md-4">
                 <div class="panel colourable">
                   <div class="panel-heading">
-                   <div id="votable-<% @video.id %>-vote" class="pull-right">
+                   <div id="votable-<%= @video.id %>-vote" class="pull-right">
                                         
                                         <%= render "admin/votes/vote_result", :votable => @video %>
                                         <%= render "admin/votes/vote_controls", :votable => @video%>

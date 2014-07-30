@@ -9,11 +9,19 @@ Rails.application.routes.draw do
   
  
 #Site Features
-  resources :sponsors, only: [:index, :show]
+  resources :sponsors, only: [:index, :show] 
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
   resources :products, only: [:index, :show]
-  resources :videos,   only: [:index, :show]
+  resources :videos,   only: [:index, :show] do 
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+
+  end 
+  resources :photos,   only: [:show] do
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+      end
   resources :galleries,   only: [:index, :show] do 
     resources :photos,   only: [:show]
   end 
@@ -150,7 +158,10 @@ Rails.application.routes.draw do
 
   #Blog Feature 
    scope '/blog' do
-      resources :posts, only: [:show, :tagged, :catagorized]
+      resources :posts, only: [:show, :tagged, :catagorized] do 
+         get '/upvote' => 'votes#upvote', :as => :upvote
+         get '/downvote' => 'votes#downvote', :as => :downvote
+      end
    end
     
   get 'search/:action' => 'searches#:action'
