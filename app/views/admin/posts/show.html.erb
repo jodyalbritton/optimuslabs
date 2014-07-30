@@ -36,16 +36,29 @@
               </div>
             </div>
           </div>
-               			<article class="col-md-8">
-                        
-                     </article>
- <div class="panel widget-comments">
-      <div class="panel-body" id="comment-list">
-        <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
-      </div>
-    </div>
+
+
+
+        <div class="panel widget-article-comments">
+          <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-comment"></i>Comments</span>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body" id="comment-list">
+             <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
+
+
+          </div> <!-- / .panel-body -->
+          <div class="panel-footer clearfix">
+            <%= render "admin/comments/form" %>
+       
+          </div> <!-- / .panel-footer -->
+        </div>
 
 
 
 
-<%= render "admin/comments/form" %>
+
+
+
+
+
