@@ -5,7 +5,7 @@ class Admin::GalleriesController < ApplicationController
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Galleries", :admin_galleries_path
   layout "layouts/admin"
-
+  impressionist :actions=>[:show]
   # GET /galleries
   # GET /galleries.json
   def index

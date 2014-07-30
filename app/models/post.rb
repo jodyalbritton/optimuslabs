@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   searchkick
-
+  is_impressionable
   attr_accessor :search
   has_attached_file :photo, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
@@ -9,10 +9,12 @@ class Post < ActiveRecord::Base
   belongs_to :author, :class_name => 'User'
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
+  acts_as_votable
+  acts_as_commentable
   paginates_per 10
 
   extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  friendly_id :slug_candidates, use: [:slugged, :finders]
 
 
 

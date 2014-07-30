@@ -1,14 +1,16 @@
 class Video < ActiveRecord::Base
   after_update :update_details
   after_create :validate_slug 
-
+  is_impressionable
   searchkick autocomplete: ['title']
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: [:slugged, :finders]
   include Rails.application.routes.url_helpers
   belongs_to :sponsor
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
+  acts_as_votable
+  acts_as_commentable
   has_attached_file :thumbnail, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
   validates_attachment_content_type :thumbnail, :content_type => /\Aimage\/.*\Z/
 
@@ -46,6 +48,9 @@ class Video < ActiveRecord::Base
     video_url(self)
   end 
 
+  def get_views 
+    self.views + self.impressionist_count
+  end
   
   def get_details
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])

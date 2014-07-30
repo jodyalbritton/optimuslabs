@@ -22,6 +22,11 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-8">
+                <div id="votable-<% @post.id %>-vote" class="pull-right">
+                                        
+                                        <%= render "admin/votes/vote_result", :votable => @post %>
+                                        <%= render "admin/votes/vote_controls", :votable => @post%>
+                   </div>
                 <%= sanitize @post.body%>
               </div>
               <div class="col-md-4" id= "sidebar">
@@ -34,3 +39,13 @@
                			<article class="col-md-8">
                         
                      </article>
+ <div class="panel widget-comments">
+      <div class="panel-body">
+        <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
+      </div>
+    </div>
+
+
+
+
+<%= render "admin/comments/form" %>

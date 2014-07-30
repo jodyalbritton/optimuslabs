@@ -34,16 +34,21 @@
               <div class="col-md-4">
                 <div class="panel colourable">
                   <div class="panel-heading">
+                   <div id="votable-<% @video.id %>-vote" class="pull-right">
+                                        
+                                        <%= render "admin/votes/vote_result", :votable => @video %>
+                                        <%= render "admin/votes/vote_controls", :votable => @video%>
+                   </div>
                     <span class="panel-title">Stats</span>
                   </div>
                   <div class="panel-body">
                     <ul class="list-group">
                     <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.views %></span>
+                      <span class="badge badge-primary"><%= @video.get_views %></span>
                       Views
                     </li>
                     <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.likes %></span>
+                      <span class="badge badge-primary"><%= @video.likes+@video.cached_votes_up %></span>
                       Likes
                     </li>
                     <li class="list-group-item">
@@ -66,3 +71,13 @@
           </div>
  
 
+    <div class="panel widget-comments">
+      <div class="panel-body">
+        <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
+      </div>
+    </div>
+
+
+
+
+<%= render "admin/comments/form" %>

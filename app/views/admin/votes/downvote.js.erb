@@ -1,0 +1,2 @@
+$("#votable-<%=@votable.id %>-vote").html("<%= j( render "admin/votes/vote_result", :votable => @votable, :result => "negative" ) %>");
+$("#votable-<%=@votable.id%>-alert").css('visibility','visible').hide().fadeIn().removeClass('hidden');

@@ -19,7 +19,10 @@ class Admin::PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-  
+    impressionist(@post)
+    @comments = @post.comment_threads.order(:cached_votes_up).reverse
+    @new_comment = Comment.build_from(@post, current_user, "")
+    @commentable = @post
   end
 
   def crop

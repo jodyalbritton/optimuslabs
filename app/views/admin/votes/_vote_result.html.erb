@@ -1,0 +1,15 @@
+<% if defined? result %>
+	<% if result == "positive" %>
+	<div class="alert alert-success hidden alert-dismissible" id="vote-<%votable.id %>-alert" data-dismiss="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		You you voted this up
+	</div>
+	<% else %>
+	<div class="alert alert-success hidden alert-dismissible" id="vote-<%=votable.id %>-alert" data-dismiss="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		You you voted this down
+	</div>
+
+
+	<% end %>
+<% end %>

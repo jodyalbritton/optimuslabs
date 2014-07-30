@@ -2,9 +2,11 @@ class Admin::PhotosController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=>[:show]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Photos", :admin_photos_path
   layout "layouts/admin"
+
 
   def new
   	if params[:gallery_id]
@@ -16,6 +18,16 @@ class Admin::PhotosController < ApplicationController
   	end
     session[:return_to] = request.referer
   end
+  
+  def show 
+    @comments = @photo.comment_threads.order(:cached_votes_up).reverse
+    @new_comment = Comment.build_from(@photo, current_user, "")
+    @commentable = @photo
+  end 
+
+  def edit
+  end
+
 
   def create
     if params[:gallery_id]
@@ -47,7 +59,12 @@ class Admin::PhotosController < ApplicationController
     private
 
     def set_photo
+      if params[:gallery_id]
+      @gallery = Gallery.friendly.find(params[:gallery_id])
+      @photo = @gallery.photos.find(params[:id])
+      else
       @photo = Photo.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

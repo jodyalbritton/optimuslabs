@@ -21,7 +21,7 @@ class Admin::ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    add_breadcrumb @project.subject
+    add_breadcrumb @project.name
    
     @payable = @project
     @payment_source = @project.client

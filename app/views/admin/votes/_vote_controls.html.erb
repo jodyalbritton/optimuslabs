@@ -1,0 +1,14 @@
+     <% if defined? votable %>
+  
+     <%= link_to [:admin, votable, :upvote], :remote => true  do %>
+		<button type="button" class="btn primary btn-xs" title="Like">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+        </button>
+    <% end %>
+    <%= link_to [:admin, votable, :downvote], :remote => true  do %>
+    	<button type="button" class="btn primary btn-xs" title="Unlike">
+            <span class="glyphicon glyphicon-thumbs-down"></span>
+        </button>
+    <% end %>
+
+    <% end %>

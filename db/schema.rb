@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722160313) do
+ActiveRecord::Schema.define(version: 20140729223816) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -77,6 +77,37 @@ ActiveRecord::Schema.define(version: 20140722160313) do
   add_index "clients", ["assigned_to_id"], name: "index_clients_on_assigned_to_id", using: :btree
   add_index "clients", ["client_owner_id"], name: "index_clients_on_client_owner_id", using: :btree
 
+  create_table "comments", force: true do |t|
+    t.integer  "commentable_id",                     default: 0
+    t.string   "commentable_type"
+    t.string   "title"
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "user_id",                            default: 0,   null: false
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average", limit: 24, default: 0.0
+  end
+
+  add_index "comments", ["cached_votes_down"], name: "index_comments_on_cached_votes_down", using: :btree
+  add_index "comments", ["cached_votes_score"], name: "index_comments_on_cached_votes_score", using: :btree
+  add_index "comments", ["cached_votes_total"], name: "index_comments_on_cached_votes_total", using: :btree
+  add_index "comments", ["cached_votes_up"], name: "index_comments_on_cached_votes_up", using: :btree
+  add_index "comments", ["cached_weighted_average"], name: "index_comments_on_cached_weighted_average", using: :btree
+  add_index "comments", ["cached_weighted_score"], name: "index_comments_on_cached_weighted_score", using: :btree
+  add_index "comments", ["cached_weighted_total"], name: "index_comments_on_cached_weighted_total", using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "contacts", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -139,8 +170,22 @@ ActiveRecord::Schema.define(version: 20140722160313) do
     t.datetime "updated_at"
     t.string   "slug"
     t.integer  "category_id"
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average", limit: 24, default: 0.0
   end
 
+  add_index "galleries", ["cached_votes_down"], name: "index_galleries_on_cached_votes_down", using: :btree
+  add_index "galleries", ["cached_votes_score"], name: "index_galleries_on_cached_votes_score", using: :btree
+  add_index "galleries", ["cached_votes_total"], name: "index_galleries_on_cached_votes_total", using: :btree
+  add_index "galleries", ["cached_votes_up"], name: "index_galleries_on_cached_votes_up", using: :btree
+  add_index "galleries", ["cached_weighted_average"], name: "index_galleries_on_cached_weighted_average", using: :btree
+  add_index "galleries", ["cached_weighted_score"], name: "index_galleries_on_cached_weighted_score", using: :btree
+  add_index "galleries", ["cached_weighted_total"], name: "index_galleries_on_cached_weighted_total", using: :btree
   add_index "galleries", ["category_id"], name: "index_galleries_on_category_id", using: :btree
   add_index "galleries", ["slug"], name: "index_galleries_on_slug", unique: true, using: :btree
 
@@ -153,6 +198,31 @@ ActiveRecord::Schema.define(version: 20140722160313) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "impressions", force: true do |t|
+    t.string   "impressionable_type"
+    t.integer  "impressionable_id"
+    t.integer  "user_id"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.string   "view_name"
+    t.string   "request_hash"
+    t.string   "ip_address"
+    t.string   "session_hash"
+    t.text     "message"
+    t.text     "referrer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}, using: :btree
+  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "interaction_events", force: true do |t|
     t.string   "name"
@@ -327,8 +397,22 @@ ActiveRecord::Schema.define(version: 20140722160313) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average", limit: 24, default: 0.0
   end
 
+  add_index "photos", ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
+  add_index "photos", ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
+  add_index "photos", ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
+  add_index "photos", ["cached_votes_up"], name: "index_photos_on_cached_votes_up", using: :btree
+  add_index "photos", ["cached_weighted_average"], name: "index_photos_on_cached_weighted_average", using: :btree
+  add_index "photos", ["cached_weighted_score"], name: "index_photos_on_cached_weighted_score", using: :btree
+  add_index "photos", ["cached_weighted_total"], name: "index_photos_on_cached_weighted_total", using: :btree
   add_index "photos", ["category_id"], name: "index_photos_on_category_id", using: :btree
   add_index "photos", ["gallery_id"], name: "index_photos_on_gallery_id", using: :btree
   add_index "photos", ["slug"], name: "index_photos_on_slug", unique: true, using: :btree
@@ -350,9 +434,23 @@ ActiveRecord::Schema.define(version: 20140722160313) do
     t.datetime "photo_updated_at"
     t.string   "meta_description"
     t.string   "meta_keywords"
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average", limit: 24, default: 0.0
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
+  add_index "posts", ["cached_votes_down"], name: "index_posts_on_cached_votes_down", using: :btree
+  add_index "posts", ["cached_votes_score"], name: "index_posts_on_cached_votes_score", using: :btree
+  add_index "posts", ["cached_votes_total"], name: "index_posts_on_cached_votes_total", using: :btree
+  add_index "posts", ["cached_votes_up"], name: "index_posts_on_cached_votes_up", using: :btree
+  add_index "posts", ["cached_weighted_average"], name: "index_posts_on_cached_weighted_average", using: :btree
+  add_index "posts", ["cached_weighted_score"], name: "index_posts_on_cached_weighted_score", using: :btree
+  add_index "posts", ["cached_weighted_total"], name: "index_posts_on_cached_weighted_total", using: :btree
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
 
@@ -655,8 +753,8 @@ ActiveRecord::Schema.define(version: 20140722160313) do
     t.datetime "updated_at"
     t.string   "uid"
     t.integer  "category_id"
-    t.boolean  "featured",               default: true
-    t.boolean  "listed",                 default: true
+    t.boolean  "featured",                           default: true
+    t.boolean  "listed",                             default: true
     t.string   "yt_tags"
     t.integer  "views"
     t.integer  "position"
@@ -664,7 +762,7 @@ ActiveRecord::Schema.define(version: 20140722160313) do
     t.datetime "yt_updated_at"
     t.string   "slug"
     t.integer  "sponsor_id"
-    t.boolean  "sponsored",              default: false
+    t.boolean  "sponsored",                          default: false
     t.text     "embed"
     t.string   "url"
     t.text     "description"
@@ -673,11 +771,40 @@ ActiveRecord::Schema.define(version: 20140722160313) do
     t.string   "thumbnail_content_type"
     t.integer  "thumbnail_file_size"
     t.datetime "thumbnail_updated_at"
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average", limit: 24, default: 0.0
   end
 
+  add_index "videos", ["cached_votes_down"], name: "index_videos_on_cached_votes_down", using: :btree
+  add_index "videos", ["cached_votes_score"], name: "index_videos_on_cached_votes_score", using: :btree
+  add_index "videos", ["cached_votes_total"], name: "index_videos_on_cached_votes_total", using: :btree
+  add_index "videos", ["cached_votes_up"], name: "index_videos_on_cached_votes_up", using: :btree
+  add_index "videos", ["cached_weighted_average"], name: "index_videos_on_cached_weighted_average", using: :btree
+  add_index "videos", ["cached_weighted_score"], name: "index_videos_on_cached_weighted_score", using: :btree
+  add_index "videos", ["cached_weighted_total"], name: "index_videos_on_cached_weighted_total", using: :btree
   add_index "videos", ["category_id"], name: "index_videos_on_category_id", using: :btree
   add_index "videos", ["gallery_id"], name: "index_videos_on_gallery_id", using: :btree
   add_index "videos", ["slug"], name: "index_videos_on_slug", unique: true, using: :btree
   add_index "videos", ["sponsor_id"], name: "index_videos_on_sponsor_id", using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

@@ -1,0 +1,18 @@
+
+  <div class="comment-form ">
+    <%= form_for ([:admin, @new_comment]), :form_html=> {:class=>"form-horizontal"} do |f| %>
+    <div class="input-group col-lg-6">
+      <%= f.text_area :body, :input_html => { :rows => "2", :columns => "50", :class=>"form-control input-md" }, :label => false %>
+      <%= f.hidden_field :commentable_id, :value => @new_comment.commentable_id %>
+      <%= f.hidden_field :commentable_type,  :value => @new_comment.commentable_type %>
+     </div>
+
+     <div class="form-group">
+      <%= f.submit :submit, :class => "btn btn-primary", :disable_with => "Submitting…" %>
+     
+    <% end %>
+     </div>
+    
+     
+  
+  </div>

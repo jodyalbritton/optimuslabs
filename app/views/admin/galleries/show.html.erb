@@ -26,16 +26,28 @@
     <div class="row">
       <% @gallery.photos.each do |photo| %>
       <div class="col-xs-3">
+        <div class="thumb-head text-center">
+          <strong>Votes Up:</strong> <%= photo.cached_votes_up %><strong>Votes Down: </strong> <%= photo.cached_votes_down %>
+        </div>
         <div class="thumb-contents thumbnail">
-            <%= link_to photo.file.url, data: {:gallery=>""} do %>
+            <%= link_to admin_gallery_photo_path(@gallery,photo) do %>
             <%= image_tag photo.file.url(:medium) %>
             <% end %>
             <div class="btn-toolbar">
               <div class="btn-group">
-                 <%= link_to  admin_photo_path(photo), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
+                  <%= link_to photo.file.url, data: {:gallery=>""} do %>
+                   <button class="btn" data-original-title="View"><i class="icon fa fa-eye"></i></button>
+                  <% end %>
+                  <%= link_to  admin_photo_path(photo), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "hidden-sm hidden-xs" do %>
                     <button class="btn" data-original-title="Cancel"><i class="icon fa fa-trash-o"></i></button>
                   <% end %>
+              
               </div>
+               <div id="votable-<% photo.id %>-vote" class="pull-right">
+                                        
+                                        <%= render "admin/votes/vote_result", :votable => photo %>
+                                        <%= render "admin/votes/vote_controls", :votable => photo %>
+                   </div>
             </div>
           </div>
       </div>

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
+  acts_as_voter
   rolify
   include Authority::UserAbilities
   # Include default devise modules. Others available are:
