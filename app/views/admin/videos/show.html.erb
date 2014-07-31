@@ -10,79 +10,83 @@
 
 
 <div class="panel colourable">
+  <div class="panel-heading">
+    <span class="panel-title">Video Details</span>
+    <div class="panel-heading-controls">
+      <span class="panel-heading-text"><em><%= link_to "Public View", video_path %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+       <%= link_to edit_admin_video_path(@video), :class => 'btn btn-xs' do %>
+        <span class="btn-label icon fa fa-plus"></span>Edit
+       <% end %>
+    </div>
+  </div> <!-- / .panel-heading -->
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <div>
+          <h3> Video </h3>
+          <%= raw(@video.get_details.embed_html5)  %>
+        </div>
+      <div>
+          <h3> Description </h3>
+           <p><%= @video.description %></p>
+      </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel colourable">
           <div class="panel-heading">
-            <span class="panel-title">Video Details</span>
-            <div class="panel-heading-controls">
-              <span class="panel-heading-text"><em><%= link_to "Public View", video_path %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
-               <%= link_to edit_admin_video_path(@video), :class => 'btn btn-xs' do %>
-                <span class="btn-label icon fa fa-plus"></span>Edit
-               <% end %>
+           <div class="panel-heading-controls">
+             <div id="votable-<%= @video.id %>-vote" class="pull-right">
+                                  
+                                  <%= render "admin/votes/vote_result", :votable => @video %>
+                                  <%= render "admin/votes/vote_controls", :votable => @video%>
+             </div>
             </div>
-          </div> <!-- / .panel-heading -->
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-8">
-                <div>
-                  <h3> Video </h3>
-                  <%= raw(@video.get_details.embed_html5)  %>
-                </div>
-              <div>
-                  <h3> Description </h3>
-                   <p><%= @video.description %></p>
-              </div>
-              </div>
-              <div class="col-md-4">
-                <div class="panel colourable">
-                  <div class="panel-heading">
-                   <div id="votable-<%= @video.id %>-vote" class="pull-right">
-                                        
-                                        <%= render "admin/votes/vote_result", :votable => @video %>
-                                        <%= render "admin/votes/vote_controls", :votable => @video%>
-                   </div>
-                    <span class="panel-title">Stats</span>
-                  </div>
-                  <div class="panel-body">
-                    <ul class="list-group">
-                    <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.get_views %></span>
-                      Views
-                    </li>
-                    <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.fetch_likes %></span>
-                      Likes
-                    </li>
-                    <li class="list-group-item">
-                      <span class="badge"><%= @video.duration %></span>
-                      Duration
-                    </li>
-                    <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.category.name %></span>
-                      Category
-                    </li>
-                    <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.published_at %></span>
-                      Published
-                    </li>
-                  </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <span class="panel-title">Stats</span>
           </div>
+          <div class="panel-body">
+            <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge badge-primary"><%= @video.get_views %></span>
+              Views
+            </li>
+            <li class="list-group-item">
+              <span class="badge badge-primary"><%= @video.fetch_likes %></span>
+              Likes
+            </li>
+            <li class="list-group-item">
+              <span class="badge"><%= @video.duration %></span>
+              Duration
+            </li>
+            <li class="list-group-item">
+              <span class="badge badge-primary"><%= @video.category.name %></span>
+              Category
+            </li>
+            <li class="list-group-item">
+              <span class="badge badge-primary"><%= @video.published_at %></span>
+              Published
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
  
 
 <div class="panel widget-article-comments">
-          <div class="panel-heading">
-            <span class="panel-title"><i class="panel-title-icon fa fa-comment"></i>Comments</span>
-          </div> <!-- / .panel-heading -->
-          <div class="panel-body" id="comment-list">
-             <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
+    <div class="panel-heading">
+      <span class="panel-title"><i class="panel-title-icon fa fa-comment"></i>Comments</span>
+    </div> <!-- / .panel-heading -->
+    <div class="panel-body" id="comment-list">
+       <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
 
 
-          </div> <!-- / .panel-body -->
-          <div class="panel-footer clearfix">
-            <%= render "admin/comments/form" %>
-       
-          </div> <!-- / .panel-footer -->
-        </div>
+    </div> <!-- / .panel-body -->
+    <div class="panel-footer clearfix">
+      <%= render "admin/comments/form" %>
+ 
+    </div> <!-- / .panel-footer -->
+ </div>
 
