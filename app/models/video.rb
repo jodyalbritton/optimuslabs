@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
   after_update :update_details
   after_create :validate_slug 
-  is_impressionable
+  is_impressionable counter_cache: true
   searchkick autocomplete: ['title']
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders]

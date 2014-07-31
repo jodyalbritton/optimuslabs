@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
-  is_impressionable
+  is_impressionable counter_cache: true
   belongs_to :gallery
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
