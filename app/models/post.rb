@@ -28,6 +28,13 @@ class Post < ActiveRecord::Base
     ]
   end
 
+def get_views 
+   self.impressionist_count
+end 
+
+def fetch_likes
+  self.cached_votes_up - self.cached_votes_down
+end 
 
 def category_name
   self.category.try(:name)

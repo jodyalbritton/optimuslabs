@@ -51,6 +51,10 @@ class Video < ActiveRecord::Base
   def get_views 
     self.views + self.impressionist_count
   end
+
+  def fetch_likes
+    self.likes + self.cached_votes_up - self.cached_votes_down
+  end
   
   def get_details
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])

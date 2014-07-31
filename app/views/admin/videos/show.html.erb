@@ -48,7 +48,7 @@
                       Views
                     </li>
                     <li class="list-group-item">
-                      <span class="badge badge-primary"><%= @video.likes+@video.cached_votes_up %></span>
+                      <span class="badge badge-primary"><%= @video.fetch_likes %></span>
                       Likes
                     </li>
                     <li class="list-group-item">
