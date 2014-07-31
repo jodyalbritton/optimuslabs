@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   resources :contacts, only: [:new, :create, :thanks]
   resources :tags, only: [:index, :show]
   resources :categories, only: [:index, :show]
+  resources :comments do 
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+  end 
 
 #Admin interface 
 
