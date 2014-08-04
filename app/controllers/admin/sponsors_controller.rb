@@ -18,6 +18,7 @@ class Admin::SponsorsController < ApplicationController
   end
 
   def show
+    impressionist(@sponsor)
   end
 
   # GET /sponsors/new

@@ -34,6 +34,25 @@
                 <div>
                   <%= image_tag @sponsor.avatar.url(:medium) %>
                 </div>
+                <div class="panel colourable">
+                  <div class="panel-heading">
+                   <div class="panel-heading-controls">
+                    </div>
+                    <span class="panel-title">Stats</span>
+                  </div>
+                  <div class="panel-body">
+                    <ul class="list-group">
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @sponsor.get_views %></span>
+                      Views
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @sponsor.fetch_likes %></span>
+                      Likes
+                    </li>
+                  </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

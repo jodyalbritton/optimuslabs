@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731080509) do
+ActiveRecord::Schema.define(version: 20140804195848) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -601,9 +601,23 @@ ActiveRecord::Schema.define(version: 20140731080509) do
     t.string   "banner_content_type"
     t.integer  "banner_file_size"
     t.datetime "banner_updated_at"
-    t.integer  "impressions_count",   default: 0
+    t.integer  "impressions_count",                  default: 0
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average", limit: 24, default: 0.0
   end
 
+  add_index "sponsors", ["cached_votes_down"], name: "index_sponsors_on_cached_votes_down", using: :btree
+  add_index "sponsors", ["cached_votes_score"], name: "index_sponsors_on_cached_votes_score", using: :btree
+  add_index "sponsors", ["cached_votes_total"], name: "index_sponsors_on_cached_votes_total", using: :btree
+  add_index "sponsors", ["cached_votes_up"], name: "index_sponsors_on_cached_votes_up", using: :btree
+  add_index "sponsors", ["cached_weighted_average"], name: "index_sponsors_on_cached_weighted_average", using: :btree
+  add_index "sponsors", ["cached_weighted_score"], name: "index_sponsors_on_cached_weighted_score", using: :btree
+  add_index "sponsors", ["cached_weighted_total"], name: "index_sponsors_on_cached_weighted_total", using: :btree
   add_index "sponsors", ["category_id"], name: "index_sponsors_on_category_id", using: :btree
   add_index "sponsors", ["client_id"], name: "index_sponsors_on_client_id", using: :btree
   add_index "sponsors", ["slug"], name: "index_sponsors_on_slug", unique: true, using: :btree
