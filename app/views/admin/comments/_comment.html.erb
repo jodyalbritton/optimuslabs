@@ -1,0 +1,33 @@
+
+                  
+                    
+
+            <div class="comment">
+             <%= image_tag comment.user.avatar.url(:thumb), :class=> "comment-avatar" %>
+              <div class="comment-body">
+                <div class="comment-text">
+                  <div class="comment-heading">
+                    <a href="#" title=""><%= comment.user.username %><span><%= time_ago_in_words(comment.created_at) %> ago</span>
+                  </div>
+                   <%= comment.body %>
+                </div>
+                <div class="comment-footer">
+                <div class="row">
+                    <div class="col-md-1">
+                      <div id="votable-<%= comment.id %>-vote">
+                                            
+                            <%= render "admin/votes/vote_result", :votable => comment %>
+                            <%= render "admin/votes/vote_controls", :votable => comment%>
+                       </div>
+                    </div>
+                    <div class="col-md-11">
+                      &nbsp;&nbsp;·&nbsp;&nbsp;
+                      <a href="#">Reply</a>
+                      ·&nbsp;&nbsp;
+                      <%= link_to  "Delete", admin_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }, :remote => true%>
+                      </div>
+                    </div>
+                </div>
+                             
+                </div>
+              </div> <!-- / .comment-body -->

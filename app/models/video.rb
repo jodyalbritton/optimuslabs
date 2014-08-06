@@ -1,22 +1,22 @@
 class Video < ActiveRecord::Base
-  
-
-
-  before_validation :update_details
-  after_create :thumbnail_remote_url
+  after_update :update_details
+  after_create :validate_slug 
+  is_impressionable counter_cache: true
   searchkick autocomplete: ['title']
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: [:slugged, :finders]
   include Rails.application.routes.url_helpers
   belongs_to :sponsor
   belongs_to :category
   acts_as_taggable # Alias for acts_as_taggable_on
+  acts_as_votable
+  acts_as_commentable
   has_attached_file :thumbnail, :styles => { :large => "750x450#", :medium => "360x244#", :thumb => "100x100#" }, :default_url => ":style/missing.png"
   validates_attachment_content_type :thumbnail, :content_type => /\Aimage\/.*\Z/
 
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*\z/i
 
-  before_create -> do
+   before_create-> do
     uid = link.match(YT_LINK_FORMAT)
 
     self.uid = uid[2] if uid && uid[2]
@@ -34,18 +34,27 @@ class Video < ActiveRecord::Base
 
   validates :link, presence: true, format: YT_LINK_FORMAT
 
+  def validate_slug 
+    if self.slug == nil 
+      self.save
+    end
+  end
   def thumbnail_remote_url
     thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
     self.thumbnail =  URI.parse(thumb_url)
-    
-
-    
   end
   
   def get_share_url
     video_url(self)
   end 
 
+  def get_views 
+    self.views + self.impressionist_count
+  end
+
+  def fetch_likes
+    self.likes + self.cached_votes_up - self.cached_votes_down
+  end
   
   def get_details
     client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
@@ -72,7 +81,7 @@ class Video < ActiveRecord::Base
   def get_additional_info
     begin
       client = YouTubeIt::OAuth2Client.new(dev_key: ENV['YT_DEV'])
-      video = client.video_by(uid)
+      video = client.video_by(self.uid)
       self.title = video.title
       self.duration = parse_duration(video.duration)
       self.author = video.author.name
@@ -92,7 +101,11 @@ class Video < ActiveRecord::Base
       end
       if self.dislikes == nil
         self.dislikes = 0
-      end
+      end 
+      
+       thumb_url = 'http://img.youtube.com/vi/'+self.uid+'/hqdefault.jpg'
+       self.thumbnail =  URI.parse(thumb_url)
+       
     rescue
       self.title = '' ; self.duration = '00:00:00' ; self.author = '' ; self.likes = 0 ; self.dislikes = 0
     end
@@ -123,12 +136,9 @@ class Video < ActiveRecord::Base
       end
       if self.dislikes == nil
         self.dislikes = 0
-      end
-    def should_generate_new_friendly_id?
-      slug.blank?
-    end
-
-    
+      end  
+      
+   
   end
   def parse_duration(d)
     hr = (d / 3600).floor

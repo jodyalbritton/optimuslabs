@@ -100,9 +100,6 @@
                 Item Name
               </th>
               <th>
-                Billed
-              </th>
-              <th>
                 Item Type
               </th>
               <th>
@@ -119,9 +116,6 @@
               <td>
                <%= item.purchasable.name %>
                 <div class="invoice-description"><%= item.description %></div>
-              </td>
-              <td>
-                <%= item.purchasable.rate_type.name %>
               </td>
               <td>
                 <%= item.purchasable.class.to_s %>

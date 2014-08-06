@@ -5,7 +5,7 @@ class Admin::GalleriesController < ApplicationController
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Galleries", :admin_galleries_path
   layout "layouts/admin"
-
+  impressionist :actions=>[:show]
   # GET /galleries
   # GET /galleries.json
   def index
@@ -74,6 +74,14 @@ class Admin::GalleriesController < ApplicationController
     end
   end
 
+  def tags 
+    @tags = ActsAsTaggableOn::Tag.where("tags.name LIKE ?", "%#{params[:q]}%") 
+    respond_to do |format|
+     format.json { render :json => @tags.collect{|t| {:id => t.name, :name => t.name }}}
+    end
+  end 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gallery
@@ -82,6 +90,6 @@ class Admin::GalleriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description)
+      params.require(:gallery).permit(:name, :description, :tag_list)
     end
 end

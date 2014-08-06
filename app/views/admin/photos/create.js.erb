@@ -1,0 +1,5 @@
+<% if @photo.new_record? %>
+  alert('Failed');
+<% else %>
+  $('ul.thumbnails').append("<%=j render partial: 'photos/upload', locals: { photo: @photo } %>");
+<% end %>

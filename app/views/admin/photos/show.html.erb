@@ -1,0 +1,82 @@
+  <% content_for :page_header do %>
+    Viewing Photo
+  <% end %>
+  <% content_for :page_actions do %>
+    <%= link_to admin_gallery_path(@photo.gallery), :class => 'btn btn-primary btn-labeled', :style=>"width: 100%;" do %>
+                <span class="btn-label icon fa fa-plus"></span>Back
+    <% end %>
+  <% end %>
+
+<%= render 'admin/header' %>
+
+
+<div class="panel colourable">
+          <div class="panel-heading">
+            <span class="panel-title">Photo Details</span>
+            <div class="panel-heading-controls">
+
+              <span class="panel-heading-text"><em><%= link_to "Public View", gallery_photo_path(@photo.gallery,@photo) %></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+               <%= link_to edit_admin_gallery_photo_path(@photo.gallery,@photo), :class => 'btn btn-xs' do %>
+                <span class="btn-label icon fa fa-plus"></span>Edit
+               <% end %>
+            </div>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div>
+                  <h3> Photo </h3>
+                  <%= image_tag @photo.file.url(:large), :class=> "img img-responsive" %>
+                 
+                </div>
+              <div>
+                  <h3> Description </h3>
+                   <p></p>
+              </div>
+              </div>
+              <div class="col-md-4">
+                <div class="panel colourable">
+                  <div class="panel-heading">
+                     <div id="votable-<%= @photo.id %>-vote" class="pull-right">
+                                        
+                                        <%= render "admin/votes/vote_result", :votable => @photo %>
+                                        <%= render "admin/votes/vote_controls", :votable => @photo%>
+                   </div>
+                    <span class="panel-title">Stats</span>
+                  </div>
+                  <div class="panel-body">
+                    <ul class="list-group">
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @photo.impressionist_count %></span>
+                      Views
+                    </li>
+                    <li class="list-group-item">
+                      <span class="badge badge-primary"><%= @photo.cached_votes_up %></span>
+                      Likes
+                    </li>
+          
+             
+                  </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<div class="panel widget-article-comments">
+          <div class="panel-heading">
+            <span class="panel-title"><i class="panel-title-icon fa fa-comment"></i>Comments</span>
+          </div> <!-- / .panel-heading -->
+          <div class="panel-body" id="comment-list">
+             <%= render :partial => "admin/comments/comment", :collection => @comments, :as => :comment %>
+
+
+          </div> <!-- / .panel-body -->
+          <div class="panel-footer clearfix">
+            <%= render "admin/comments/form" %>
+       
+          </div> <!-- / .panel-footer -->
+        </div>
+

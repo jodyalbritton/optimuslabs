@@ -11,7 +11,7 @@ class Message < ActiveRecord::Base
   before_create :get_sender
   after_create :create_receipts, :create_interaction
 
-  validates_presence_of :email, :subject
+  validates_presence_of :email, :subject, :full_name
 
    
 
@@ -26,7 +26,11 @@ class Message < ActiveRecord::Base
        	Contact.find_or_create_by(:email => email) do |contact|
           name_array = full_name.split
           contact.first_name = name_array[0]
-          contact.last_name = name_array[1]
+          unless name_array[1] == nil 
+            contact.last_name = name_array[1]
+          else 
+            contact.last_name = "unknown" 
+          end 
         end 
       else
         

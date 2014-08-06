@@ -1,6 +1,7 @@
 class Admin::VideosController < ApplicationController
   before_filter :authenticate_user!
   authorize_actions_for ApplicationAuthorizer
+
   before_action :set_video, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "Admin", :admin_index_path
   add_breadcrumb "Videos", :admin_videos_path
@@ -14,6 +15,10 @@ class Admin::VideosController < ApplicationController
   end
 
   def show
+    impressionist(@video)
+    @comments = @video.comment_threads.order(:cached_votes_up).reverse
+    @new_comment = Comment.build_from(@video, current_user, "")
+    @commentable = @video
   end
 
   def create

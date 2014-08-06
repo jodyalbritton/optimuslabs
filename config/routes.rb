@@ -2,29 +2,47 @@ Rails.application.routes.draw do
 
 
 
- 
+
+
 #Users and Roles 
     devise_for :users, :controllers => { :registrations => "registrations", omniauth_callbacks: 'omniauth_callbacks' }
   
  
 #Site Features
-  resources :sponsors, only: [:index, :show]
+  resources :sponsors, only: [:index, :show] 
   resources :services, only: [:index, :show]
   resources :messages, only: [:new, :create]
   resources :products, only: [:index, :show]
-  resources :videos,   only: [:index, :show]
+  resources :videos,   only: [:index, :show] do 
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+
+  end 
+  resources :photos,   only: [:show] do
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+      end
   resources :galleries,   only: [:index, :show] do 
     resources :photos,   only: [:show]
   end 
   resources :contacts, only: [:new, :create, :thanks]
   resources :tags, only: [:index, :show]
   resources :categories, only: [:index, :show]
+  resources :comments do 
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+  end 
 
 #Admin interface 
 
   resources :admin, only: [:index]
 
   namespace :admin do
+    
+      resources :comments do 
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+      end  
       namespace :settings do
        match  'edit_all' => :edit_all, :via => :get
        match  'update_all' => :update_all, :via => :put
@@ -41,6 +59,10 @@ Rails.application.routes.draw do
         collection do
           get :tags
         end
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+        resources :votes, :only => [:upvote, :downvote]
+        resources :comments, :only => [:create, :destroy]
       end
       resources :products do 
         resources :attachments
@@ -50,17 +72,37 @@ Rails.application.routes.draw do
       resources :categories
       resources :galleries do 
         resources :photos
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+        resources :votes, :only => [:upvote, :downvote]
+        resources :comments, :only => [:create, :destroy]
+        collection do
+          get :tags
+        end
       end
 
       resources :photos do
          collection do
           get :tags
         end
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+        resources :votes, :only => [:upvote, :downvote]
+        resources :comments, :only => [:create, :destroy]
       end
       resources :videos do
+
+        get '/upvote' => 'votes#upvote', :as => :upvote
+        get '/downvote' => 'votes#downvote', :as => :downvote
+        resources :votes, :only => [:upvote, :downvote]
+        resources :comments, :only => [:create, :destroy]
         collection do
           get :tags
         end
+      end
+
+      resources :projects do 
+        resources :milestones
       end
       resources :interaction_events
       resources :rate_types
@@ -110,6 +152,9 @@ Rails.application.routes.draw do
       end
       resources :sponsors do 
         resources :attachments
+        collection do
+          get :tags
+        end
       end
 
 
@@ -117,7 +162,10 @@ Rails.application.routes.draw do
 
   #Blog Feature 
    scope '/blog' do
-      resources :posts, only: [:show, :tagged, :catagorized]
+      resources :posts, only: [:show, :tagged, :catagorized] do 
+         get '/upvote' => 'votes#upvote', :as => :upvote
+         get '/downvote' => 'votes#downvote', :as => :downvote
+      end
    end
     
   get 'search/:action' => 'searches#:action'

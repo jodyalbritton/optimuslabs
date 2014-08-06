@@ -1,0 +1,18 @@
+
+  <div class="comment-form ">
+    <%= form_for ([:admin, @new_comment]), :form_html=> {:class=>"form-horizontal panel"} do |f| %>
+        <div class="article-comments-add expanding-input expanding-input-sm expanded">
+         <%= f.text_area :body, :class=> "form-control", :rows=> 2, :placeholder=> "Write comment", :style=> "overflow: hidden; word-wrap: break-word; resize: horizontal; height: 50px;"%>
+         <%= f.hidden_field :commentable_id, :value => @new_comment.commentable_id %>
+        <%= f.hidden_field :commentable_type,  :value => @new_comment.commentable_type %>
+        <div class="expanding-input-hidden expanding-input-content" style="margin-top: 10px;">
+          <%= f.submit :comment, :class => "btn btn-sm btn-primary pull-right", :disable_with => "Submitting…" %>
+      
+        </div>
+      </div>   
+     
+    <% end %>
+  </div>
+
+
+

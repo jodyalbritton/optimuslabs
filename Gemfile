@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 #gems for user accounts and objects
+
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -60,11 +61,14 @@ gem 'thin', group: :development
 gem 'searchkick'
 gem 'high_voltage', github: 'thoughtbot/high_voltage'
 gem 'acts_as_list'
+gem 'acts_as_commentable_with_threading'
+gem 'acts_as_votable', '~> 0.10.0'
 gem 'pusher'
 gem 'jquery-datatables-rails', '~> 2.1.10.0.2'
+gem 'jquery-fileupload-rails'
 gem 'lodash-rails'
 gem 'ancestry'
-
+gem 'impressionist'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
